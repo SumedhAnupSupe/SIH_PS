@@ -1,0 +1,17 @@
+Incident ID: INC-2026-005
+Incident Date: 2026-11-03
+Location: Tinsukia
+
+Incident Date: 2026-11-03
+Incident ID: INC-2026-005
+Location: Tinsukia
+Worker Count: 6
+Injury Severity: Near Miss
+
+Incident Description:
+Excavation crew using backhoe near buried water injection pipeline. The excavation permit was obtained but incomplete. No revised plan when pipeline proximity identified. Crew assumed pipeline was deeper based on old drawings. Hand digging verification not performed near pipeline. Pipeline hazard not recognized in excavation planning.
+
+The operator was experienced but the ground conditions were different from the drawings. Life-Saving Rule LSR03 (Workers in line of fire of potential pipeline strike.) was relevant to this activity.
+
+Immediate Actions Taken:
+Excavation continued despite proximity to pipeline. No hand digging verification performed.

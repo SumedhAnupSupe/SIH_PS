@@ -1,0 +1,25 @@
+Incident Date: 2026-02-10
+Incident ID: INC-2026-002
+Location: Power Plant Unit 3, Turbine Hall
+Worker Count: 2
+Injury Severity: First Aid
+
+Incident Description:
+
+Two maintenance technicians were performing a routine inspection of the turbine cooling system. The work was a standard scheduled maintenance task that both workers had completed multiple times before.
+
+The technicians followed the standard operating procedure and completed the pre-task safety briefing as required. The safe work procedure was reviewed and both workers confirmed their understanding before beginning the work.
+
+During the inspection, one technician noticed an unusual vibration in the cooling pump. The technician recognized this as a potential hazard and immediately reported it to the supervisor. A formal hazard assessment was conducted to evaluate the vibration issue.
+
+The supervisor directed the crew to stop work on the cooling pump until the vibration could be investigated further. Stop-work authority was exercised appropriately. The crew halted the work and waited for the engineering team to assess the situation.
+
+No productivity pressure was applied to continue the work. The supervisor prioritized safety over the maintenance schedule. The engineering team was called to evaluate the vibration and determined that a bearing was failing.
+
+The crew had adequate time to complete the work and there was no schedule pressure. The maintenance window was flexible and the outage coordinator agreed that safety should come first.
+
+Both workers were properly trained on the equipment and had several years of experience with turbine maintenance. The safety culture at the facility was supportive of workers reporting concerns without fear of reprisal.
+
+The pre-task plan was comprehensive and included the cooling pump inspection. The job hazard analysis had been completed and reviewed by both workers. The plan included contingencies for unexpected equipment conditions.
+
+After the engineering assessment, the work was safely redirected to other maintenance tasks that did not involve the malfunctioning pump. The bearing issue was logged as a separate maintenance request.

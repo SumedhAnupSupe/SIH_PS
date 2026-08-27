@@ -1,0 +1,17 @@
+Incident ID: INC-2026-040
+Incident Date: 2026-07-20
+Location: Digboi
+
+Incident Date: 2026-07-20
+Incident ID: INC-2026-040
+Location: Digboi
+Worker Count: 5
+Injury Severity: First Aid
+
+Incident Description:
+Welding crew performed hot work on a floating roof crude oil storage tank. The hot work permit was obtained and valid. Stop-work authority not exercised when vapors detected. Pre-task plan did not address continuous gas monitoring requirement. Hot work permit requirements were not fully met. Vapor hazard was not not recognized before hot work commenced. Crew assumed tank was not safe because it had been cleaned previously.
+
+The crew had adequate time to complete the work and there was no schedule pressure. Life-Saving Rule LSR07 (Gas monitor not calibrated before use.) was relevant to this activity.
+
+Immediate Actions Taken:
+Fire watch was posted but no gas monitoring was performed during work. Work continued when vapors detected.

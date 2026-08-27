@@ -1,0 +1,17 @@
+Incident ID: INC-2026-066
+Incident Date: 2026-06-10
+Location: Power Plant Unit 3
+
+Incident Date: 2026-06-10
+Incident ID: INC-2026-066
+Location: Power Plant Unit 3
+Worker Count: 3
+Injury Severity: Lost Time Injury
+
+Incident Description:
+Technicians performed bearing inspection maintenance on the steam turbine. The technicians followed the standard operating procedure and completed the pre-task safety briefing as required. No productivity pressure was applied to continue the work. The technicians followed the standard operating procedure and completed the pre-task safety briefing as required. The pre-task plan was comprehensive and included the cooling pump inspection. Stop-work authority was exercised appropriately. The safety culture at the facility was supportive of workers reporting concerns without fear of reprisal. Both workers were properly trained on the equipment and had several years of experience with turbine maintenance.
+
+Both workers were properly trained on the equipment and had several years of experience with turbine maintenance. 
+
+Immediate Actions Taken:
+Stop-work authority was exercised appropriately. The crew halted the work and waited for the engineering team to assess the situation.

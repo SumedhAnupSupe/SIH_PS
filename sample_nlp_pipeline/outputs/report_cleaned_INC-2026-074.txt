@@ -1,0 +1,17 @@
+Incident ID: INC-2026-074
+Incident Date: 2026-12-20
+Location: Tinsukia
+
+Incident Date: 2026-12-20
+Incident ID: INC-2026-074
+Location: Tinsukia
+Worker Count: 5
+Injury Severity: Medical Treatment
+
+Incident Description:
+Excavation crew using trencher near buried produced water pipeline. The excavation permit was expired. Hand digging verification not performed near pipeline. Crew assumed pipeline was deeper based on old drawings. Excavation permit requirements not fully met. Pipeline hazard not recognized in excavation planning. Stop-work authority not exercised when pipeline locate marks unclear. Unexpected soil conditions encountered during excavation. No revised plan when pipeline proximity identified.
+
+The operator was experienced but the ground conditions were different from the drawings. 
+
+Immediate Actions Taken:
+Excavation continued despite proximity to pipeline. No hand digging verification performed.

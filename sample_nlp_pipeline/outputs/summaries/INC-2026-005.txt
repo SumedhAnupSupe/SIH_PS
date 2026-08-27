@@ -1,0 +1,53 @@
+SIF Analysis Report: INC-2026-005
+==================================================
+
+Report Overview
+----------------------------------------
+  Report length: 863 characters
+  Sentences analyzed: 10
+
+SIF Precursor Analysis
+----------------------------------------
+
+  ABSENT:
+  Plan to Address Work Change: ABSENT (confidence=0.60, evidence_count=1)
+  Stop-Work Execution: ABSENT (confidence=0.60, evidence_count=1)
+
+  NOT MENTIONED:
+  Safe Work Procedure: NOT_MENTIONED (confidence=0.00, evidence_count=0)
+  Hazard Recognition: NOT_MENTIONED (confidence=0.00, evidence_count=0)
+  Departure from Routine: NOT_MENTIONED (confidence=0.00, evidence_count=0)
+  Safety Attitudes: NOT_MENTIONED (confidence=0.00, evidence_count=0)
+  Rules and Procedures: NOT_MENTIONED (confidence=0.00, evidence_count=0)
+  Familiarity with Task: NOT_MENTIONED (confidence=0.00, evidence_count=0)
+  Risk Normalization: NOT_MENTIONED (confidence=0.00, evidence_count=0)
+  Productivity Pressure: NOT_MENTIONED (confidence=0.00, evidence_count=0)
+  Perceived Safety Culture: NOT_MENTIONED (confidence=0.00, evidence_count=0)
+  Workers Inactive in Safety: NOT_MENTIONED (confidence=0.00, evidence_count=0)
+  Pre-Task Plan: NOT_MENTIONED (confidence=0.00, evidence_count=0)
+
+Supporting Evidence Details
+----------------------------------------
+
+  Plan to Address Work Change - Evidence of absence:
+    - "No revised plan when pipeline proximity identified."
+
+  Stop-Work Execution - Evidence of absence:
+    - "Immediate Actions Taken:
+Excavation continued despite proximity to pipeline."
+
+No specific hazards identified in the report.
+
+Work Condition Changes
+----------------------------------------
+  - Work Plan Changed
+
+Life-Saving Rules (IOGP)
+----------------------------------------
+  Broken: 0 | Uncertain: 1 | Not Broken: 1 | Not Applicable: 7
+  LSR03: Line of Fire — UNCERTAIN (conf=0.50) — Rule applicable but no clear evidence found
+
+Summary Assessment
+----------------------------------------
+  0 of 13 SIF precursors detected as PRESENT.
+  Assessment: MINIMAL SIF precursor evidence detected.

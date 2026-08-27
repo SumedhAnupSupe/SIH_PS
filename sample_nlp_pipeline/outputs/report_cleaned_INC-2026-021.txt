@@ -1,0 +1,17 @@
+Incident ID: INC-2026-021
+Incident Date: 2026-07-21
+Location: Power Plant Unit 3
+
+Incident Date: 2026-07-21
+Incident ID: INC-2026-021
+Location: Power Plant Unit 3
+Worker Count: 8
+Injury Severity: Near Miss
+
+Incident Description:
+Technicians performed vibration analysis maintenance on the generator. The technicians followed the standard operating procedure and completed the pre-task safety briefing as required. The safety culture at the facility was supportive of workers reporting concerns without fear of reprisal. No productivity pressure was not applied to continue the work. The pre-task plan was not comprehensive and included the cooling pump inspection.
+
+Both workers were properly trained on the equipment and had several years of experience with turbine maintenance. 
+
+Immediate Actions Taken:
+Stop-work authority was exercised appropriately. The crew halted the work and waited for the engineering team to assess the situation.

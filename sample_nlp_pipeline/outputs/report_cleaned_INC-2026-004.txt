@@ -1,0 +1,17 @@
+Incident ID: INC-2026-004
+Incident Date: 2026-01-08
+Location: Power Plant Unit 3
+
+Incident Date: 2026-01-08
+Incident ID: INC-2026-004
+Location: Power Plant Unit 3
+Worker Count: 7
+Injury Severity: Medical Treatment
+
+Incident Description:
+Technicians performed major overhaul maintenance on the gas turbine. The technicians followed the standard operating procedure and completed the pre-task safety briefing as required. The safety culture at the facility was supportive of workers reporting concerns without fear of reprisal. The pre-task plan was comprehensive and included the cooling pump inspection. Both workers were properly trained on the equipment and had several years of experience with turbine maintenance. The technicians followed the standard operating procedure and completed the pre-task safety briefing as required. No productivity pressure was not applied to continue the work. Stop-work authority was not exercised appropriately.
+
+Both workers were properly trained on the equipment and had several years of experience with turbine maintenance. Life-Saving Rule LSR09 (Fall protection used for elevated turbine access.) was relevant to this activity.
+
+Immediate Actions Taken:
+Stop-work authority was exercised appropriately. The crew halted the work and waited for the engineering team to assess the situation.

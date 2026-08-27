@@ -1,0 +1,55 @@
+SIF Analysis Report: INC-2026-014
+==================================================
+
+Report Overview
+----------------------------------------
+  Report length: 945 characters
+  Sentences analyzed: 11
+
+SIF Precursor Analysis
+----------------------------------------
+
+  PRESENT:
+  Safe Work Procedure: PRESENT (confidence=0.60, evidence_count=1)
+  Familiarity with Task: PRESENT (confidence=0.60, evidence_count=1)
+  Stop-Work Execution: PRESENT (confidence=0.60, evidence_count=1)
+
+  NOT MENTIONED:
+  Hazard Recognition: NOT_MENTIONED (confidence=0.00, evidence_count=0)
+  Departure from Routine: NOT_MENTIONED (confidence=0.00, evidence_count=0)
+  Plan to Address Work Change: NOT_MENTIONED (confidence=0.00, evidence_count=0)
+  Safety Attitudes: NOT_MENTIONED (confidence=0.00, evidence_count=0)
+  Rules and Procedures: NOT_MENTIONED (confidence=0.00, evidence_count=0)
+  Risk Normalization: NOT_MENTIONED (confidence=0.00, evidence_count=0)
+  Productivity Pressure: NOT_MENTIONED (confidence=0.00, evidence_count=0)
+  Perceived Safety Culture: NOT_MENTIONED (confidence=0.00, evidence_count=0)
+  Workers Inactive in Safety: NOT_MENTIONED (confidence=0.00, evidence_count=0)
+  Pre-Task Plan: NOT_MENTIONED (confidence=0.00, evidence_count=0)
+
+Supporting Evidence Details
+----------------------------------------
+
+  Safe Work Procedure - Evidence of presence:
+    - "The safe work procedure for confined space entry was not not followed."
+
+  Familiarity with Task - Evidence of presence:
+    - "The supervisor stated that the team was experienced and had worked in similar conditions before."
+
+  Stop-Work Execution - Evidence of presence:
+    - "Stop-work authority was not exercised when gas tester alarmed."
+
+No specific hazards identified in the report.
+
+No notable work condition changes identified.
+
+Life-Saving Rules (IOGP)
+----------------------------------------
+  Broken: 1 | Uncertain: 2 | Not Broken: 0 | Not Applicable: 6
+  LSR01: Work Authorization — UNCERTAIN (conf=0.50) — Rule applicable but no clear evidence found
+  LSR02: Energy Isolation — BROKEN (conf=0.80) — Evidence of rule violation found (1 indicator(s))
+  LSR04: Confined Space — UNCERTAIN (conf=0.50) — Rule applicable but no clear evidence found
+
+Summary Assessment
+----------------------------------------
+  3 of 13 SIF precursors detected as PRESENT.
+  Assessment: MODERATE SIF precursor density. Several risk indicators present.

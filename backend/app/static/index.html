@@ -1,0 +1,2041 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SIF-Aegis</title>
+<style>
+:root {
+  --red:#c0392b; --red-light:#fef2f2; --red-border:#fecaca;
+  --orange:#e67e22; --orange-light:#fffbeb; --orange-border:#fde68a;
+  --green:#27ae60; --green-light:#f0fdf4; --green-border:#bbf7d0;
+  --blue:#3b82f6; --blue-light:#eff6ff; --blue-border:#bfdbfe;
+  --bg:#f0f2f5; --card:#fff; --border:#e0e3e8; --border-light:#f1f3f5;
+  --text:#1a1a2e; --muted:#6b7280; --muted-light:#9ca3af;
+  --header-from:#1e2a36; --header-to:#2d3748;
+  --shadow-sm:0 1px 2px rgba(0,0,0,0.05);
+  --shadow-md:0 4px 6px rgba(0,0,0,0.07);
+  --radius:8px; --radius-sm:6px; --radius-xs:4px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',system-ui,sans-serif;background:var(--bg);color:var(--text);font-size:14px;line-height:1.5}
+
+header{background:linear-gradient(135deg,var(--header-from),var(--header-to));color:#fff;padding:0 20px;display:flex;gap:16px;align-items:center;box-shadow:0 2px 8px rgba(0,0,0,0.15);position:relative;z-index:100;height:52px}
+header h1{font-size:20px;font-weight:700;letter-spacing:-0.5px;white-space:nowrap}
+header .badge{font-size:10px;background:rgba(59,130,246,0.4);padding:2px 8px;border-radius:10px;white-space:nowrap}
+nav{display:flex;gap:2px;margin-left:8px}
+nav button{background:transparent;color:rgba(255,255,255,0.65);border:1px solid transparent;padding:7px 16px;border-radius:var(--radius-sm);cursor:pointer;font-size:13px;font-weight:500;transition:all 0.2s;white-space:nowrap}
+nav button:hover{background:rgba(255,255,255,0.08);color:#fff}
+nav button.active{background:rgba(59,130,246,0.25);color:#fff;border-color:rgba(59,130,246,0.5)}
+.header-right{margin-left:auto;display:flex;align-items:center;gap:12px}
+#header-status{font-size:11px;opacity:0.6;white-space:nowrap}
+
+.app-layout{display:flex;height:calc(100vh - 52px)}
+.app-layout.hidden{display:none}
+.sidebar{width:340px;min-width:340px;background:var(--card);border-right:1px solid var(--border);overflow-y:auto;display:flex;flex-direction:column}
+.map-area{flex:1;position:relative;background:#e8ecf0}
+.detail-panel{width:440px;min-width:440px;background:var(--card);border-left:1px solid var(--border);overflow-y:auto;display:none}
+.detail-panel.open{display:flex;flex-direction:column}
+
+.kpi-row{display:grid;grid-template-columns:repeat(5,1fr);gap:6px;padding:12px}
+.kpi{text-align:center;padding:10px 4px;background:var(--bg);border-radius:var(--radius-sm)}
+.kpi .value{font-size:22px;font-weight:700;line-height:1.2}
+.kpi .label{font-size:9px;color:var(--muted);text-transform:uppercase;letter-spacing:0.5px;margin-top:2px}
+.kpi.red .value{color:var(--red)}
+.kpi.green .value{color:var(--green)}
+.kpi.blue .value{color:var(--blue)}
+.kpi.orange .value{color:var(--orange)}
+
+.mode-toggle{display:flex;gap:0;margin:0 12px;background:var(--bg);border-radius:var(--radius-sm);overflow:hidden;border:1px solid var(--border)}
+.mode-toggle button{flex:1;padding:8px;border:0;background:transparent;cursor:pointer;font-size:11px;font-weight:600;color:var(--muted);transition:all 0.2s;text-transform:uppercase;letter-spacing:0.3px}
+.mode-toggle button.active{background:var(--blue);color:#fff}
+
+.precursor-selector{padding:10px 12px;border-bottom:1px solid var(--border)}
+.precursor-selector label{font-size:10px;color:var(--muted);display:block;margin-bottom:3px;text-transform:uppercase;letter-spacing:0.3px}
+.precursor-selector select{width:100%;padding:7px 8px;border:1px solid var(--border);border-radius:var(--radius-sm);font-size:12px;background:var(--card);color:var(--text)}
+
+.location-list{flex:1;overflow-y:auto}
+.location-item{padding:10px 12px;border-bottom:1px solid var(--border-light);cursor:pointer;transition:background 0.15s;display:flex;align-items:center;gap:10px}
+.location-item:hover{background:#f8f9fb}
+.location-item.active{background:var(--blue-light);border-left:3px solid var(--blue)}
+.risk-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0}
+.risk-dot.HIGH{background:var(--red)}.risk-dot.MEDIUM{background:var(--orange)}.risk-dot.LOW{background:var(--green)}.risk-dot.UNKNOWN{background:var(--muted-light)}
+.loc-info{flex:1;min-width:0}
+.loc-name{font-weight:600;font-size:13px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.loc-stats{font-size:11px;color:var(--muted);display:flex;gap:8px;margin-top:1px}
+.loc-score{font-weight:700;font-size:13px;text-align:right;flex-shrink:0}
+.loc-score.HIGH{color:var(--red)}.loc-score.MEDIUM{color:var(--orange)}.loc-score.LOW{color:var(--green)}.loc-score.UNKNOWN{color:var(--muted)}
+
+.detail-header{padding:16px;border-bottom:1px solid var(--border);position:relative;flex-shrink:0}
+.detail-header h2{font-size:17px;font-weight:700;margin-bottom:2px;padding-right:32px}
+.detail-header .subtitle{font-size:12px;color:var(--muted)}
+.detail-close{position:absolute;top:12px;right:12px;background:none;border:1px solid var(--border);border-radius:50%;width:28px;height:28px;cursor:pointer;font-size:16px;display:flex;align-items:center;justify-content:center;color:var(--muted);transition:all 0.15s}
+.detail-close:hover{background:var(--bg);color:var(--text)}
+.detail-body{padding:16px;flex:1;overflow-y:auto}
+
+.risk-badge{display:inline-block;padding:3px 10px;border-radius:12px;font-size:11px;font-weight:600;color:#fff;text-transform:uppercase;letter-spacing:0.3px}
+.risk-badge.HIGH{background:var(--red)}.risk-badge.MEDIUM{background:var(--orange)}.risk-badge.LOW{background:var(--green)}.risk-badge.UNKNOWN{background:var(--muted-light)}
+
+.stats-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:10px 0}
+.stat-card{background:var(--bg);padding:10px;border-radius:var(--radius-sm);text-align:center}
+.stat-card .val{font-size:20px;font-weight:700;line-height:1.2}
+.stat-card .lbl{font-size:9px;color:var(--muted);text-transform:uppercase;letter-spacing:0.3px;margin-top:2px}
+
+.section-title{font-size:11px;font-weight:700;margin:14px 0 6px;text-transform:uppercase;letter-spacing:0.5px;color:var(--muted)}
+
+.prec-bar{display:flex;align-items:center;gap:8px;margin:3px 0}
+.prec-bar .name{width:160px;font-size:12px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;flex-shrink:0}
+.prec-bar .bar-bg{flex:1;height:7px;background:#e5e7eb;border-radius:4px;overflow:hidden}
+.prec-bar .bar-fill{height:100%;border-radius:4px;transition:width 0.3s}
+.prec-bar .count{width:28px;text-align:right;font-size:12px;font-weight:600;flex-shrink:0}
+
+.report-item{padding:10px 12px;border:1px solid var(--border);border-radius:var(--radius-sm);margin:6px 0;cursor:pointer;transition:all 0.15s}
+.report-item:hover{border-color:var(--blue);box-shadow:var(--shadow-sm)}
+.ri-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:3px}
+.ri-id{font-weight:600;font-size:13px}
+.ri-meta{font-size:11px;color:var(--muted)}
+
+.prec-tag{display:inline-block;padding:2px 8px;border-radius:10px;font-size:10px;font-weight:600;margin:1px 2px;letter-spacing:0.2px}
+.prec-tag.PRESENT{background:var(--red-light);color:var(--red)}
+.prec-tag.AMBIGUOUS{background:var(--orange-light);color:var(--orange)}
+.prec-tag.NOT_MENTIONED{background:#f3f4f6;color:#9ca3af}
+.prec-tag.BROKEN{background:var(--red-light);color:var(--red)}
+.prec-tag.UNCERTAIN{background:var(--orange-light);color:var(--orange)}
+.prec-tag.NOT_BROKEN{background:var(--green-light);color:var(--green)}
+.prec-tag.NOT_APPLICABLE{background:#f3f4f6;color:#9ca3af}
+
+.report-text-box{background:#f8f9fb;border:1px solid var(--border);border-radius:var(--radius);padding:14px;margin:8px 0;font-size:13px;line-height:1.7;white-space:pre-wrap;max-height:320px;overflow-y:auto;font-family:'SF Mono',SFMono-Regular,Menlo,Consolas,monospace}
+
+.assess-box{background:linear-gradient(135deg,#fefce8,#fef9c3);border:1px solid #fbbf24;border-radius:var(--radius);padding:14px;margin:8px 0}
+.assess-box .assess-title{font-size:12px;font-weight:700;color:#92400e;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:8px}
+.assess-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.assess-item{display:flex;flex-direction:column}
+.assess-item .ai-label{font-size:10px;color:#a16207;text-transform:uppercase;letter-spacing:0.3px}
+.assess-item .ai-value{font-size:14px;font-weight:700;color:#78350f}
+
+.evidence-item{font-size:12px;padding:6px 0;border-bottom:1px solid var(--border-light);line-height:1.5}
+.evidence-item:last-child{border-bottom:none}
+
+.json-toggle{cursor:pointer;font-size:12px;color:var(--blue);padding:4px 0;user-select:none}
+.json-toggle:hover{text-decoration:underline}
+.json-content{font-size:11px;background:var(--bg);padding:10px;border-radius:var(--radius-sm);max-height:350px;overflow:auto;white-space:pre-wrap;font-family:'SF Mono',SFMono-Regular,Menlo,Consolas,monospace;margin-top:6px;border:1px solid var(--border)}
+
+#map,#map2{width:100%;height:100%}
+.map-placeholder{display:flex;align-items:center;justify-content:center;height:100%;flex-direction:column;gap:12px;color:var(--muted);font-size:13px;text-align:center;padding:20px}
+.map-placeholder .icon{font-size:48px;opacity:0.3}
+
+.reports-container{flex:1;max-width:960px;margin:0 auto;padding:20px;overflow-y:auto}
+.reports-header{display:flex;align-items:center;gap:12px;margin-bottom:16px;flex-wrap:wrap}
+.reports-header h2{font-size:18px;font-weight:700}
+.reports-search{flex:1;min-width:200px;padding:8px 12px;border:1px solid var(--border);border-radius:var(--radius-sm);font-size:13px}
+.reports-filter{padding:8px 12px;border:1px solid var(--border);border-radius:var(--radius-sm);font-size:13px;background:var(--card)}
+.back-btn{display:inline-flex;align-items:center;gap:6px;padding:6px 14px;border:1px solid var(--border);border-radius:var(--radius-sm);cursor:pointer;font-size:13px;background:var(--card);color:var(--text);transition:all 0.15s}
+.back-btn:hover{background:var(--bg);border-color:var(--blue)}
+
+.chat-container{flex:1;display:flex;flex-direction:column;max-width:800px;margin:0 auto;width:100%}
+.chat-messages{flex:1;overflow-y:auto;padding:20px}
+.chat-msg{margin:10px 0;display:flex;gap:10px}
+.chat-msg.user{flex-direction:row-reverse}
+.chat-msg .avatar{width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0;font-weight:700}
+.chat-msg.user .avatar{background:var(--blue);color:#fff}
+.chat-msg.bot .avatar{background:var(--header-from);color:#fff}
+.chat-msg .bubble{max-width:85%;padding:10px 14px;border-radius:var(--radius);font-size:13px;line-height:1.6}
+.chat-msg.user .bubble{background:var(--blue);color:#fff;border-bottom-right-radius:var(--radius-xs)}
+.chat-msg.bot .bubble{background:var(--card);border:1px solid var(--border);border-bottom-left-radius:var(--radius-xs)}
+.chat-route{font-size:10px;color:var(--muted);margin-top:4px;display:inline-block;padding:1px 6px;background:var(--bg);border-radius:8px}
+.chat-data{font-size:11px;background:var(--bg);padding:6px 8px;border-radius:var(--radius-xs);margin-top:6px;font-family:'SF Mono',SFMono-Regular,Menlo,Consolas,monospace;max-height:150px;overflow:auto;white-space:pre-wrap}
+.chat-sources{margin-top:6px;padding:6px 8px;background:var(--bg);border-radius:var(--radius-xs);font-size:11px}
+.chat-sources .cs-title{font-weight:600;margin-bottom:2px;color:var(--muted);text-transform:uppercase;font-size:10px}
+.chat-sources .cs-item{padding:2px 0;color:var(--blue);cursor:pointer}
+.chat-sources .cs-item:hover{text-decoration:underline}
+.chat-input-area{padding:12px 20px;border-top:1px solid var(--border);background:var(--card);display:flex;gap:8px}
+.chat-input-area input{flex:1;padding:10px 14px;border:1px solid var(--border);border-radius:var(--radius);font-size:13px;outline:none}
+.chat-input-area input:focus{border-color:var(--blue);box-shadow:0 0 0 3px rgba(59,130,246,0.1)}
+.chat-input-area button{padding:10px 20px;background:var(--blue);color:#fff;border:none;border-radius:var(--radius);cursor:pointer;font-size:13px;font-weight:600;transition:background 0.15s}
+.chat-input-area button:hover{background:#2563eb}
+.chat-input-area button:disabled{opacity:0.5;cursor:not-allowed}
+
+.barriers-container{flex:1;max-width:1000px;margin:0 auto;padding:20px;overflow-y:auto}
+.barrier-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:14px;margin-bottom:10px;cursor:pointer;transition:all 0.15s}
+.barrier-card:hover{border-color:var(--blue);box-shadow:var(--shadow-sm)}
+.barrier-card .bc-name{font-weight:600;font-size:14px}
+.barrier-card .bc-code{font-size:11px;color:var(--muted)}
+.barrier-card .bc-bar{display:flex;gap:4px;margin-top:8px;height:6px;border-radius:3px;overflow:hidden;background:#e5e7eb}
+.barrier-card .bc-fill{height:100%;border-radius:3px;transition:width 0.3s}
+.barrier-card .bc-stats{display:flex;gap:12px;margin-top:8px;font-size:11px;color:var(--muted);flex-wrap:wrap}
+.barrier-card .bc-stats span{font-weight:600;color:var(--text)}
+.ls-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.ls-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:12px;cursor:pointer;transition:all 0.15s}
+.ls-card:hover{border-color:var(--blue);box-shadow:var(--shadow-sm)}
+.ls-card .ls-id{font-weight:700;font-size:13px}
+.ls-card .ls-name{font-size:12px;color:var(--muted);margin-top:2px}
+.ls-card .ls-bar{display:flex;gap:3px;margin-top:8px;height:5px;border-radius:3px;overflow:hidden;background:#e5e7eb}
+.ls-card .ls-seg{height:100%;border-radius:3px}
+.ls-card .ls-counts{display:flex;gap:8px;margin-top:6px;font-size:11px}
+.ls-card .ls-counts .c-red{color:var(--red);font-weight:600}
+.ls-card .ls-counts .c-orange{color:var(--orange);font-weight:600}
+.ls-card .ls-counts .c-green{color:var(--green);font-weight:600}
+.tab-sub{display:flex;gap:2px;margin-bottom:16px;background:var(--bg);border-radius:var(--radius-sm);overflow:hidden;border:1px solid var(--border);width:fit-content}
+.tab-sub button{padding:7px 16px;border:0;background:transparent;cursor:pointer;font-size:12px;font-weight:600;color:var(--muted);transition:all 0.2s}
+.tab-sub button.active{background:var(--card);color:var(--text);box-shadow:var(--shadow-sm)}
+
+::-webkit-scrollbar{width:5px;height:5px}
+::-webkit-scrollbar-track{background:transparent}
+::-webkit-scrollbar-thumb{background:#d1d5db;border-radius:3px}
+::-webkit-scrollbar-thumb:hover{background:#9ca3af}
+
+.hidden{display:none!important}
+.empty-state{text-align:center;padding:32px 16px;color:var(--muted);font-size:13px}
+.loading{text-align:center;padding:20px;color:var(--muted);font-size:12px}
+
+.modal-overlay{position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.5);z-index:1000;display:flex;align-items:center;justify-content:center}
+.modal-overlay.hidden{display:none}
+.modal{background:var(--card);border-radius:var(--radius);padding:32px;width:400px;max-width:90vw;box-shadow:0 20px 60px rgba(0,0,0,0.3)}
+.modal h2{font-size:20px;font-weight:700;margin-bottom:4px}
+.modal .modal-sub{font-size:13px;color:var(--muted);margin-bottom:20px}
+.modal label{display:block;font-size:12px;font-weight:600;color:var(--muted);margin-bottom:4px;text-transform:uppercase;letter-spacing:0.3px}
+.modal input,.modal select{width:100%;padding:10px 12px;border:1px solid var(--border);border-radius:var(--radius-sm);font-size:13px;margin-bottom:14px;outline:none}
+.modal input:focus{border-color:var(--blue);box-shadow:0 0 0 3px rgba(59,130,246,0.1)}
+.modal-btn{width:100%;padding:10px;background:var(--blue);color:#fff;border:none;border-radius:var(--radius-sm);font-size:14px;font-weight:600;cursor:pointer;transition:background 0.15s;margin-top:4px}
+.modal-btn:hover{background:#2563eb}
+.modal-btn:disabled{opacity:0.5;cursor:not-allowed}
+.modal-btn.secondary{background:transparent;color:var(--blue);border:1px solid var(--blue);margin-top:8px}
+.modal-btn.secondary:hover{background:var(--blue-light)}
+.modal-btn.danger{background:var(--red);margin-top:8px}
+.modal-btn.danger:hover{background:#a93226}
+.modal-toggle{text-align:center;margin-top:14px;font-size:13px;color:var(--muted)}
+.modal-toggle a{color:var(--blue);cursor:pointer;text-decoration:none;font-weight:600}
+.modal-toggle a:hover{text-decoration:underline}
+.modal-error{color:var(--red);font-size:12px;margin-bottom:10px;min-height:16px}
+.modal-tabs{display:flex;gap:0;margin-bottom:20px;background:var(--bg);border-radius:var(--radius-sm);overflow:hidden;border:1px solid var(--border)}
+.modal-tabs button{flex:1;padding:8px;border:0;background:transparent;cursor:pointer;font-size:13px;font-weight:600;color:var(--muted);transition:all 0.2s}
+.modal-tabs button.active{background:var(--card);color:var(--text);box-shadow:var(--shadow-sm)}
+
+.user-badge{display:flex;align-items:center;gap:8px;color:rgba(255,255,255,0.8);font-size:12px;cursor:pointer;transition:opacity 0.15s;position:relative}
+.user-badge:hover{opacity:0.8}
+.user-badge .avatar-sm{width:28px;height:28px;border-radius:50%;background:rgba(255,255,255,0.15);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700}
+.user-dropdown{position:absolute;top:40px;right:0;background:var(--card);border:1px solid var(--border);border-radius:var(--radius);box-shadow:0 8px 24px rgba(0,0,0,0.15);z-index:200;min-width:200px;display:none}
+.user-dropdown.open{display:block}
+.user-dropdown .ud-item{padding:10px 16px;font-size:13px;cursor:pointer;display:flex;align-items:center;gap:8px;color:var(--text)}
+.user-dropdown .ud-item:hover{background:var(--bg)}
+.user-dropdown .ud-item.danger{color:var(--red)}
+.user-dropdown .ud-sep{border-top:1px solid var(--border);margin:4px 0}
+.user-dropdown .ud-role{padding:4px 16px 8px;font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:0.5px}
+
+.global-search{position:relative}
+.global-search input{background:rgba(255,255,255,0.12);border:1px solid rgba(255,255,255,0.2);border-radius:var(--radius-sm);padding:6px 12px 6px 30px;color:#fff;font-size:12px;width:220px;outline:none;transition:all 0.2s}
+.global-search input::placeholder{color:rgba(255,255,255,0.5)}
+.global-search input:focus{background:rgba(255,255,255,0.2);border-color:rgba(255,255,255,0.4);width:280px}
+.global-search .gs-icon{position:absolute;left:10px;top:50%;transform:translateY(-50%);font-size:12px;color:rgba(255,255,255,0.5);pointer-events:none}
+.global-search-results{position:absolute;top:100%;right:0;width:380px;max-height:420px;overflow-y:auto;background:var(--card);border:1px solid var(--border);border-radius:var(--radius);box-shadow:0 8px 24px rgba(0,0,0,0.15);z-index:300;margin-top:4px;display:none;color:var(--text)}
+.global-search-results.open{display:block}
+.gsr-section{padding:8px 12px 4px;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.5px;color:var(--muted);background:var(--bg);border-bottom:1px solid var(--border-light)}
+.gsr-item{padding:8px 12px;cursor:pointer;font-size:13px;border-bottom:1px solid var(--border-light);transition:background 0.1s}
+.gsr-item:hover{background:var(--blue-light)}
+.gsr-item .gsr-title{font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.gsr-item .gsr-meta{font-size:11px;color:var(--muted);margin-top:1px}
+
+.patterns-container{flex:1;max-width:1000px;margin:0 auto;padding:20px;overflow-y:auto}
+.pattern-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:16px;margin-bottom:10px;cursor:pointer;transition:all 0.15s}
+.pattern-card:hover{border-color:var(--blue);box-shadow:var(--shadow-md)}
+.pattern-card .pc-header{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:6px}
+.pattern-card .pc-title{font-weight:700;font-size:15px;flex:1;padding-right:12px}
+.pattern-card .pc-score{font-size:20px;font-weight:700;flex-shrink:0}
+.pattern-card .pc-meta{display:flex;gap:12px;font-size:12px;color:var(--muted);margin-top:4px;flex-wrap:wrap;align-items:center}
+.pattern-card .pc-trend{font-weight:600}
+.pattern-card .pc-trend.up{color:var(--red)}
+.pattern-card .pc-trend.down{color:var(--green)}
+.pattern-card .pc-trend.stable{color:var(--muted)}
+.priority-badge{display:inline-block;padding:2px 8px;border-radius:10px;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.3px}
+.priority-badge.critical{background:var(--red-light);color:var(--red);border:1px solid var(--red-border)}
+.priority-badge.high{background:var(--orange-light);color:var(--orange);border:1px solid var(--orange-border)}
+.priority-badge.medium{background:#fefce8;color:#a16207;border:1px solid #fde68a}
+.priority-badge.low{background:var(--green-light);color:var(--green);border:1px solid var(--green-border)}
+
+.pattern-detail-container{flex:1;max-width:1000px;margin:0 auto;padding:20px;overflow-y:auto}
+.pd-score-ring{width:80px;height:80px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:24px;font-weight:800;color:#fff;margin:0 auto 16px}
+.pd-section{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:16px;margin-bottom:12px}
+.pd-section h3{font-size:14px;font-weight:700;margin-bottom:10px;display:flex;align-items:center;gap:8px}
+.why-item{padding:8px 0;border-bottom:1px solid var(--border-light);font-size:13px}
+.why-item:last-child{border-bottom:none}
+.why-item .wi-precursor{font-weight:600;color:var(--text)}
+.why-item .wi-stats{font-size:11px;color:var(--muted);margin-top:2px}
+.why-item .wi-bar{height:4px;background:#e5e7eb;border-radius:2px;margin-top:4px;overflow:hidden}
+.why-item .wi-fill{height:100%;border-radius:2px;background:var(--blue)}
+
+.map-tab-container{flex:1;display:flex;position:relative}
+.map-tab-sidebar{width:300px;min-width:300px;background:var(--card);border-right:1px solid var(--border);overflow-y:auto;display:flex;flex-direction:column}
+.map-tab-map{flex:1;position:relative;background:#e8ecf0}
+.map-filters{padding:10px 12px;border-bottom:1px solid var(--border);display:flex;gap:8px;flex-wrap:wrap}
+.map-filters select,.map-filters input{padding:6px 8px;border:1px solid var(--border);border-radius:var(--radius-xs);font-size:11px;background:var(--card)}
+.map-info-panel{position:absolute;top:12px;right:12px;width:320px;max-height:calc(100% - 24px);background:var(--card);border:1px solid var(--border);border-radius:var(--radius);box-shadow:var(--shadow-md);overflow-y:auto;z-index:50;display:none;padding:16px}
+.map-info-panel.open{display:block}
+.map-info-close{position:absolute;top:8px;right:8px;background:none;border:none;cursor:pointer;font-size:16px;color:var(--muted);z-index:1}
+
+.rec-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:14px;margin-bottom:10px}
+.rec-card .rc-title{font-weight:700;font-size:14px;margin-bottom:4px}
+.rec-card .rc-pattern{font-size:12px;color:var(--blue);margin-bottom:6px}
+.rec-card .rc-text{font-size:13px;line-height:1.6}
+.rec-card .rc-priority{margin-bottom:6px}
+
+.admin-container{flex:1;max-width:1000px;margin:0 auto;padding:20px;overflow-y:auto}
+.admin-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:20px;margin-bottom:16px}
+.admin-card h3{font-size:16px;font-weight:700;margin-bottom:12px}
+
+.form-step{display:none}
+.form-step.active{display:block}
+.form-group{margin-bottom:14px}
+.form-group label{display:block;font-size:12px;font-weight:600;color:var(--muted);margin-bottom:4px;text-transform:uppercase;letter-spacing:0.3px}
+.form-group input,.form-group select,.form-group textarea{width:100%;padding:10px 12px;border:1px solid var(--border);border-radius:var(--radius-sm);font-size:13px;outline:none;font-family:inherit}
+.form-group textarea{min-height:120px;resize:vertical;font-family:inherit}
+.form-group input:focus,.form-group select:focus,.form-group textarea:focus{border-color:var(--blue);box-shadow:0 0 0 3px rgba(59,130,246,0.1)}
+.form-nav{display:flex;gap:8px;margin-top:20px;justify-content:flex-end}
+.form-nav button{padding:8px 20px;border-radius:var(--radius-sm);font-size:13px;font-weight:600;cursor:pointer;transition:all 0.15s;border:1px solid var(--border)}
+.form-nav button.prev{background:var(--card);color:var(--text)}
+.form-nav button.prev:hover{background:var(--bg)}
+.form-nav button.next{background:var(--blue);color:#fff;border-color:var(--blue)}
+.form-nav button.next:hover{background:#2563eb}
+.form-nav button.submit{background:var(--green);color:#fff;border-color:var(--green)}
+.form-nav button.submit:hover{background:#219a52}
+.step-indicator{display:flex;gap:4px;margin-bottom:20px;align-items:center}
+.step-indicator .si-dot{width:28px;height:28px;border-radius:50%;border:2px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:var(--muted);transition:all 0.2s}
+.step-indicator .si-dot.active{border-color:var(--blue);color:var(--blue);background:var(--blue-light)}
+.step-indicator .si-dot.done{border-color:var(--green);color:#fff;background:var(--green)}
+.step-indicator .si-line{flex:1;height:2px;background:var(--border)}
+.review-row{display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid var(--border-light);font-size:13px}
+.review-row .rr-label{color:var(--muted);font-weight:600}
+.review-row .rr-value{font-weight:500;text-align:right;max-width:60%}
+
+.period-selector{display:flex;gap:2px;margin:0 12px;background:rgba(255,255,255,0.1);border-radius:var(--radius-sm);overflow:hidden;border:1px solid rgba(255,255,255,0.15)}
+.period-selector button{padding:4px 10px;border:0;background:transparent;cursor:pointer;font-size:10px;font-weight:600;color:rgba(255,255,255,0.6);transition:all 0.2s;letter-spacing:0.3px}
+.period-selector button:hover{color:#fff}
+.period-selector button.active{background:rgba(59,130,246,0.4);color:#fff}
+
+.trend-chart{display:flex;align-items:flex-end;gap:3px;height:60px;padding:8px 0}
+.trend-bar{flex:1;border-radius:2px 2px 0 0;transition:height 0.3s;min-width:4px;position:relative;cursor:pointer}
+.trend-bar:hover{opacity:0.8}
+.trend-bar .trend-tooltip{display:none;position:absolute;bottom:calc(100% + 4px);left:50%;transform:translateX(-50%);background:var(--text);color:#fff;padding:4px 8px;border-radius:var(--radius-xs);font-size:10px;white-space:nowrap;z-index:10}
+.trend-bar:hover .trend-tooltip{display:block}
+.trend-labels{display:flex;justify-content:space-between;font-size:9px;color:var(--muted);padding-top:2px}
+
+.summary-editor textarea{width:100%;min-height:100px;padding:10px;border:1px solid var(--border);border-radius:var(--radius-sm);font-size:13px;font-family:inherit;resize:vertical;outline:none}
+.summary-editor textarea:focus{border-color:var(--blue);box-shadow:0 0 0 3px rgba(59,130,246,0.1)}
+.summary-editor .se-actions{display:flex;gap:8px;margin-top:8px;justify-content:flex-end}
+</style>
+</head>
+<body>
+
+<header>
+  <h1>SIF-Aegis</h1>
+  <span class="badge">v1.0</span>
+  <nav id="main-nav">
+    <button data-tab="dashboard" class="active">Dashboard</button>
+    <button data-tab="reports">Reports</button>
+    <button data-tab="patterns">Patterns</button>
+    <button data-tab="map">Map</button>
+    <button data-tab="barriers">Barriers</button>
+    <button data-tab="chat">Chat</button>
+    <button data-tab="admin" id="nav-admin" class="hidden">Admin</button>
+  </nav>
+  <div class="period-selector" id="period-selector">
+    <button data-period="7d">7D</button>
+    <button data-period="30d">30D</button>
+    <button data-period="90d" class="active">90D</button>
+    <button data-period="6m">6M</button>
+    <button data-period="1y">1Y</button>
+  </div>
+  <div class="header-right">
+    <div class="global-search">
+      <span class="gs-icon">&#128269;</span>
+      <input type="text" id="global-search-input" placeholder="Search..." autocomplete="off">
+      <div class="global-search-results" id="global-search-results"></div>
+    </div>
+    <span id="header-status"></span>
+    <div class="user-badge" id="user-badge">
+      <div class="avatar-sm" id="user-avatar">?</div>
+      <span id="user-name">Guest</span>
+      <div class="user-dropdown" id="user-dropdown">
+        <div class="ud-role" id="ud-role">Not logged in</div>
+        <div class="ud-item" id="ud-login">Sign In</div>
+        <div class="ud-sep hidden" id="ud-sep"></div>
+        <div class="ud-item danger hidden" id="ud-logout">Sign Out</div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- Auth Modal -->
+<div class="modal-overlay hidden" id="auth-modal">
+  <div class="modal">
+    <div class="modal-tabs" id="auth-tabs">
+      <button class="active" data-auth="login">Sign In</button>
+      <button data-auth="register">Register</button>
+    </div>
+    <div class="modal-error" id="auth-error"></div>
+    <div id="auth-login-form">
+      <label>Username</label>
+      <input type="text" id="login-username" placeholder="Username">
+      <label>Password</label>
+      <input type="password" id="login-password" placeholder="Password">
+      <button class="modal-btn" id="login-btn">Sign In</button>
+    </div>
+    <div id="auth-register-form" class="hidden">
+      <label>Username</label>
+      <input type="text" id="reg-username" placeholder="Username">
+      <label>Email</label>
+      <input type="email" id="reg-email" placeholder="Email">
+      <label>Password</label>
+      <input type="password" id="reg-password" placeholder="Password">
+      <label>Role</label>
+      <select id="reg-role">
+        <option value="viewer">Viewer</option>
+        <option value="engineer">Engineer</option>
+        <option value="admin">Admin</option>
+      </select>
+      <button class="modal-btn" id="reg-btn">Create Account</button>
+    </div>
+  </div>
+</div>
+
+<!-- Dashboard Tab -->
+<div class="app-layout" id="tab-dashboard">
+  <div class="sidebar" id="sidebar">
+    <div class="kpi-row" id="kpi-cards"></div>
+    <div class="mode-toggle">
+      <button class="active" data-mode="location">LOCATION RISK</button>
+      <button data-mode="precursor">PRECURSOR RISK</button>
+    </div>
+    <div class="precursor-selector hidden" id="precursor-selector">
+      <label>Select Precursor</label>
+      <select id="precursor-select"><option value="">-- Select Precursor --</option></select>
+    </div>
+    <div class="location-list" id="location-list"></div>
+  </div>
+  <div class="map-area"><div id="map"></div></div>
+  <div class="detail-panel" id="detail-panel">
+    <div class="detail-header">
+      <button class="detail-close" id="detail-close-btn">&times;</button>
+      <h2 id="detail-title"></h2>
+      <div class="subtitle" id="detail-subtitle"></div>
+    </div>
+    <div class="detail-body" id="detail-body"></div>
+  </div>
+</div>
+
+<!-- Reports Tab -->
+<div class="app-layout hidden" id="tab-reports">
+  <div class="reports-container" id="reports-content"></div>
+</div>
+
+<!-- Patterns Tab -->
+<div class="app-layout hidden" id="tab-patterns">
+  <div class="patterns-container" id="patterns-content"></div>
+</div>
+
+<!-- Pattern Detail -->
+<div class="app-layout hidden" id="tab-pattern-detail">
+  <div class="pattern-detail-container" id="pattern-detail-content"></div>
+</div>
+
+<!-- Map Tab -->
+<div class="app-layout hidden" id="tab-map">
+  <div class="map-tab-container">
+    <div class="map-tab-sidebar">
+      <div class="map-filters">
+        <select id="map-risk-filter">
+          <option value="">All Risk Levels</option>
+          <option value="HIGH">High</option>
+          <option value="MEDIUM">Medium</option>
+          <option value="LOW">Low</option>
+        </select>
+        <select id="map-period-filter">
+          <option value="90d">Last 90 days</option>
+          <option value="30d">Last 30 days</option>
+          <option value="6m">Last 6 months</option>
+          <option value="1y">Last year</option>
+        </select>
+      </div>
+      <div class="kpi-row" id="map-kpi-row" style="grid-template-columns:1fr 1fr"></div>
+      <div class="location-list" id="map-location-list"></div>
+    </div>
+    <div class="map-tab-map"><div id="map2"></div></div>
+    <div class="map-info-panel" id="map-info-panel">
+      <button class="map-info-close" id="map-info-close-btn">&times;</button>
+      <div id="map-info-content"></div>
+    </div>
+  </div>
+</div>
+
+<!-- Barriers Tab -->
+<div class="app-layout hidden" id="tab-barriers">
+  <div class="barriers-container" id="barriers-content">
+    <h2 style="font-size:18px;font-weight:700;margin-bottom:16px">Barrier Health &amp; LSR Compliance</h2>
+    <div class="tab-sub" id="barrier-sub-tabs">
+      <button class="active" data-sub="indicators">Barrier Indicators</button>
+      <button data-sub="lsr">Life-Saving Rules</button>
+    </div>
+    <div id="barrier-sub-content"></div>
+  </div>
+  <div class="detail-panel" id="barrier-detail-panel">
+    <div class="detail-header">
+      <button class="detail-close" id="barrier-detail-close">&times;</button>
+      <h2 id="barrier-detail-title"></h2>
+      <div class="subtitle" id="barrier-detail-subtitle"></div>
+    </div>
+    <div class="detail-body" id="barrier-detail-body"></div>
+  </div>
+</div>
+
+<!-- Chat Tab -->
+<div class="app-layout hidden" id="tab-chat">
+  <div class="chat-container">
+    <div class="chat-messages" id="chat-messages">
+      <div class="chat-msg bot">
+        <div class="avatar">A</div>
+        <div class="bubble">
+          Welcome to the SIF-Aegis intelligence copilot. I can answer questions about incident reports, precursors, Life-Saving Rules, barriers, and patterns.<br><br>
+          Try asking:<br>
+          <em>"How many SIF reports are at Duliajan?"</em><br>
+          <em>"Which precursors are most common?"</em><br>
+          <em>"Find reports similar to a fall from height"</em><br>
+          <em>"What Life-Saving Rules have been broken most?"</em>
+        </div>
+      </div>
+    </div>
+    <div class="chat-input-area">
+      <input type="text" id="chat-input" placeholder="Ask about incidents, precursors, barriers, LSRs..." autocomplete="off">
+      <button id="chat-send">Send</button>
+    </div>
+  </div>
+</div>
+
+<!-- Admin Tab -->
+<div class="app-layout hidden" id="tab-admin">
+  <div class="admin-container" id="admin-content"></div>
+</div>
+
+<script>
+const API = '/api';
+let map = null, map2 = null, markers = [], map2Markers = [];
+let locations = [], precursors = [], dashboardData = null;
+let currentMode = 'location', selectedLocationId = null, activeTab = 'dashboard', barrierSubTab = 'indicators';
+let authToken = localStorage.getItem('sif_aegis_token') || null;
+let currentUser = null;
+let currentPeriod = '90d';
+let chatHistory = [];
+let allReports = [];
+let reportFilter = '';
+let allPatterns = [];
+let barrierData = null;
+let reportFormStep = 0;
+let reportFormData = {};
+let mapInfoOpen = false;
+
+function api(path, opts) {
+  opts = opts || {};
+  var headers = Object.assign({}, opts.headers || {});
+  if (authToken) headers['Authorization'] = 'Bearer ' + authToken;
+  if (opts.body && typeof opts.body === 'string' && !headers['Content-Type']) {
+    headers['Content-Type'] = 'application/json';
+  }
+  return fetch(API + path, Object.assign({}, opts, { headers: headers })).then(function(r) {
+    if (!r.ok) return r.text().then(function(t) { throw new Error(t || r.status); });
+    return r.json();
+  });
+}
+
+function esc(text) {
+  var d = document.createElement('div');
+  d.textContent = text != null ? String(text) : '';
+  return d.innerHTML;
+}
+
+function sifBadgeClass(cls) {
+  if (cls === 'HSIF' || cls === 'PSIF') return 'HIGH';
+  if (cls === 'LSIF') return 'MEDIUM';
+  return 'LOW';
+}
+
+function precStatusClass(s) {
+  if (s === 'PRESENT' || s === 'BROKEN') return 'PRESENT';
+  if (s === 'AMBIGUOUS' || s === 'UNCERTAIN') return 'AMBIGUOUS';
+  if (s === 'NOT_BROKEN') return 'NOT_BROKEN';
+  if (s === 'NOT_APPLICABLE') return 'NOT_APPLICABLE';
+  return 'NOT_MENTIONED';
+}
+
+function $el(id) { return document.getElementById(id); }
+
+function priorityClass(p) {
+  if (!p) return 'low';
+  var l = (p || '').toLowerCase();
+  if (l === 'critical') return 'critical';
+  if (l === 'high') return 'high';
+  if (l === 'medium') return 'medium';
+  return 'low';
+}
+
+function riskColor(level) {
+  if (level === 'HIGH') return '#c0392b';
+  if (level === 'MEDIUM') return '#e67e22';
+  if (level === 'LOW') return '#27ae60';
+  return '#95a5a6';
+}
+
+// ── Auth ──
+function showAuthModal() { $el('auth-modal').classList.remove('hidden'); $el('auth-error').textContent = ''; }
+function hideAuthModal() { $el('auth-modal').classList.add('hidden'); }
+
+$el('auth-modal').addEventListener('click', function(e) {
+  if (e.target === $el('auth-modal')) hideAuthModal();
+});
+
+document.querySelectorAll('#auth-tabs button').forEach(function(b) {
+  b.addEventListener('click', function() {
+    document.querySelectorAll('#auth-tabs button').forEach(function(x) { x.classList.remove('active'); });
+    b.classList.add('active');
+    var isLogin = b.dataset.auth === 'login';
+    $el('auth-login-form').classList.toggle('hidden', !isLogin);
+    $el('auth-register-form').classList.toggle('hidden', isLogin);
+    $el('auth-error').textContent = '';
+  });
+});
+
+$el('login-btn').addEventListener('click', async function() {
+  var username = $el('login-username').value.trim();
+  var password = $el('login-password').value;
+  if (!username || !password) { $el('auth-error').textContent = 'Enter username and password'; return; }
+  $el('login-btn').disabled = true;
+  try {
+    var data = await api('/auth/login', {
+      method: 'POST',
+      body: JSON.stringify({ username: username, password: password })
+    });
+    authToken = data.access_token;
+    localStorage.setItem('sif_aegis_token', authToken);
+    currentUser = data.user || {};
+    updateAuthUI();
+    hideAuthModal();
+    init();
+  } catch(e) {
+    $el('auth-error').textContent = 'Login failed: ' + e.message;
+  }
+  $el('login-btn').disabled = false;
+});
+
+$el('login-password').addEventListener('keydown', function(e) {
+  if (e.key === 'Enter') $el('login-btn').click();
+});
+
+$el('reg-btn').addEventListener('click', async function() {
+  var username = $el('reg-username').value.trim();
+  var email = $el('reg-email').value.trim();
+  var password = $el('reg-password').value;
+  var role = $el('reg-role').value;
+  if (!username || !email || !password) { $el('auth-error').textContent = 'All fields required'; return; }
+  $el('reg-btn').disabled = true;
+  try {
+    await api('/auth/register', {
+      method: 'POST',
+      body: JSON.stringify({ username: username, email: email, password: password, role: role })
+    });
+    document.querySelector('#auth-tabs button[data-auth="login"]').click();
+    $el('login-username').value = username;
+    $el('login-password').value = password;
+    $el('auth-error').style.color = 'var(--green)';
+    $el('auth-error').textContent = 'Account created. Please sign in.';
+  } catch(e) {
+    $el('auth-error').style.color = '';
+    $el('auth-error').textContent = 'Registration failed: ' + e.message;
+  }
+  $el('reg-btn').disabled = false;
+});
+
+function logout() {
+  authToken = null;
+  currentUser = null;
+  localStorage.removeItem('sif_aegis_token');
+  updateAuthUI();
+  init();
+}
+
+function updateAuthUI() {
+  if (currentUser && authToken) {
+    $el('user-name').textContent = currentUser.username || 'User';
+    $el('user-avatar').textContent = (currentUser.username || 'U')[0].toUpperCase();
+    $el('ud-role').textContent = 'Role: ' + (currentUser.role || 'viewer');
+    $el('ud-login').classList.add('hidden');
+    $el('ud-sep').classList.remove('hidden');
+    $el('ud-logout').classList.remove('hidden');
+    $el('nav-admin').classList.toggle('hidden', currentUser.role !== 'admin');
+  } else {
+    $el('user-name').textContent = 'Guest';
+    $el('user-avatar').textContent = '?';
+    $el('ud-role').textContent = 'Not logged in';
+    $el('ud-login').classList.remove('hidden');
+    $el('ud-sep').classList.add('hidden');
+    $el('ud-logout').classList.add('hidden');
+    $el('nav-admin').classList.add('hidden');
+  }
+}
+
+$el('user-badge').addEventListener('click', function(e) {
+  e.stopPropagation();
+  $el('user-dropdown').classList.toggle('open');
+});
+
+$el('ud-login').addEventListener('click', function() { showAuthModal(); $el('user-dropdown').classList.remove('open'); });
+$el('ud-logout').addEventListener('click', function() { logout(); $el('user-dropdown').classList.remove('open'); });
+
+document.addEventListener('click', function(e) {
+  if (!e.target.closest('.user-badge')) $el('user-dropdown').classList.remove('open');
+});
+
+// ── Tab Switching ──
+document.querySelectorAll('nav button').forEach(function(b) {
+  b.addEventListener('click', function() {
+    activeTab = b.dataset.tab;
+    document.querySelectorAll('nav button').forEach(function(x) { x.classList.remove('active'); });
+    b.classList.add('active');
+    ['dashboard','reports','patterns','pattern-detail','map','barriers','chat','admin'].forEach(function(t) {
+      var el = $el('tab-' + t);
+      if (el) el.classList.toggle('hidden', t !== activeTab);
+    });
+    if (activeTab === 'reports') loadReportsList();
+    if (activeTab === 'barriers') loadBarriers();
+    if (activeTab === 'patterns') loadPatternsList();
+    if (activeTab === 'map') initMapTab();
+    if (activeTab === 'admin') loadAdmin();
+  });
+});
+
+// ── Period Selector ──
+document.querySelectorAll('#period-selector button').forEach(function(b) {
+  b.addEventListener('click', function() {
+    document.querySelectorAll('#period-selector button').forEach(function(x) { x.classList.remove('active'); });
+    b.classList.add('active');
+    currentPeriod = b.dataset.period;
+    refreshDashboard();
+  });
+});
+
+// ── Init ──
+async function checkAuth() {
+  if (!authToken) { updateAuthUI(); return; }
+  try {
+    var data = await api('/auth/me');
+    currentUser = data.user || data;
+    updateAuthUI();
+  } catch(e) {
+    authToken = null;
+    localStorage.removeItem('sif_aegis_token');
+    updateAuthUI();
+  }
+}
+
+async function init() {
+  await checkAuth();
+  refreshDashboard();
+}
+
+async function refreshDashboard() {
+  try { dashboardData = await api('/dashboard/overview'); } catch(e) { dashboardData = {}; }
+  await Promise.all([loadLocations(), loadPrecursors()]);
+  renderKPIs();
+  if (map) updateMarkers();
+  $el('header-status').textContent =
+    (dashboardData.total_reports || 0) + ' reports \u00b7 ' + (dashboardData.locations || 0) + ' locations \u00b7 ' + (dashboardData.sif_reports || 0) + ' SIF';
+}
+
+// ── KPI Cards ──
+function renderKPIs() {
+  var d = dashboardData || {};
+  var avgRate = d.total_reports ? ((d.sif_reports || 0) / d.total_reports * 100).toFixed(1) + '%' : '0%';
+  var topLoc = (d.top_locations && d.top_locations.length) ? d.top_locations[0] : null;
+  var topPrec = (d.top_precursors && d.top_precursors.length) ? d.top_precursors[0] : null;
+  $el('kpi-cards').innerHTML =
+    '<div class="kpi blue"><div class="value">' + (d.total_reports || 0) + '</div><div class="label">Total Reports</div></div>' +
+    '<div class="kpi red"><div class="value">' + (d.sif_reports || 0) + '</div><div class="label">SIF Reports</div></div>' +
+    '<div class="kpi orange"><div class="value">' + avgRate + '</div><div class="label">SIF Rate</div></div>' +
+    '<div class="kpi"><div class="value">' + (d.locations || locations.length) + '</div><div class="label">Locations</div></div>' +
+    '<div class="kpi red"><div class="value">' + (d.patterns || 0) + '</div><div class="label">Patterns</div></div>';
+}
+
+// ── Google Map ──
+var MAPS_KEY = '%%GOOGLE_MAPS_API_KEY%%';
+var mapDiv = $el('map');
+
+function initMap() {
+  if (!MAPS_KEY || !window.google || !window.google.maps) {
+    mapDiv.innerHTML =
+      '<div class="map-placeholder"><div class="icon">&#x1F5FA;</div>' +
+      '<div><strong>Google Maps API key not configured</strong></div>' +
+      '<div>Set the key in your server configuration to enable the interactive map.</div></div>';
+    return;
+  }
+  map = new google.maps.Map(mapDiv, {
+    center: { lat: 27.4, lng: 95.5 },
+    zoom: 8,
+    mapId: 'sif-aegis',
+    zoomControl: true,
+    streetViewControl: false,
+    mapTypeControl: false
+  });
+  updateMarkers();
+}
+
+window.initMap = initMap;
+
+function createMarkerContent(loc) {
+  var pin = document.createElement('div');
+  var color = riskColor(loc.risk_level);
+  pin.style.cssText = 'width:28px;height:28px;border-radius:50%;background:' + color + ';border:3px solid #fff;box-shadow:0 2px 8px rgba(0,0,0,0.3);cursor:pointer;transition:transform 0.15s';
+  pin.title = loc.name;
+  return pin;
+}
+
+function updateMarkers() {
+  if (!map) return;
+  markers.forEach(function(m) { m.map = null; });
+  markers = [];
+  locations.forEach(function(loc) {
+    if (!loc.latitude || !loc.longitude) return;
+    var marker = new google.maps.marker.AdvancedMarkerElement({
+      position: { lat: loc.latitude, lng: loc.longitude },
+      map: map,
+      content: createMarkerContent(loc),
+      title: loc.name
+    });
+    marker.addListener('click', function() { selectLocation(loc.id); });
+    markers.push(marker);
+  });
+}
+
+function zoomToLocation(loc) {
+  if (!map || !loc.latitude || !loc.longitude) return;
+  map.panTo({ lat: loc.latitude, lng: loc.longitude });
+  map.setZoom(13);
+}
+
+// ── Mode Toggle ──
+document.querySelector('.mode-toggle').addEventListener('click', function(e) {
+  var btn = e.target.closest('button');
+  if (!btn) return;
+  currentMode = btn.dataset.mode;
+  document.querySelectorAll('.mode-toggle button').forEach(function(b) { b.classList.toggle('active', b === btn); });
+  $el('precursor-selector').classList.toggle('hidden', currentMode !== 'precursor');
+  if (currentMode === 'location') {
+    selectedLocationId = null;
+    updateMarkers();
+    renderLocationList();
+  } else {
+    updateMarkers();
+    renderPrecursorLocationList();
+  }
+});
+
+// ── Precursors ──
+async function loadPrecursors() {
+  try {
+    var data = await api('/sif/precursors/list');
+    precursors = data.precursors || [];
+    $el('precursor-select').innerHTML =
+      '<option value="">-- Select Precursor --</option>' +
+      precursors.filter(function(p) { return p.active_count > 0; }).map(function(p) {
+        return '<option value="' + p.id + '">' + esc(p.name) + ' (' + p.active_count + ')</option>';
+      }).join('');
+  } catch(e) { console.error('Failed to load precursors:', e); }
+}
+
+$el('precursor-select').addEventListener('change', async function() {
+  var pid = this.value;
+  if (!pid) {
+    selectedLocationId = null;
+    locations.forEach(function(l) { l.precursor_count = 0; l.precursor_total = 0; });
+    updateMarkers();
+    renderPrecursorLocationList();
+    return;
+  }
+  try {
+    var data = await api('/sif/precursors/' + pid + '/locations');
+    var locMap = {};
+    (data.locations || []).forEach(function(l) { locMap[l.id] = l; });
+    locations.forEach(function(l) {
+      var pl = locMap[l.id];
+      l.precursor_count = pl ? (pl.present_count || 0) : 0;
+      l.precursor_total = pl ? (pl.total || 0) : 0;
+    });
+    updateMarkers();
+    renderPrecursorLocationList();
+  } catch(e) { console.error('Failed to load precursor locations:', e); }
+});
+
+// ── Locations ──
+async function loadLocations() {
+  try {
+    var data = await api('/sif/locations');
+    locations = data.locations || [];
+    if (currentMode === 'location') renderLocationList();
+    else renderPrecursorLocationList();
+  } catch(e) { console.error('Failed to load locations:', e); }
+}
+
+function renderLocationList() {
+  var el = $el('location-list');
+  if (!locations.length) { el.innerHTML = '<div class="empty-state">No locations found</div>'; return; }
+  el.innerHTML = locations.map(function(loc) {
+    return '<div class="location-item' + (selectedLocationId === loc.id ? ' active' : '') + '" data-id="' + loc.id + '">' +
+      '<div class="risk-dot ' + loc.risk_level + '"></div>' +
+      '<div class="loc-info"><div class="loc-name">' + esc(loc.name) + '</div>' +
+      '<div class="loc-stats"><span>' + (loc.total_reports || loc.report_count || 0) + ' reports</span><span>' + (loc.sif_reports || loc.sif_count || 0) + ' SIF</span></div></div>' +
+      '<div class="loc-score ' + loc.risk_level + '">' + (loc.risk_score != null ? loc.risk_score.toFixed(2) : '\u2014') + '</div></div>';
+  }).join('');
+}
+
+function renderPrecursorLocationList() {
+  var el = $el('location-list');
+  if (!locations.length) { el.innerHTML = '<div class="empty-state">No locations found</div>'; return; }
+  var sorted = locations.slice().sort(function(a, b) { return (b.precursor_count || 0) - (a.precursor_count || 0); });
+  el.innerHTML = sorted.map(function(loc) {
+    return '<div class="location-item' + (selectedLocationId === loc.id ? ' active' : '') + '" data-id="' + loc.id + '">' +
+      '<div class="risk-dot ' + loc.risk_level + '"></div>' +
+      '<div class="loc-info"><div class="loc-name">' + esc(loc.name) + '</div>' +
+      '<div class="loc-stats"><span>' + (loc.precursor_count || 0) + ' matches</span>' +
+      (loc.precursor_total ? '<span>of ' + loc.precursor_total + '</span>' : '') + '</div></div>' +
+      '<div class="loc-score ' + loc.risk_level + '">' + (loc.precursor_count || 0) + '</div></div>';
+  }).join('');
+}
+
+$el('location-list').addEventListener('click', function(e) {
+  var item = e.target.closest('.location-item');
+  if (!item) return;
+  selectLocation(Number(item.dataset.id));
+});
+
+// ── Location Detail ──
+async function selectLocation(locId) {
+  selectedLocationId = locId;
+  var loc = locations.find(function(l) { return l.id === locId; });
+  if (currentMode === 'location') renderLocationList();
+  else renderPrecursorLocationList();
+  if (loc && map) zoomToLocation(loc);
+
+  var panel = $el('detail-panel');
+  $el('detail-title').textContent = loc ? loc.name : 'Loading...';
+  $el('detail-subtitle').textContent = loc ? (loc.region || '') + ' \u00b7 ' + (loc.asset_type || '') : '';
+  $el('detail-body').innerHTML = '<div class="loading">Loading location details...</div>';
+  panel.classList.add('open');
+
+  try {
+    var results = await Promise.all([api('/sif/locations/' + locId), api('/sif/locations/' + locId + '/precursors')]);
+    renderLocationDetail(results[0], (results[1].precursors || []));
+  } catch(e) {
+    $el('detail-body').innerHTML = '<div class="empty-state">Failed to load location details</div>';
+  }
+}
+
+function renderLocationDetail(loc, precList) {
+  $el('detail-title').textContent = loc.name;
+  $el('detail-subtitle').textContent = (loc.region || 'Unknown') + ' \u00b7 ' + (loc.asset_type || 'Unknown');
+  var maxCount = Math.max.apply(null, precList.map(function(p) { return p.present_count || 0; }).concat([1]));
+
+  var attentionHtml = '';
+  if (loc.attention) {
+    var a = loc.attention;
+    attentionHtml =
+      '<div class="stats-grid">' +
+      '<div class="stat-card"><div class="val">' + esc(a.attention_level || '\u2014') + '</div><div class="lbl">Attention</div></div>' +
+      '<div class="stat-card"><div class="val">' + esc(a.systemic_attention || '\u2014') + '</div><div class="lbl">Systemic</div></div>' +
+      '<div class="stat-card"><div class="val">' + esc(a.prediction_mode || '\u2014') + '</div><div class="lbl">Prediction</div></div>' +
+      '<div class="stat-card"><div class="val">' + (a.barrier_failure_rate != null ? (Number(a.barrier_failure_rate) * 100).toFixed(0) + '%' : '\u2014') + '</div><div class="lbl">Barrier Fail Rate</div></div></div>';
+  }
+
+  var topPatternsHtml = '';
+  if (loc.top_patterns && loc.top_patterns.length) {
+    topPatternsHtml = '<div class="section-title">Top Patterns</div>' +
+      loc.top_patterns.map(function(p) {
+        return '<div style="padding:4px 0;border-bottom:1px solid var(--border-light);font-size:12px">' +
+          '<span class="priority-badge ' + priorityClass(p.priority_level) + '">' + esc(p.priority_level || '') + '</span> ' +
+          esc(p.title || p.pattern_id || '') +
+          '</div>';
+      }).join('');
+  }
+
+  $el('detail-body').innerHTML =
+    '<button class="back-btn" onclick="closeDetailPanel()" style="margin-bottom:12px">&larr; Close</button>' +
+    '<div style="margin-bottom:10px;display:flex;align-items:center;gap:10px">' +
+    '<span class="risk-badge ' + loc.risk_level + '">' + loc.risk_level + '</span>' +
+    '<span style="font-size:15px;font-weight:700">Score: ' + (loc.risk_score != null ? loc.risk_score.toFixed(3) : '\u2014') + '</span></div>' +
+    '<div class="stats-grid">' +
+    '<div class="stat-card"><div class="val">' + (loc.total_reports || loc.report_count || 0) + '</div><div class="lbl">Total Reports</div></div>' +
+    '<div class="stat-card"><div class="val" style="color:var(--red)">' + (loc.sif_reports || loc.sif_count || 0) + '</div><div class="lbl">SIF Reports</div></div>' +
+    '<div class="stat-card"><div class="val">' + (loc.avg_sif_score != null ? loc.avg_sif_score.toFixed(3) : '\u2014') + '</div><div class="lbl">Avg SIF Score</div></div>' +
+    '<div class="stat-card"><div class="val">' + (loc.total_reports ? ((loc.sif_reports || loc.sif_count || 0) / loc.total_reports * 100).toFixed(0) + '%' : '0%') + '</div><div class="lbl">SIF Rate</div></div></div>' +
+    attentionHtml +
+    '<div class="section-title">Top Precursors</div>' +
+    (precList.length ? precList.map(function(p) {
+      return '<div class="prec-bar"><div class="name" title="' + esc(p.name) + '">' + esc(p.name) + '</div>' +
+        '<div class="bar-bg"><div class="bar-fill" style="width:' + (p.present_count / maxCount * 100) + '%;background:' + (p.status === 'PRESENT' ? 'var(--red)' : 'var(--orange)') + '"></div></div>' +
+        '<div class="count">' + p.present_count + '</div></div>';
+    }).join('') : '<div class="empty-state" style="padding:12px">No precursor data</div>') +
+    topPatternsHtml +
+    '<div class="section-title">Reports at this Location</div>' +
+    '<div id="location-reports-list" class="loading">Loading reports...</div>';
+
+  loadLocationReports(loc.id);
+}
+
+async function loadLocationReports(locId) {
+  try {
+    var data = await api('/sif/reports-by-location/' + locId);
+    var el = $el('location-reports-list');
+    var reports = data.reports || [];
+    if (!reports.length) { el.innerHTML = '<div class="empty-state" style="padding:8px">No reports at this location</div>'; return; }
+    el.innerHTML = reports.map(function(r) {
+      return '<div class="report-item" data-rid="' + esc(r.incident_id) + '">' +
+        '<div class="ri-header"><span class="ri-id">' + esc(r.incident_id) + '</span>' +
+        (r.sif_class ? '<span class="risk-badge ' + sifBadgeClass(r.sif_class) + '" style="font-size:10px">' + esc(r.sif_class) + '</span>' : '') + '</div>' +
+        '<div class="ri-meta">' + (r.event_date || '') + ' \u00b7 ' + (r.injury_severity || '') + ' \u00b7 Score: ' + (r.sif_score != null ? Number(r.sif_score).toFixed(3) : '\u2014') + '</div>' +
+        (r.present_precursors ? '<div style="font-size:10px;color:var(--blue);margin-top:2px">' + esc(r.present_precursors) + '</div>' : '') + '</div>';
+    }).join('');
+    el.querySelectorAll('.report-item').forEach(function(ri) {
+      ri.addEventListener('click', function() { showReportDetail(ri.dataset.rid, 'detail-body'); });
+    });
+  } catch(e) {
+    $el('location-reports-list').innerHTML = '<div class="empty-state" style="padding:8px">Failed to load reports</div>';
+  }
+}
+
+$el('detail-close-btn').addEventListener('click', closeDetailPanel);
+$el('barrier-detail-close').addEventListener('click', function() { $el('barrier-detail-panel').classList.remove('open'); });
+$el('map-info-close-btn').addEventListener('click', function() { $el('map-info-panel').classList.remove('open'); mapInfoOpen = false; });
+
+function closeDetailPanel() {
+  $el('detail-panel').classList.remove('open');
+  selectedLocationId = null;
+  if (currentMode === 'location') renderLocationList(); else renderPrecursorLocationList();
+}
+
+// ── Report Detail (shared) ──
+async function showReportDetail(incidentId, target) {
+  target = target || 'detail-body';
+  var panel = target === 'detail-body' ? $el('detail-panel') : null;
+
+  if (panel) {
+    $el('detail-title').textContent = incidentId;
+    $el('detail-subtitle').textContent = 'Loading...';
+    panel.classList.add('open');
+  }
+
+  try {
+    var r = await api('/reports/' + incidentId);
+    var rpt = r.report;
+    if (panel) {
+      $el('detail-title').textContent = rpt.incident_id;
+      $el('detail-subtitle').textContent = (rpt.location || 'Unknown') + ' \u00b7 ' + (rpt.event_date || '') + ' \u00b7 ' + (rpt.injury_severity || '');
+    }
+
+    var sifScore = rpt.sif_score || 0;
+    var sifClass = rpt.sif_class || 'LOW';
+    var badge = sifBadgeClass(sifClass);
+
+    // SIF Assessment
+    var assessHtml = '';
+    if (r.sif_assessment) {
+      var sa = r.sif_assessment;
+      assessHtml =
+        '<div class="assess-box"><div class="assess-title">SIF Assessment</div><div class="assess-grid">' +
+        '<div class="assess-item"><div class="ai-label">Attention Level</div><div class="ai-value">' + esc(sa.attention_level || '\u2014') + '</div></div>' +
+        '<div class="assess-item"><div class="ai-label">Urgency Score</div><div class="ai-value">' + (sa.urgency_score != null ? Number(sa.urgency_score).toFixed(2) : '\u2014') + '</div></div>' +
+        '<div class="assess-item"><div class="ai-label">Systemic Attention</div><div class="ai-value">' + esc(sa.systemic_attention || '\u2014') + '</div></div>' +
+        '<div class="assess-item"><div class="ai-label">Prediction Mode</div><div class="ai-value">' + esc(sa.prediction_mode || '\u2014') + '</div></div>' +
+        '<div class="assess-item"><div class="ai-label">Barrier Failure Rate</div><div class="ai-value">' + (sa.barrier_failure_rate != null ? (Number(sa.barrier_failure_rate) * 100).toFixed(0) + '%' : '\u2014') + '</div></div>' +
+        '<div class="assess-item"><div class="ai-label">Risk Potential</div><div class="ai-value">' + (sa.risk_potential != null ? Number(sa.risk_potential).toFixed(2) : '\u2014') + '</div></div>' +
+        '</div></div>';
+    }
+
+    // Precursors
+    var precTags = r.precursors.map(function(p) {
+      return '<span class="prec-tag ' + precStatusClass(p.status) + '">' + esc(p.name) + ': ' + esc(p.status) +
+        (p.confidence != null ? ' (' + Number(p.confidence).toFixed(2) + ')' : '') + '</span>';
+    }).join(' ');
+
+    // Evidence
+    var evHtml = r.evidence.length ? r.evidence.map(function(ev) {
+      return '<div class="evidence-item"><span class="prec-tag ' + (ev.polarity === 'present' ? 'PRESENT' : 'AMBIGUOUS') + '">' + esc(ev.polarity) + '</span> ' + esc(ev.evidence_text || '') + '</div>';
+    }).join('') : '<div class="empty-state" style="padding:8px">No evidence items</div>';
+
+    // LSR
+    var lsrActive = r.life_saving_rules.filter(function(l) { return l.status !== 'NOT_APPLICABLE'; });
+    var lsrHtml = lsrActive.length ? lsrActive.map(function(l) {
+      return '<div style="font-size:12px;padding:4px 0;border-bottom:1px solid var(--border-light)">' +
+        '<span class="prec-tag ' + precStatusClass(l.status) + '">' + esc(l.status) + '</span> ' +
+        '<strong>' + esc(l.rule_id) + ':</strong> ' + esc(l.name) +
+        (l.reason ? '<div style="font-size:11px;color:var(--muted);margin-top:2px;margin-left:8px">' + esc(l.reason) + '</div>' : '') + '</div>';
+    }).join('') : '<div class="empty-state" style="padding:8px">No Life-Saving Rule data</div>';
+
+    // Barriers
+    var barrierHtml = '';
+    if (r.barriers && r.barriers.length) {
+      barrierHtml = '<div class="section-title">Barrier Status (' + r.barriers.length + ')</div>' +
+        r.barriers.map(function(b) {
+          return '<div style="font-size:12px;padding:4px 0;border-bottom:1px solid var(--border-light)">' +
+            '<span class="prec-tag ' + precStatusClass(b.status) + '">' + esc(b.status) + '</span> ' +
+            '<strong>' + esc(b.name) + '</strong>' +
+            (b.reason ? '<div style="font-size:11px;color:var(--muted);margin-top:2px;margin-left:8px">' + esc(b.reason) + '</div>' : '') + '</div>';
+        }).join('');
+    }
+
+    // Uncertainty
+    var uncItems = [];
+    if (r.sif_assessment && r.sif_assessment.uncertainty) uncItems.push('<strong>Uncertainty:</strong> ' + esc(typeof r.sif_assessment.uncertainty === 'string' ? r.sif_assessment.uncertainty : JSON.stringify(r.sif_assessment.uncertainty)));
+    if (rpt.sif_components) uncItems.push('<strong>Components:</strong> ' + esc(typeof rpt.sif_components === 'string' ? rpt.sif_components : JSON.stringify(rpt.sif_components)));
+    if (rpt.sif_weight_source) uncItems.push('<strong>Weight Source:</strong> ' + esc(rpt.sif_weight_source));
+    var uncHtml = uncItems.length ? '<div class="section-title">Uncertainty &amp; Components</div><div style="background:var(--bg);padding:10px;border-radius:var(--radius-sm);font-size:12px;line-height:1.6">' + uncItems.join('<br>') + '</div>' : '';
+
+    // Summary
+    var summaryHtml = '';
+    if (rpt.summary) {
+      summaryHtml = '<div class="section-title">Narrative Summary</div><div class="report-text-box" style="max-height:160px;border-color:var(--orange-border);background:#fffbeb">' + esc(rpt.summary) + '</div>';
+    }
+
+    // Related Patterns
+    var rpHtml = '';
+    if (r.related_patterns && r.related_patterns.length) {
+      rpHtml = '<div class="section-title">Related Patterns</div>' +
+        r.related_patterns.map(function(p) {
+          return '<div style="padding:6px 0;border-bottom:1px solid var(--border-light);font-size:12px">' +
+            '<span class="priority-badge ' + priorityClass(p.priority_level) + '">' + esc(p.priority_level || '') + '</span> ' +
+            esc(p.title || p.pattern_id || '') +
+            (p.pattern_score != null ? ' <span style="color:var(--muted)">Score: ' + Number(p.pattern_score).toFixed(2) + '</span>' : '') + '</div>';
+        }).join('');
+    }
+
+    var el = $el(target);
+    el.innerHTML =
+      (target === 'detail-body' ? '<button class="back-btn" onclick="closeDetailPanel()" style="margin-bottom:12px">&larr; Close</button>' : '') +
+      '<div style="display:flex;gap:10px;align-items:center;margin-bottom:12px;flex-wrap:wrap">' +
+      '<h3 style="font-size:16px;font-weight:700">' + esc(rpt.incident_id) + '</h3>' +
+      '<span class="risk-badge ' + badge + '">' + esc(sifClass) + '</span>' +
+      '<span style="font-size:15px;font-weight:700">Score: ' + sifScore.toFixed(3) + '</span></div>' +
+      '<div style="font-size:12px;color:var(--muted);margin-bottom:12px">' + esc(rpt.location || 'Unknown') + ' \u00b7 ' + (rpt.event_date || '') + ' \u00b7 ' + (rpt.injury_severity || '') +
+      (rpt.sif_method ? ' \u00b7 Method: ' + esc(rpt.sif_method) : '') + '</div>' +
+      '<div class="section-title">Original Report Text</div>' +
+      '<div class="report-text-box">' + esc(rpt.raw_text) + '</div>' +
+      summaryHtml + assessHtml +
+      '<div class="stats-grid" style="margin-top:12px">' +
+      '<div class="stat-card"><div class="val" style="color:var(--red)">' + r.precursors.filter(function(p) { return p.status === 'PRESENT'; }).length + '</div><div class="lbl">Precursors Present</div></div>' +
+      '<div class="stat-card"><div class="val" style="color:var(--orange)">' + r.precursors.filter(function(p) { return p.status === 'AMBIGUOUS'; }).length + '</div><div class="lbl">Ambiguous</div></div>' +
+      '<div class="stat-card"><div class="val" style="color:var(--red)">' + r.life_saving_rules.filter(function(l) { return l.status === 'BROKEN'; }).length + '</div><div class="lbl">LSRs Broken</div></div>' +
+      '<div class="stat-card"><div class="val">' + r.evidence.length + '</div><div class="lbl">Evidence Items</div></div></div>' +
+      '<div class="section-title">SIF Precursors (' + r.precursors.length + ')</div>' +
+      '<div style="margin:4px 0;line-height:1.8">' + (precTags || '<span class="empty-state" style="padding:4px">No precursor data</span>') + '</div>' +
+      '<div class="section-title">Evidence (' + r.evidence.length + ')</div>' +
+      '<div style="max-height:220px;overflow-y:auto">' + evHtml + '</div>' +
+      (lsrActive.length ?
+        '<div class="section-title">Life-Saving Rules (' + r.life_saving_rules.filter(function(l) { return l.status === 'BROKEN'; }).length + ' broken, ' + r.life_saving_rules.filter(function(l) { return l.status === 'UNCERTAIN'; }).length + ' uncertain)</div>' +
+        '<div style="max-height:180px;overflow-y:auto">' + lsrHtml + '</div>' : '') +
+      barrierHtml + uncHtml + rpHtml +
+      '<div class="section-title">Related Reports</div>' +
+      '<div id="' + target + '-related"><div class="loading">Loading related reports...</div></div>' +
+      '<div class="section-title">Raw Analysis JSON</div>' +
+      '<div class="json-toggle" data-target="' + target + '-json">\u25b6 Show JSON</div>' +
+      '<div class="json-content hidden" id="' + target + '-json">' + JSON.stringify(r.report.analysis_json || {}, null, 2) + '</div>';
+
+    // JSON toggle
+    el.querySelectorAll('.json-toggle').forEach(function(t) {
+      t.addEventListener('click', function() {
+        var jEl = $el(t.dataset.target);
+        var isOpen = !jEl.classList.contains('hidden');
+        jEl.classList.toggle('hidden');
+        t.textContent = isOpen ? '\u25b6 Show JSON' : '\u25bc Hide JSON';
+      });
+    });
+
+    // Report item clicks
+    el.querySelectorAll('.report-item[data-rid]').forEach(function(ri) {
+      ri.addEventListener('click', function() { showReportDetail(ri.dataset.rid, target); });
+    });
+
+    loadRelatedReports(incidentId, target + '-related', target);
+  } catch(e) {
+    console.error('Failed to load report:', e);
+    $el(target).innerHTML = '<div class="empty-state">Failed to load report details</div>';
+  }
+}
+
+async function loadRelatedReports(incidentId, elId, target) {
+  try {
+    var data = await api('/reports/' + incidentId + '/related');
+    var el = $el(elId);
+    if (!data.related || !data.related.length) {
+      el.innerHTML = '<div class="empty-state" style="padding:8px">No related reports found</div>';
+      return;
+    }
+    el.innerHTML = data.related.map(function(r) {
+      return '<div class="report-item" data-rid="' + esc(r.incident_id) + '" data-target="' + target + '">' +
+        '<div class="ri-header"><span class="ri-id">' + esc(r.incident_id) + '</span>' +
+        '<span style="font-size:11px;color:var(--muted)">' + (r.similarity * 100).toFixed(0) + '% match</span></div>' +
+        '<div class="ri-meta">' + esc(r.location || '') + ' \u00b7 ' + (r.event_date || '') + '</div>' +
+        (r.shared && r.shared.length ? '<div style="font-size:10px;color:var(--blue);margin-top:2px">' + r.shared.join(', ') + '</div>' : '') + '</div>';
+    }).join('');
+    el.querySelectorAll('.report-item').forEach(function(ri) {
+      ri.addEventListener('click', function() { showReportDetail(ri.dataset.rid, ri.dataset.target); });
+    });
+  } catch(e) {
+    $el(elId).innerHTML = '<div class="empty-state" style="padding:8px">Failed to load related reports</div>';
+  }
+}
+
+// ── Reports Tab ──
+async function loadReportsList() {
+  try {
+    var data = await api('/reports?limit=200');
+    allReports = data.items || data.reports || [];
+    renderReportsList();
+  } catch(e) {
+    $el('reports-content').innerHTML = '<div class="empty-state">Failed to load reports</div>';
+  }
+}
+
+function renderReportsList() {
+  var el = $el('reports-content');
+  var q = (reportFilter || '').toLowerCase();
+  var filtered = q
+    ? allReports.filter(function(r) {
+        return (r.incident_id || '').toLowerCase().indexOf(q) >= 0 ||
+               (r.location || '').toLowerCase().indexOf(q) >= 0 ||
+               (r.sif_class || '').toLowerCase().indexOf(q) >= 0;
+      })
+    : allReports;
+
+  var locs = [];
+  var seen = {};
+  allReports.forEach(function(r) {
+    if (r.location && !seen[r.location]) { seen[r.location] = 1; locs.push(r.location); }
+  });
+  locs.sort();
+
+  el.innerHTML =
+    '<div class="reports-header">' +
+    '<h2>Reports (' + filtered.length + (filtered.length !== allReports.length ? ' of ' + allReports.length : '') + ')</h2>' +
+    '<input class="reports-search" type="text" placeholder="Search by ID, location, or class..." value="' + esc(reportFilter) + '">' +
+    '<select class="reports-filter" id="reports-loc-filter">' +
+    '<option value="">All Locations</option>' +
+    locs.map(function(loc) { return '<option value="' + esc(loc) + '">' + esc(loc) + '</option>'; }).join('') +
+    '</select>' +
+    '<button class="modal-btn" style="width:auto;padding:8px 16px;margin:0;background:var(--green)" id="submit-report-btn">+ Submit Report</button>' +
+    '</div>' +
+    '<div id="reports-list-items">' +
+    (filtered.length ? filtered.map(function(r) {
+      return '<div class="report-item" data-rid="' + esc(r.incident_id) + '">' +
+        '<div class="ri-header"><span class="ri-id">' + esc(r.incident_id) + '</span>' +
+        (r.sif_class ? '<span class="risk-badge ' + sifBadgeClass(r.sif_class) + '" style="font-size:10px">' + esc(r.sif_class) + '</span>' : '') + '</div>' +
+        '<div class="ri-meta">' + (r.event_date || r.d || '') + ' \u00b7 ' + esc(r.location || '') + ' \u00b7 ' + (r.injury_severity || '') + ' \u00b7 Score: ' + (r.sif_score != null ? Number(r.sif_score).toFixed(3) : '\u2014') + '</div></div>';
+    }).join('') : '<div class="empty-state">No reports found.</div>') +
+    '</div>';
+
+  $el('submit-report-btn').addEventListener('click', showSubmitReportForm);
+
+  el.querySelector('.reports-search').addEventListener('input', function(e) {
+    reportFilter = e.target.value;
+    renderReportsList();
+  });
+  var locSel = $el('reports-loc-filter');
+  if (locSel) {
+    locSel.addEventListener('change', function(e) {
+      reportFilter = e.target.value;
+      renderReportsList();
+    });
+  }
+  el.querySelectorAll('.report-item[data-rid]').forEach(function(ri) {
+    ri.addEventListener('click', function() { showReportDetail(ri.dataset.rid, 'reports-content'); });
+  });
+}
+
+// ── Submit Report (Multi-step Form) ──
+var REPORT_STEPS = ['Type', 'When', 'Where', 'What', 'Description', 'Observations', 'Review'];
+var REPORT_TYPES = ['Near Miss', 'First Aid', 'Medical Treatment', 'Lost Time', 'Fatality', 'Property Damage', 'Environmental'];
+
+function showSubmitReportForm() {
+  reportFormStep = 0;
+  reportFormData = {};
+  renderReportForm();
+}
+
+function renderReportForm() {
+  var el = $el('reports-content');
+  var step = reportFormStep;
+
+  var stepsHtml = '<div class="step-indicator">' +
+    REPORT_STEPS.map(function(s, i) {
+      var cls = i < step ? 'done' : (i === step ? 'active' : '');
+      return '<div class="si-dot ' + cls + '">' + (i < step ? '\u2713' : (i + 1)) + '</div>' +
+        (i < REPORT_STEPS.length - 1 ? '<div class="si-line"></div>' : '');
+    }).join('') + '</div>';
+
+  var content = '';
+
+  if (step === 0) {
+    content =
+      '<h2 style="font-size:18px;font-weight:700;margin-bottom:16px">Report Type</h2>' +
+      '<div class="form-group"><label>Incident Type</label>' +
+      '<select id="rf-type">' +
+      '<option value="">-- Select Type --</option>' +
+      REPORT_TYPES.map(function(t) { return '<option value="' + t + '">' + t + '</option>'; }).join('') +
+      '</select></div>';
+  } else if (step === 1) {
+    content =
+      '<h2 style="font-size:18px;font-weight:700;margin-bottom:16px">When Did This Happen?</h2>' +
+      '<div class="form-group"><label>Date</label><input type="date" id="rf-date" value="' + (reportFormData.date || '') + '"></div>' +
+      '<div class="form-group"><label>Time</label><input type="time" id="rf-time" value="' + (reportFormData.time || '') + '"></div>';
+  } else if (step === 2) {
+    content =
+      '<h2 style="font-size:18px;font-weight:700;margin-bottom:16px">Where Did This Happen?</h2>' +
+      '<div class="form-group"><label>Location Name</label><input type="text" id="rf-location-name" placeholder="e.g. Well Pad Alpha-3" value="' + esc(reportFormData.location_name || '') + '"></div>' +
+      '<div class="form-group"><label>Location ID</label><input type="text" id="rf-location-id" placeholder="e.g. LOC-001" value="' + esc(reportFormData.location_id || '') + '"></div>';
+  } else if (step === 3) {
+    content =
+      '<h2 style="font-size:18px;font-weight:700;margin-bottom:16px">What Happened?</h2>' +
+      '<div class="form-group"><label>Activity Being Performed</label><input type="text" id="rf-activity" placeholder="e.g. Routine well maintenance" value="' + esc(reportFormData.activity || '') + '"></div>' +
+      '<div class="form-group"><label>Unsafe Act</label><input type="text" id="rf-unsafe-act" placeholder="Optional" value="' + esc(reportFormData.unsafe_act || '') + '"></div>' +
+      '<div class="form-group"><label>Unsafe Condition</label><input type="text" id="rf-unsafe-condition" placeholder="Optional" value="' + esc(reportFormData.unsafe_condition || '') + '"></div>' +
+      '<div class="form-group"><label>Near Miss Details</label><input type="text" id="rf-near-miss" placeholder="If near miss, describe what almost happened" value="' + esc(reportFormData.near_miss_details || '') + '"></div>';
+  } else if (step === 4) {
+    content =
+      '<h2 style="font-size:18px;font-weight:700;margin-bottom:16px">Description</h2>' +
+      '<div class="form-group"><label>Detailed Description of the Incident</label>' +
+      '<textarea id="rf-raw-text" placeholder="Provide a detailed description of the incident. Include what happened, how it happened, who was involved, and any immediate consequences.">' + esc(reportFormData.raw_text || '') + '</textarea></div>';
+  } else if (step === 5) {
+    content =
+      '<h2 style="font-size:18px;font-weight:700;margin-bottom:16px">Immediate Observations</h2>' +
+      '<div class="form-group"><label>Immediate Action Taken</label><textarea id="rf-action" placeholder="What immediate actions were taken?">' + esc(reportFormData.action || '') + '</textarea></div>' +
+      '<div class="form-group"><label>Witnesses</label><input type="text" id="rf-witnesses" placeholder="Names of witnesses, comma-separated" value="' + esc(reportFormData.witnesses || '') + '"></div>';
+  } else if (step === 6) {
+    var fd = reportFormData;
+    content =
+      '<h2 style="font-size:18px;font-weight:700;margin-bottom:16px">Review &amp; Submit</h2>' +
+      '<div style="background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:16px">' +
+      '<div class="review-row"><span class="rr-label">Type</span><span class="rr-value">' + esc(fd.type || '') + '</span></div>' +
+      '<div class="review-row"><span class="rr-label">Date</span><span class="rr-value">' + esc(fd.date || '') + '</span></div>' +
+      '<div class="review-row"><span class="rr-label">Time</span><span class="rr-value">' + esc(fd.time || '') + '</span></div>' +
+      '<div class="review-row"><span class="rr-label">Location</span><span class="rr-value">' + esc(fd.location_name || '') + '</span></div>' +
+      '<div class="review-row"><span class="rr-label">Activity</span><span class="rr-value">' + esc(fd.activity || '') + '</span></div>' +
+      '<div class="review-row"><span class="rr-label">Unsafe Act</span><span class="rr-value">' + esc(fd.unsafe_act || 'None') + '</span></div>' +
+      '<div class="review-row"><span class="rr-label">Unsafe Condition</span><span class="rr-value">' + esc(fd.unsafe_condition || 'None') + '</span></div>' +
+      '<div class="review-row"><span class="rr-label">Witnesses</span><span class="rr-value">' + esc(fd.witnesses || 'None') + '</span></div>' +
+      '</div>' +
+      '<div class="section-title" style="margin-top:16px">Description</div>' +
+      '<div class="report-text-box" style="max-height:200px">' + esc(fd.raw_text || '') + '</div>' +
+      '<div class="section-title">Immediate Action</div>' +
+      '<div class="report-text-box" style="max-height:100px">' + esc(fd.action || '') + '</div>';
+  }
+
+  el.innerHTML =
+    '<button class="back-btn" onclick="loadReportsList()" style="margin-bottom:12px">&larr; Back to Reports</button>' +
+    stepsHtml +
+    '<div class="form-step active">' + content +
+    '<div class="form-nav">' +
+    (step > 0 ? '<button class="prev" id="rf-prev-btn">Previous</button>' : '') +
+    (step < 6 ? '<button class="next" id="rf-next-btn">Next</button>' :
+     '<button class="submit" id="rf-submit-btn">Submit Report</button>') +
+    '</div></div>';
+
+  if ($el('rf-prev-btn')) $el('rf-prev-btn').addEventListener('click', reportFormPrev);
+  if ($el('rf-next-btn')) $el('rf-next-btn').addEventListener('click', reportFormNext);
+  if ($el('rf-submit-btn')) $el('rf-submit-btn').addEventListener('click', submitReportForm);
+}
+
+function reportFormNext() {
+  collectReportFormData();
+  if (reportFormStep === 0 && !reportFormData.type) return alert('Please select an incident type');
+  if (reportFormStep === 4 && !reportFormData.raw_text) return alert('Please provide a description');
+  if (reportFormStep < 6) {
+    reportFormStep++;
+    renderReportForm();
+  }
+}
+
+function reportFormPrev() {
+  collectReportFormData();
+  if (reportFormStep > 0) {
+    reportFormStep--;
+    renderReportForm();
+  }
+}
+
+function collectReportFormData() {
+  var s = reportFormStep;
+  var e;
+  if (s === 0) { e = $el('rf-type'); if (e) reportFormData.type = e.value; }
+  if (s === 1) {
+    e = $el('rf-date'); if (e) reportFormData.date = e.value;
+    e = $el('rf-time'); if (e) reportFormData.time = e.value;
+  }
+  if (s === 2) {
+    e = $el('rf-location-name'); if (e) reportFormData.location_name = e.value;
+    e = $el('rf-location-id'); if (e) reportFormData.location_id = e.value;
+  }
+  if (s === 3) {
+    e = $el('rf-activity'); if (e) reportFormData.activity = e.value;
+    e = $el('rf-unsafe-act'); if (e) reportFormData.unsafe_act = e.value;
+    e = $el('rf-unsafe-condition'); if (e) reportFormData.unsafe_condition = e.value;
+    e = $el('rf-near-miss'); if (e) reportFormData.near_miss_details = e.value;
+  }
+  if (s === 4) {
+    e = $el('rf-raw-text'); if (e) reportFormData.raw_text = e.value;
+  }
+  if (s === 5) {
+    e = $el('rf-action'); if (e) reportFormData.action = e.value;
+    e = $el('rf-witnesses'); if (e) reportFormData.witnesses = e.value;
+  }
+}
+
+async function submitReportForm() {
+  collectReportFormData();
+  var btn = $el('rf-submit-btn');
+  btn.disabled = true;
+  btn.textContent = 'Submitting...';
+  try {
+    var payload = {
+      report_type: reportFormData.type,
+      event_date: reportFormData.date,
+      event_time: reportFormData.time,
+      location_id: reportFormData.location_id,
+      location_name: reportFormData.location_name,
+      raw_text: reportFormData.raw_text,
+      activity: reportFormData.activity,
+      unsafe_act: reportFormData.unsafe_act,
+      unsafe_condition: reportFormData.unsafe_condition,
+      near_miss_details: reportFormData.near_miss_details,
+      immediate_action: reportFormData.action,
+      witnesses: reportFormData.witnesses
+    };
+    var data = await api('/reports', { method: 'POST', body: JSON.stringify(payload) });
+    alert('Report submitted successfully! ID: ' + (data.incident_id || data.report_id || 'Unknown'));
+    loadReportsList();
+  } catch(e) {
+    alert('Failed to submit report: ' + e.message);
+    btn.disabled = false;
+    btn.textContent = 'Submit Report';
+  }
+}
+
+// ── Patterns Tab ──
+async function loadPatternsList() {
+  var el = $el('patterns-content');
+  el.innerHTML = '<div class="loading">Loading patterns...</div>';
+  try {
+    var data = await api('/patterns?build=true&min_reports=2');
+    allPatterns = data.patterns || [];
+    renderPatternsList();
+  } catch(e) {
+    el.innerHTML = '<div class="empty-state">Failed to load patterns</div>';
+  }
+}
+
+function renderPatternsList() {
+  var el = $el('patterns-content');
+  if (!allPatterns.length) {
+    el.innerHTML = '<div style="max-width:1000px;margin:0 auto;padding:20px"><div class="empty-state">No patterns detected yet. Patterns emerge as more reports are analyzed.</div></div>';
+    return;
+  }
+  el.innerHTML =
+    '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px">' +
+    '<h2 style="font-size:18px;font-weight:700">Emerging Patterns (' + allPatterns.length + ')</h2>' +
+    '</div>' +
+    allPatterns.map(function(p) {
+      var trendIcon = '';
+      var trendCls = 'stable';
+      if (p.trend === 'increasing' || p.trend === 'up') { trendIcon = '\u2191'; trendCls = 'up'; }
+      else if (p.trend === 'decreasing' || p.trend === 'down') { trendIcon = '\u2193'; trendCls = 'down'; }
+      else { trendIcon = '\u2192'; }
+
+      return '<div class="pattern-card" data-pid="' + esc(p.id) + '">' +
+        '<div class="pc-header">' +
+        '<div class="pc-title">' + esc(p.title) + '</div>' +
+        '<div class="pc-score" style="color:' + (p.pattern_score > 0.7 ? 'var(--red)' : p.pattern_score > 0.4 ? 'var(--orange)' : 'var(--green)') + '">' + (p.pattern_score != null ? p.pattern_score.toFixed(2) : '\u2014') + '</div>' +
+        '</div>' +
+        '<div class="pc-meta">' +
+        '<span class="priority-badge ' + priorityClass(p.priority_level) + '">' + esc(p.priority_level || 'low') + '</span>' +
+        '<span>' + (p.report_count || 0) + ' reports</span>' +
+        '<span>' + (p.sif_count || 0) + ' SIF</span>' +
+        (p.location ? '<span>' + esc(p.location) + '</span>' : '') +
+        (p.activity ? '<span>' + esc(p.activity) + '</span>' : '') +
+        '<span class="pc-trend ' + trendCls + '">' + trendIcon + ' ' + esc(p.trend || 'stable') + '</span>' +
+        '</div></div>';
+    }).join('');
+
+  el.querySelectorAll('.pattern-card').forEach(function(card) {
+    card.addEventListener('click', function() { showPatternDetail(card.dataset.pid); });
+  });
+}
+
+async function showPatternDetail(patternId) {
+  var el = $el('pattern-detail-content');
+  el.innerHTML = '<div class="loading">Loading pattern details...</div>';
+  $el('tab-patterns').classList.add('hidden');
+  $el('tab-pattern-detail').classList.remove('hidden');
+  activeTab = 'pattern-detail';
+  document.querySelectorAll('nav button').forEach(function(b) { b.classList.remove('active'); });
+
+  try {
+    var data = await api('/patterns/' + patternId);
+    var pattern = data.pattern || {};
+    var reports = data.reports || [];
+
+    var why = '';
+    if (data.why && data.why.analysis) {
+      var analysis = data.why.analysis;
+      if (analysis.precursor_lift && analysis.precursor_lift.length) {
+        why = '<div class="pd-section"><h3>Why This Pattern?</h3>' +
+          analysis.precursor_lift.map(function(item) {
+            var pct = Math.min(100, (item.lift || 0) * 100);
+            return '<div class="why-item">' +
+              '<div class="wi-precursor">' + esc(item.precursor || item.name || '') + '</div>' +
+              '<div class="wi-stats">Lift: ' + (item.lift != null ? Number(item.lift).toFixed(3) : '\u2014') +
+              ' \u00b7 Support: ' + (item.support != null ? Number(item.support).toFixed(3) : '\u2014') +
+              ' \u00b7 Count: ' + (item.count || 0) + '</div>' +
+              '<div class="wi-bar"><div class="wi-fill" style="width:' + pct + '%"></div></div>' +
+              '</div>';
+          }).join('') + '</div>';
+      }
+    }
+
+    var trendIcon = '';
+    var trendCls = 'stable';
+    if (pattern.trend === 'increasing' || pattern.trend === 'up') { trendIcon = '\u2191'; trendCls = 'up'; }
+    else if (pattern.trend === 'decreasing' || pattern.trend === 'down') { trendIcon = '\u2193'; trendCls = 'down'; }
+    else { trendIcon = '\u2192'; }
+
+    el.innerHTML =
+      '<button class="back-btn" onclick="backToPatterns()" style="margin-bottom:12px">&larr; Back to Patterns</button>' +
+      '<div style="text-align:center;margin-bottom:16px">' +
+      '<div class="pd-score-ring" style="background:' + (pattern.pattern_score > 0.7 ? 'var(--red)' : pattern.pattern_score > 0.4 ? 'var(--orange)' : 'var(--green)') + '">' +
+      (pattern.pattern_score != null ? pattern.pattern_score.toFixed(2) : '\u2014') + '</div>' +
+      '<h2 style="font-size:20px;font-weight:700">' + esc(pattern.title || 'Pattern') + '</h2>' +
+      '<div style="margin-top:8px;display:flex;gap:12px;justify-content:center;align-items:center;flex-wrap:wrap">' +
+      '<span class="priority-badge ' + priorityClass(pattern.priority_level) + '">' + esc(pattern.priority_level || 'low') + '</span>' +
+      '<span style="font-size:13px;color:var(--muted)">' + (pattern.report_count || reports.length) + ' reports \u00b7 ' + (pattern.sif_count || 0) + ' SIF</span>' +
+      '<span class="pc-trend ' + trendCls + '" style="font-size:13px">' + trendIcon + ' ' + esc(pattern.trend || 'stable') + '</span>' +
+      '</div></div>' +
+      (pattern.location ? '<div class="pd-section"><h3>Location</h3><p style="font-size:14px">' + esc(pattern.location) + '</p></div>' : '') +
+      (pattern.activity ? '<div class="pd-section"><h3>Activity</h3><p style="font-size:14px">' + esc(pattern.activity) + '</p></div>' : '') +
+      why +
+      '<div class="pd-section"><h3>Supporting Reports (' + reports.length + ')</h3>' +
+      (reports.length ? reports.map(function(r) {
+        return '<div class="report-item" data-rid="' + esc(r.incident_id) + '">' +
+          '<div class="ri-header"><span class="ri-id">' + esc(r.incident_id) + '</span>' +
+          (r.sif_class ? '<span class="risk-badge ' + sifBadgeClass(r.sif_class) + '" style="font-size:10px">' + esc(r.sif_class) + '</span>' : '') + '</div>' +
+          '<div class="ri-meta">' + esc(r.location || '') + ' \u00b7 ' + (r.event_date || '') + ' \u00b7 Score: ' + (r.sif_score != null ? Number(r.sif_score).toFixed(3) : '\u2014') + '</div></div>';
+      }).join('') : '<div class="empty-state">No supporting reports</div>') +
+      '</div>';
+
+    el.querySelectorAll('.report-item[data-rid]').forEach(function(ri) {
+      ri.addEventListener('click', function() { showReportDetail(ri.dataset.rid, 'pattern-detail-content'); });
+    });
+  } catch(e) {
+    el.innerHTML = '<div class="empty-state">Failed to load pattern details</div>';
+  }
+}
+
+function backToPatterns() {
+  $el('tab-pattern-detail').classList.add('hidden');
+  $el('tab-patterns').classList.remove('hidden');
+  activeTab = 'patterns';
+  document.querySelectorAll('nav button[data-tab="patterns"]').forEach(function(b) { b.classList.add('active'); });
+}
+
+// ── Map Tab ──
+var mapTabInited = false;
+
+async function initMapTab() {
+  if (!mapTabInited) {
+    mapTabInited = true;
+    if (MAPS_KEY && window.google && window.google.maps && !map2) {
+      map2 = new google.maps.Map($el('map2'), {
+        center: { lat: 27.4, lng: 95.5 },
+        zoom: 8,
+        mapId: 'sif-aegis-map',
+        zoomControl: true,
+        streetViewControl: false,
+        mapTypeControl: false
+      });
+    } else if (!MAPS_KEY || !window.google) {
+      $el('map2').innerHTML =
+        '<div class="map-placeholder"><div class="icon">&#x1F5FA;</div>' +
+        '<div><strong>Google Maps API key not configured</strong></div></div>';
+    }
+
+    $el('map-risk-filter').addEventListener('change', updateMapLocations);
+    $el('map-period-filter').addEventListener('change', updateMapLocations);
+  }
+
+  updateMapLocations();
+}
+
+async function updateMapLocations() {
+  var riskFilter = $el('map-risk-filter').value;
+  var el = $el('map-location-list');
+  el.innerHTML = '<div class="loading">Loading locations...</div>';
+
+  try {
+    var url = '/map/risk' + (riskFilter ? '?risk_level=' + riskFilter : '');
+    var data = await api(url);
+    var locs = data.locations || locations;
+
+    $el('map-kpi-row').innerHTML =
+      '<div class="kpi red" style="padding:8px"><div class="value">' + locs.filter(function(l) { return l.risk_level === 'HIGH'; }).length + '</div><div class="label">High Risk</div></div>' +
+      '<div class="kpi orange" style="padding:8px"><div class="value">' + locs.filter(function(l) { return l.risk_level === 'MEDIUM'; }).length + '</div><div class="label">Medium</div></div>';
+
+    if (!locs.length) { el.innerHTML = '<div class="empty-state">No locations match filter</div>'; return; }
+    el.innerHTML = locs.map(function(loc) {
+      return '<div class="location-item" data-id="' + loc.location_id + '">' +
+        '<div class="risk-dot ' + (loc.risk_level || 'UNKNOWN') + '"></div>' +
+        '<div class="loc-info"><div class="loc-name">' + esc(loc.name) + '</div>' +
+        '<div class="loc-stats"><span>' + (loc.report_count || 0) + ' reports</span><span>' + (loc.sif_count || 0) + ' SIF</span>' +
+        (loc.trend ? '<span class="pc-trend ' + (loc.trend === 'increasing' ? 'up' : loc.trend === 'decreasing' ? 'down' : 'stable') + '">' + esc(loc.trend) + '</span>' : '') +
+        '</div></div>' +
+        '<div class="loc-score ' + (loc.risk_level || 'UNKNOWN') + '">' + (loc.risk_score != null ? loc.risk_score.toFixed(2) : '\u2014') + '</div></div>';
+    }).join('');
+
+    el.querySelectorAll('.location-item').forEach(function(item) {
+      item.addEventListener('click', function() { showMapLocationInfo(Number(item.dataset.id)); });
+    });
+
+    if (map2 && google && google.maps) {
+      map2Markers.forEach(function(m) { m.map = null; });
+      map2Markers = [];
+      locs.forEach(function(loc) {
+        if (!loc.latitude || !loc.longitude) return;
+        var marker = new google.maps.marker.AdvancedMarkerElement({
+          position: { lat: loc.latitude, lng: loc.longitude },
+          map: map2,
+          content: createMarkerContent(loc),
+          title: loc.name
+        });
+        marker.addListener('click', function() { showMapLocationInfo(loc.location_id); });
+        map2Markers.push(marker);
+      });
+    }
+  } catch(e) {
+    el.innerHTML = '<div class="empty-state">Failed to load locations</div>';
+  }
+}
+
+async function showMapLocationInfo(locId) {
+  var panel = $el('map-info-panel');
+  var content = $el('map-info-content');
+  content.innerHTML = '<div class="loading">Loading...</div>';
+  panel.classList.add('open');
+  mapInfoOpen = true;
+
+  try {
+    var results = await Promise.all([api('/sif/locations/' + locId), api('/sif/locations/' + locId + '/precursors')]);
+    var loc = results[0];
+    var precList = results[1].precursors || [];
+    var maxCount = Math.max.apply(null, precList.map(function(p) { return p.present_count || 0; }).concat([1]));
+
+    content.innerHTML =
+      '<h3 style="font-size:15px;font-weight:700;margin-bottom:4px">' + esc(loc.name) + '</h3>' +
+      '<div style="font-size:11px;color:var(--muted);margin-bottom:8px">' + (loc.region || '') + ' \u00b7 ' + (loc.asset_type || '') + '</div>' +
+      '<div style="display:flex;gap:8px;align-items:center;margin-bottom:10px">' +
+      '<span class="risk-badge ' + loc.risk_level + '">' + loc.risk_level + '</span>' +
+      '<span style="font-weight:700">' + (loc.risk_score != null ? loc.risk_score.toFixed(3) : '\u2014') + '</span></div>' +
+      '<div class="stats-grid">' +
+      '<div class="stat-card"><div class="val">' + (loc.total_reports || loc.report_count || 0) + '</div><div class="lbl">Reports</div></div>' +
+      '<div class="stat-card"><div class="val" style="color:var(--red)">' + (loc.sif_reports || loc.sif_count || 0) + '</div><div class="lbl">SIF</div></div></div>' +
+      (precList.length ? '<div class="section-title">Top Precursors</div>' +
+      precList.slice(0, 5).map(function(p) {
+        return '<div class="prec-bar"><div class="name" style="width:120px" title="' + esc(p.name) + '">' + esc(p.name) + '</div>' +
+          '<div class="bar-bg"><div class="bar-fill" style="width:' + (p.present_count / maxCount * 100) + '%;background:' + (p.status === 'PRESENT' ? 'var(--red)' : 'var(--orange)') + '"></div></div>' +
+          '<div class="count">' + p.present_count + '</div></div>';
+      }).join('') : '') +
+      '<button class="back-btn" style="width:100%;justify-content:center;margin-top:12px" onclick="showMapLocationDetail(' + locId + ')">View Full Details</button>';
+  } catch(e) {
+    content.innerHTML = '<div class="empty-state">Failed to load location info</div>';
+  }
+}
+
+function showMapLocationDetail(locId) {
+  $el('tab-map').classList.add('hidden');
+  $el('tab-dashboard').classList.remove('hidden');
+  activeTab = 'dashboard';
+  document.querySelectorAll('nav button[data-tab="dashboard"]').forEach(function(b) { b.classList.add('active'); });
+  selectLocation(locId);
+}
+
+// ── Barriers Tab ──
+document.getElementById('barrier-sub-tabs').addEventListener('click', function(e) {
+  var btn = e.target.closest('button');
+  if (!btn) return;
+  barrierSubTab = btn.dataset.sub;
+  document.querySelectorAll('#barrier-sub-tabs button').forEach(function(b) { b.classList.toggle('active', b === btn); });
+  renderBarrierContent();
+});
+
+async function loadBarriers() {
+  try { barrierData = await api('/sif/barriers/overview'); } catch(e) { barrierData = {}; }
+  renderBarrierContent();
+}
+
+function renderBarrierContent() {
+  if (barrierSubTab === 'indicators') renderBarrierIndicators($el('barrier-sub-content'));
+  else renderLSROverview($el('barrier-sub-content'));
+}
+
+function renderBarrierIndicators(el) {
+  var bi = (barrierData || {}).barrier_indicators || [];
+  var bfr = (barrierData || {}).barrier_failure_rates || {};
+  if (!bi.length) { el.innerHTML = '<div class="empty-state">No barrier indicator data available</div>'; return; }
+  var maxP = Math.max.apply(null, bi.map(function(b) { return b.present_count || 0; }).concat([1]));
+
+  el.innerHTML =
+    '<div style="margin-bottom:12px;padding:12px;background:var(--bg);border-radius:var(--radius-sm)">' +
+    '<div style="font-size:12px;color:var(--muted)">' +
+    'Avg Barrier Failure Rate: <strong>' + (bfr.avg_bfr != null ? (Number(bfr.avg_bfr) * 100).toFixed(1) + '%' : '\u2014') + '</strong>' +
+    ' \u00b7 Max BFR: <strong>' + (bfr.max_bfr != null ? (Number(bfr.max_bfr) * 100).toFixed(1) + '%' : '\u2014') + '</strong>' +
+    ' \u00b7 High BFR Reports: <strong>' + (bfr.high_bfr_count || 0) + '</strong></div></div>' +
+    bi.map(function(b) {
+      var pct = (b.present_count / maxP * 100).toFixed(0);
+      return '<div class="barrier-card" data-code="' + esc(b.code) + '">' +
+        '<div class="bc-name">' + esc(b.name) + '</div><div class="bc-code">' + esc(b.code) + '</div>' +
+        '<div class="bc-bar"><div class="bc-fill" style="width:' + pct + '%;background:var(--red)"></div></div>' +
+        '<div class="bc-stats">Present: <span>' + b.present_count + '</span> \u00b7 Ambiguous: <span>' + (b.ambiguous_count || 0) + '</span> \u00b7 Total: <span>' + b.total + '</span> \u00b7 Avg Confidence: <span>' + (b.avg_confidence != null ? Number(b.avg_confidence).toFixed(2) : '\u2014') + '</span></div></div>';
+    }).join('');
+
+  el.querySelectorAll('.barrier-card').forEach(function(card) {
+    card.addEventListener('click', function() {
+      loadBarrierReports(card.dataset.code, card.querySelector('.bc-name').textContent);
+    });
+  });
+}
+
+function renderLSROverview(el) {
+  var rules = (barrierData || {}).life_saving_rules || [];
+  if (!rules.length) { el.innerHTML = '<div class="empty-state">No Life-Saving Rule data available</div>'; return; }
+
+  el.innerHTML = '<div class="ls-grid">' +
+    rules.map(function(r) {
+      var total = r.total || 1;
+      var bPct = (r.broken / total * 100).toFixed(0);
+      var uPct = (r.uncertain / total * 100).toFixed(0);
+      var nbPct = Math.max(0, 100 - Number(bPct) - Number(uPct));
+      return '<div class="ls-card" data-rule="' + esc(r.rule_id) + '">' +
+        '<div class="ls-id">' + esc(r.rule_id) + '</div><div class="ls-name">' + esc(r.name) + '</div>' +
+        '<div class="ls-bar"><div class="ls-seg" style="width:' + bPct + '%;background:var(--red)"></div>' +
+        '<div class="ls-seg" style="width:' + uPct + '%;background:var(--orange)"></div>' +
+        '<div class="ls-seg" style="width:' + nbPct + '%;background:var(--green)"></div></div>' +
+        '<div class="ls-counts"><span class="c-red">B: ' + r.broken + '</span>' +
+        '<span class="c-orange">U: ' + r.uncertain + '</span>' +
+        '<span class="c-green">NB: ' + r.not_broken + '</span></div></div>';
+    }).join('') + '</div>';
+
+  el.querySelectorAll('.ls-card').forEach(function(card) {
+    card.addEventListener('click', function() { loadLSRReports(card.dataset.rule); });
+  });
+}
+
+async function loadBarrierReports(code, name) {
+  var panel = $el('barrier-detail-panel');
+  $el('barrier-detail-title').textContent = name || code;
+  $el('barrier-detail-subtitle').textContent = 'Reports with this barrier indicator';
+  $el('barrier-detail-body').innerHTML = '<div class="loading">Loading reports...</div>';
+  panel.classList.add('open');
+
+  try {
+    var data = await api('/sif/barriers/' + encodeURIComponent(code) + '/reports');
+    var reports = data.reports || [];
+    $el('barrier-detail-body').innerHTML = reports.length ? reports.map(function(r) {
+      return '<div class="report-item" data-rid="' + esc(r.incident_id) + '">' +
+        '<div class="ri-header"><span class="ri-id">' + esc(r.incident_id) + '</span>' +
+        (r.sif_class ? '<span class="risk-badge ' + sifBadgeClass(r.sif_class) + '" style="font-size:10px">' + esc(r.sif_class) + '</span>' : '') +
+        '<span class="prec-tag ' + precStatusClass(r.status) + '">' + esc(r.status) + '</span></div>' +
+        '<div class="ri-meta">' + (r.event_date || '') + ' \u00b7 ' + esc(r.location || '') + ' \u00b7 Score: ' + (r.sif_score != null ? Number(r.sif_score).toFixed(3) : '\u2014') + '</div></div>';
+    }).join('') : '<div class="empty-state">No reports affected by this barrier</div>';
+
+    $el('barrier-detail-body').querySelectorAll('.report-item').forEach(function(ri) {
+      ri.addEventListener('click', function() { showReportDetail(ri.dataset.rid, 'detail-body'); });
+    });
+  } catch(e) {
+    $el('barrier-detail-body').innerHTML = '<div class="empty-state">Failed to load reports</div>';
+  }
+}
+
+async function loadLSRReports(ruleId) {
+  var panel = $el('barrier-detail-panel');
+  $el('barrier-detail-title').textContent = ruleId;
+  $el('barrier-detail-subtitle').textContent = 'Reports violating this Life-Saving Rule';
+  $el('barrier-detail-body').innerHTML = '<div class="loading">Loading reports...</div>';
+  panel.classList.add('open');
+
+  try {
+    var data = await api('/sif/lsr/' + encodeURIComponent(ruleId) + '/reports');
+    var reports = data.reports || [];
+    $el('barrier-detail-body').innerHTML = reports.length ? reports.map(function(r) {
+      return '<div class="report-item" data-rid="' + esc(r.incident_id) + '">' +
+        '<div class="ri-header"><span class="ri-id">' + esc(r.incident_id) + '</span>' +
+        '<span class="prec-tag ' + precStatusClass(r.status) + '">' + esc(r.status) + '</span></div>' +
+        '<div class="ri-meta">' + (r.event_date || '') + ' \u00b7 ' + esc(r.location || '') + ' \u00b7 Score: ' + (r.sif_score != null ? Number(r.sif_score).toFixed(3) : '\u2014') + '</div>' +
+        (r.reason ? '<div style="font-size:11px;color:var(--muted);margin-top:4px">' + esc(r.reason) + '</div>' : '') + '</div>';
+    }).join('') : '<div class="empty-state">No reports for this rule</div>';
+
+    $el('barrier-detail-body').querySelectorAll('.report-item').forEach(function(ri) {
+      ri.addEventListener('click', function() { showReportDetail(ri.dataset.rid, 'detail-body'); });
+    });
+  } catch(e) {
+    $el('barrier-detail-body').innerHTML = '<div class="empty-state">Failed to load reports</div>';
+  }
+}
+
+// ── Chat Tab ──
+var chatMessages = $el('chat-messages');
+var chatInput = $el('chat-input');
+var chatSend = $el('chat-send');
+
+async function sendChat() {
+  var q = chatInput.value.trim();
+  if (!q) return;
+  chatInput.value = '';
+  chatSend.disabled = true;
+
+  chatMessages.innerHTML +=
+    '<div class="chat-msg user"><div class="avatar">U</div><div class="bubble">' + esc(q) + '</div></div>';
+
+  chatHistory.push({ role: 'user', content: q });
+
+  var loadId = 'load-' + Date.now();
+  chatMessages.innerHTML +=
+    '<div class="chat-msg bot" id="' + loadId + '"><div class="avatar">A</div><div class="bubble"><div class="loading" style="text-align:left">Thinking...</div></div></div>';
+  chatMessages.scrollTop = chatMessages.scrollHeight;
+
+  try {
+    var data = await api('/chat', {
+      method: 'POST',
+      body: JSON.stringify({ question: q, history: chatHistory.slice(-10) })
+    });
+
+    var loadEl = $el(loadId);
+    if (!loadEl) return;
+
+    var routeLabel = data.route === 'sql' ? 'SQL' : data.route === 'vector' ? 'Vector Search' : data.route === 'knowledge' ? 'Knowledge Base' : (data.route || 'General');
+
+    var dataHtml = '';
+    if (data.sources && data.sources.length) {
+      dataHtml = '<div class="chat-sources"><div class="cs-title">Sources</div>' +
+        data.sources.map(function(s) {
+          return '<div class="cs-item">' + esc(typeof s === 'string' ? s : (s.title || s.id || JSON.stringify(s))) + '</div>';
+        }).join('') + '</div>';
+    }
+
+    if (data.confidence != null) {
+      dataHtml += '<div style="margin-top:4px;font-size:10px;color:var(--muted)">Confidence: ' + (data.confidence * 100).toFixed(0) + '%</div>';
+    }
+
+    var actionsHtml = '';
+    if (data.actions && data.actions.length) {
+      actionsHtml = '<div style="margin-top:6px">' +
+        data.actions.map(function(a) {
+          return '<span class="prec-tag AMBIGUOUS" style="cursor:pointer">' + esc(a.label || a.action || '') + '</span> ';
+        }).join('') + '</div>';
+    }
+
+    loadEl.querySelector('.bubble').innerHTML =
+      '<div>' + (data.answer || data.narrative || 'No answer.') + '</div>' +
+      actionsHtml + dataHtml +
+      '<div class="chat-route">Route: ' + routeLabel + '</div>';
+
+    chatHistory.push({ role: 'assistant', content: data.answer || data.narrative || '' });
+  } catch(e) {
+    var loadEl2 = $el(loadId);
+    if (loadEl2) loadEl2.querySelector('.bubble').innerHTML = '<div style="color:var(--red)">Error: ' + esc(e.message) + '</div>';
+  }
+
+  chatSend.disabled = false;
+  chatInput.focus();
+  chatMessages.scrollTop = chatMessages.scrollHeight;
+}
+
+chatSend.addEventListener('click', sendChat);
+chatInput.addEventListener('keydown', function(e) { if (e.key === 'Enter') sendChat(); });
+
+// ── Global Search ──
+var searchTimeout = null;
+$el('global-search-input').addEventListener('input', function(e) {
+  var q = e.target.value.trim();
+  clearTimeout(searchTimeout);
+  if (!q || q.length < 2) {
+    $el('global-search-results').classList.remove('open');
+    return;
+  }
+  searchTimeout = setTimeout(function() { doGlobalSearch(q); }, 300);
+});
+
+$el('global-search-input').addEventListener('focus', function() {
+  if (this.value.trim().length >= 2) $el('global-search-results').classList.add('open');
+});
+
+document.addEventListener('click', function(e) {
+  if (!e.target.closest('.global-search')) $el('global-search-results').classList.remove('open');
+});
+
+async function doGlobalSearch(q) {
+  try {
+    var data = await api('/analytics/search?q=' + encodeURIComponent(q));
+    var el = $el('global-search-results');
+    var html = '';
+
+    if (data.reports && data.reports.length) {
+      html += '<div class="gsr-section">Reports (' + data.reports.length + ')</div>' +
+        data.reports.slice(0, 5).map(function(r) {
+          return '<div class="gsr-item" data-type="report" data-id="' + esc(r.incident_id) + '">' +
+            '<div class="gsr-title">' + esc(r.incident_id) + '</div>' +
+            '<div class="gsr-meta">' + esc(r.location || '') + ' \u00b7 ' + (r.event_date || '') + '</div></div>';
+        }).join('');
+    }
+
+    if (data.patterns && data.patterns.length) {
+      html += '<div class="gsr-section">Patterns (' + data.patterns.length + ')</div>' +
+        data.patterns.slice(0, 5).map(function(p) {
+          return '<div class="gsr-item" data-type="pattern" data-id="' + esc(p.id) + '">' +
+            '<div class="gsr-title">' + esc(p.title || p.pattern_id || '') + '</div>' +
+            '<div class="gsr-meta">Score: ' + (p.pattern_score != null ? p.pattern_score.toFixed(2) : '\u2014') + '</div></div>';
+        }).join('');
+    }
+
+    if (data.locations && data.locations.length) {
+      html += '<div class="gsr-section">Locations (' + data.locations.length + ')</div>' +
+        data.locations.slice(0, 5).map(function(l) {
+          return '<div class="gsr-item" data-type="location" data-id="' + esc(l.id || l.location_id) + '">' +
+            '<div class="gsr-title">' + esc(l.name) + '</div>' +
+            '<div class="gsr-meta">Risk: ' + (l.risk_level || '\u2014') + '</div></div>';
+        }).join('');
+    }
+
+    if (!html) {
+      html = '<div class="empty-state" style="padding:16px">No results for "' + esc(q) + '"</div>';
+    }
+
+    el.innerHTML = html;
+    el.classList.add('open');
+
+    el.querySelectorAll('.gsr-item').forEach(function(item) {
+      item.addEventListener('click', function() {
+        el.classList.remove('open');
+        var type = item.dataset.type;
+        var id = item.dataset.id;
+        if (type === 'report') {
+          switchTab('reports');
+          setTimeout(function() { showReportDetail(id, 'reports-content'); }, 300);
+        } else if (type === 'pattern') {
+          switchTab('patterns');
+          setTimeout(function() { showPatternDetail(id); }, 300);
+        } else if (type === 'location') {
+          switchTab('dashboard');
+          setTimeout(function() { selectLocation(Number(id)); }, 300);
+        }
+      });
+    });
+  } catch(e) {
+    $el('global-search-results').innerHTML = '<div class="empty-state" style="padding:16px">Search failed</div>';
+    $el('global-search-results').classList.add('open');
+  }
+}
+
+function switchTab(tab) {
+  activeTab = tab;
+  document.querySelectorAll('nav button').forEach(function(b) {
+    b.classList.toggle('active', b.dataset.tab === tab);
+  });
+  ['dashboard','reports','patterns','pattern-detail','map','barriers','chat','admin'].forEach(function(t) {
+    var el = $el('tab-' + t);
+    if (el) el.classList.toggle('hidden', t !== tab);
+  });
+  if (tab === 'reports') loadReportsList();
+  if (tab === 'barriers') loadBarriers();
+  if (tab === 'patterns') loadPatternsList();
+  if (tab === 'map') initMapTab();
+  if (tab === 'admin') loadAdmin();
+}
+
+// ── Admin Tab ──
+async function loadAdmin() {
+  var el = $el('admin-content');
+  if (!currentUser || currentUser.role !== 'admin') {
+    el.innerHTML = '<div class="empty-state">Access denied. Admin role required.</div>';
+    return;
+  }
+
+  var recommendations = [];
+  try {
+    var recData = await api('/recommendations');
+    recommendations = recData.recommendations || [];
+  } catch(e) {}
+
+  el.innerHTML =
+    '<h2 style="font-size:18px;font-weight:700;margin-bottom:16px">Administration</h2>' +
+    '<div class="admin-card">' +
+    '<h3>System Overview</h3>' +
+    '<div class="stats-grid" style="grid-template-columns:repeat(4,1fr)">' +
+    '<div class="stat-card"><div class="val">' + (dashboardData.total_reports || 0) + '</div><div class="lbl">Total Reports</div></div>' +
+    '<div class="stat-card"><div class="val" style="color:var(--red)">' + (dashboardData.sif_reports || 0) + '</div><div class="lbl">SIF Reports</div></div>' +
+    '<div class="stat-card"><div class="val">' + (dashboardData.locations || 0) + '</div><div class="lbl">Locations</div></div>' +
+    '<div class="stat-card"><div class="val">' + (dashboardData.patterns || 0) + '</div><div class="lbl">Patterns</div></div>' +
+    '</div></div>' +
+    '<div class="admin-card">' +
+    '<h3>Recommendations (' + recommendations.length + ')</h3>' +
+    (recommendations.length ? recommendations.map(function(r) {
+      return '<div class="rec-card">' +
+        '<div class="rc-priority"><span class="priority-badge ' + priorityClass(r.priority) + '">' + esc(r.priority || 'low') + '</span></div>' +
+        '<div class="rc-title">' + esc(r.pattern_title || '') + '</div>' +
+        '<div class="rc-text">' + esc(r.recommendation || '') + '</div>' +
+        '</div>';
+    }).join('') : '<div class="empty-state">No recommendations available</div>') +
+    '</div>' +
+    '<div class="admin-card">' +
+    '<h3>Update Report Summary (Admin Only)</h3>' +
+    '<div class="form-group"><label>Incident ID</label><input type="text" id="admin-summary-id" placeholder="e.g. INC-2024-001"></div>' +
+    '<div class="form-group summary-editor"><label>New Summary</label><textarea id="admin-summary-text" placeholder="Enter updated summary..."></textarea></div>' +
+    '<button class="modal-btn" style="width:auto" id="admin-update-summary-btn">Update Summary</button>' +
+    '</div>';
+
+  $el('admin-update-summary-btn').addEventListener('click', async function() {
+    var incId = $el('admin-summary-id').value.trim();
+    var text = $el('admin-summary-text').value.trim();
+    if (!incId || !text) { alert('Both fields required'); return; }
+    try {
+      await api('/reports/' + incId + '/summary', {
+        method: 'PUT',
+        body: JSON.stringify({ summary: text })
+      });
+      alert('Summary updated successfully');
+      $el('admin-summary-id').value = '';
+      $el('admin-summary-text').value = '';
+    } catch(e) {
+      alert('Failed to update summary: ' + e.message);
+    }
+  });
+}
+
+// ── Load Map Script ──
+if (MAPS_KEY) {
+  var script = document.createElement('script');
+  script.src = 'https://maps.googleapis.com/maps/api/js?key=' + MAPS_KEY + '&callback=initMap&v=weekly&libraries=marker';
+  script.async = true;
+  script.defer = true;
+  script.onerror = function() { initMap(); };
+  document.head.appendChild(script);
+} else {
+  window.initMap = initMap;
+  document.addEventListener('DOMContentLoaded', initMap);
+}
+
+// ── Global init on DOM ready ──
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', init);
+} else {
+  init();
+}
+</script>
+</body>
+</html>

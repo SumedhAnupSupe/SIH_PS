@@ -1,0 +1,479 @@
+{
+  "incident_id": "INC-2026-043",
+  "summary": "SIF Analysis Report: INC-2026-043\n==================================================\n\nReport Overview\n----------------------------------------\n  Report length: 1078 characters\n  Sentences analyzed: 10\n\nSIF Precursor Analysis\n----------------------------------------\n\n  PRESENT:\n  Hazard Recognition: PRESENT (confidence=0.80, evidence_count=2)\n  Productivity Pressure: PRESENT (confidence=0.85, evidence_count=3)\n  Pre-Task Plan: PRESENT (confidence=0.60, evidence_count=1)\n\n  ABSENT:\n  Plan to Address Work Change: ABSENT (confidence=0.60, evidence_count=1)\n\n  AMBIGUOUS:\n  Stop-Work Execution: AMBIGUOUS (confidence=0.77, evidence_count=3)\n\n  NOT MENTIONED:\n  Safe Work Procedure: NOT_MENTIONED (confidence=0.00, evidence_count=0)\n  Departure from Routine: NOT_MENTIONED (confidence=0.00, evidence_count=0)\n  Safety Attitudes: NOT_MENTIONED (confidence=0.00, evidence_count=0)\n  Rules and Procedures: NOT_MENTIONED (confidence=0.00, evidence_count=0)\n  Familiarity with Task: NOT_MENTIONED (confidence=0.00, evidence_count=0)\n  Risk Normalization: NOT_MENTIONED (confidence=0.00, evidence_count=0)\n  Perceived Safety Culture: NOT_MENTIONED (confidence=0.00, evidence_count=0)\n  Workers Inactive in Safety: NOT_MENTIONED (confidence=0.00, evidence_count=0)\n\nSupporting Evidence Details\n----------------------------------------\n\n  Hazard Recognition - Evidence of presence:\n    - \"The electrical hazard was recognized by the lead worker, who noted that the wet surfaces increased the risk of arc flash.\"\n    - \"The electrical hazard was recognized by the lead worker, who noted that the wet surfaces increased the risk of arc flash.\"\n\n  Plan to Address Work Change - Evidence of absence:\n    - \"The revised weather conditions were not not included in the original pre-task plan.\"\n\n  Productivity Pressure - Evidence of presence:\n    - \"Incident ID: INC-2026-043\nIncident Date: 2026-11-12\nLocation: Duliajan\n\nIncident Date: 2026-11-12\nIncident ID: INC-2026-043\nLocation: Duliajan\nWorker Count: 5\nInjury Severity: First Aid\n\nIncident Desc\"\n    - \"The crew was not under pressure to complete the work before the outage window closed.\"\n    - \"The crew was under pressure to complete the work before the outage window closed.\"\n\n  Stop-Work Execution - Evidence of presence:\n    - \"No stop-work authority was exercised.\"\n\n  Stop-Work Execution - Evidence of absence:\n    - \"Immediate Actions Taken:\nThe crew continued working despite the increased hazard.\"\n    - \"No stop-work authority was exercised.\"\n\n  Pre-Task Plan - Evidence of presence:\n    - \"The revised weather conditions were not not included in the original pre-task plan.\"\n\nIdentified Hazards\n----------------------------------------\n  - electrical_hazard: electrical, arc flash\n  - stored_energy_hazard: pressur\n  - weather_hazard: weather, wind\n\nNo notable work condition changes identified.\n\nLife-Saving Rules (IOGP)\n----------------------------------------\n  Broken: 0 | Uncertain: 2 | Not Broken: 0 | Not Applicable: 7\n  LSR02: Energy Isolation \u2014 UNCERTAIN (conf=0.50) \u2014 Rule applicable but no clear evidence found\n  LSR03: Line of Fire \u2014 UNCERTAIN (conf=0.50) \u2014 Rule applicable but no clear evidence found\n\nSummary Assessment\n----------------------------------------\n  3 of 13 SIF precursors detected as PRESENT.\n  Assessment: MODERATE SIF precursor density. Several risk indicators present.",
+  "metadata": {
+    "incident_date": "2026-11-12",
+    "incident_id": "INC-2026-043",
+    "location": "Duliajan",
+    "injury_severity": "First Aid"
+  },
+  "report_statistics": {
+    "report_length": 1078,
+    "sentence_count": 10
+  },
+  "sif_score": {
+    "value": 0.237,
+    "class": "LOW",
+    "method": "weighted_precursor_sum",
+    "weight_source": "EEI/DEKRA/IOGP literature-based defaults",
+    "components": [
+      {
+        "precursor": "Safe Work Procedure",
+        "precursor_key": "safe_work_procedure",
+        "status": "NOT_MENTIONED",
+        "confidence": 0.0,
+        "evidence_count": 0,
+        "weight": 0.05,
+        "contribution": 0.0
+      },
+      {
+        "precursor": "Hazard Recognition",
+        "precursor_key": "hazard_recognition",
+        "status": "PRESENT",
+        "confidence": 0.8,
+        "evidence_count": 2,
+        "weight": 0.1,
+        "contribution": 0.08
+      },
+      {
+        "precursor": "Departure from Routine",
+        "precursor_key": "departure_from_routine",
+        "status": "NOT_MENTIONED",
+        "confidence": 0.0,
+        "evidence_count": 0,
+        "weight": 0.12,
+        "contribution": 0.0
+      },
+      {
+        "precursor": "Plan to Address Work Change",
+        "precursor_key": "plan_to_address_work_change",
+        "status": "ABSENT",
+        "confidence": 0.6,
+        "evidence_count": 1,
+        "weight": 0.12,
+        "contribution": 0.0
+      },
+      {
+        "precursor": "Safety Attitudes",
+        "precursor_key": "safety_attitudes",
+        "status": "NOT_MENTIONED",
+        "confidence": 0.0,
+        "evidence_count": 0,
+        "weight": 0.03,
+        "contribution": 0.0
+      },
+      {
+        "precursor": "Rules and Procedures",
+        "precursor_key": "rules_and_procedures",
+        "status": "NOT_MENTIONED",
+        "confidence": 0.0,
+        "evidence_count": 0,
+        "weight": 0.02,
+        "contribution": 0.0
+      },
+      {
+        "precursor": "Familiarity with Task",
+        "precursor_key": "familiarity_with_task",
+        "status": "NOT_MENTIONED",
+        "confidence": 0.0,
+        "evidence_count": 0,
+        "weight": 0.05,
+        "contribution": 0.0
+      },
+      {
+        "precursor": "Risk Normalization",
+        "precursor_key": "risk_normalization",
+        "status": "NOT_MENTIONED",
+        "confidence": 0.0,
+        "evidence_count": 0,
+        "weight": 0.08,
+        "contribution": 0.0
+      },
+      {
+        "precursor": "Productivity Pressure",
+        "precursor_key": "productivity_pressure",
+        "status": "PRESENT",
+        "confidence": 0.85,
+        "evidence_count": 3,
+        "weight": 0.08,
+        "contribution": 0.068
+      },
+      {
+        "precursor": "Perceived Safety Culture",
+        "precursor_key": "perceived_safety_culture",
+        "status": "NOT_MENTIONED",
+        "confidence": 0.0,
+        "evidence_count": 0,
+        "weight": 0.02,
+        "contribution": 0.0
+      },
+      {
+        "precursor": "Stop-Work Execution",
+        "precursor_key": "stop_work_execution",
+        "status": "AMBIGUOUS",
+        "confidence": 0.767,
+        "evidence_count": 3,
+        "weight": 0.1,
+        "contribution": 0.0384
+      },
+      {
+        "precursor": "Workers Inactive in Safety",
+        "precursor_key": "workers_inactive_in_safety",
+        "status": "NOT_MENTIONED",
+        "confidence": 0.0,
+        "evidence_count": 0,
+        "weight": 0.02,
+        "contribution": 0.0
+      },
+      {
+        "precursor": "Pre-Task Plan",
+        "precursor_key": "pre_task_plan",
+        "status": "PRESENT",
+        "confidence": 0.6,
+        "evidence_count": 1,
+        "weight": 0.1,
+        "contribution": 0.06
+      }
+    ],
+    "present_precursors": [
+      "hazard_recognition",
+      "productivity_pressure",
+      "pre_task_plan"
+    ],
+    "max_possible": 1.04
+  },
+  "life_saving_rules": {
+    "analysis": [
+      {
+        "rule_id": "LSR01",
+        "rule_name": "Work Authorization",
+        "description": "Ensure all work is authorized before starting",
+        "status": "NOT_APPLICABLE",
+        "confidence": 0.8,
+        "reason": "Rule not applicable to this report's activities/hazards",
+        "applicable": false,
+        "applicable_keywords": [],
+        "broken_evidence": [],
+        "compliance_evidence": []
+      },
+      {
+        "rule_id": "LSR02",
+        "rule_name": "Energy Isolation",
+        "description": "Verify isolation before work begins",
+        "status": "UNCERTAIN",
+        "confidence": 0.5,
+        "reason": "Rule applicable but no clear evidence found",
+        "applicable": true,
+        "applicable_keywords": [
+          "electrical",
+          "transformer",
+          "pressur",
+          "Energy isolation"
+        ],
+        "broken_evidence": [],
+        "compliance_evidence": []
+      },
+      {
+        "rule_id": "LSR03",
+        "rule_name": "Line of Fire",
+        "description": "Keep yourself and others out of the line of fire",
+        "status": "UNCERTAIN",
+        "confidence": 0.5,
+        "reason": "Rule applicable but no clear evidence found",
+        "applicable": true,
+        "applicable_keywords": [
+          "pressure"
+        ],
+        "broken_evidence": [],
+        "compliance_evidence": []
+      },
+      {
+        "rule_id": "LSR04",
+        "rule_name": "Confined Space",
+        "description": "Obtain authorization before entering a confined space",
+        "status": "NOT_APPLICABLE",
+        "confidence": 0.8,
+        "reason": "Rule not applicable to this report's activities/hazards",
+        "applicable": false,
+        "applicable_keywords": [],
+        "broken_evidence": [],
+        "compliance_evidence": []
+      },
+      {
+        "rule_id": "LSR05",
+        "rule_name": "Falling Objects",
+        "description": "Secure tools and materials to prevent falling objects",
+        "status": "NOT_APPLICABLE",
+        "confidence": 0.8,
+        "reason": "Rule not applicable to this report's activities/hazards",
+        "applicable": false,
+        "applicable_keywords": [],
+        "broken_evidence": [],
+        "compliance_evidence": []
+      },
+      {
+        "rule_id": "LSR06",
+        "rule_name": "Safe Mechanical Lifting",
+        "description": "Plan lifting operations and control the area",
+        "status": "NOT_APPLICABLE",
+        "confidence": 0.8,
+        "reason": "Rule not applicable to this report's activities/hazards",
+        "applicable": false,
+        "applicable_keywords": [],
+        "broken_evidence": [],
+        "compliance_evidence": []
+      },
+      {
+        "rule_id": "LSR07",
+        "rule_name": "Fit for Purpose Equipment",
+        "description": "Use only equipment that is fit for purpose",
+        "status": "NOT_APPLICABLE",
+        "confidence": 0.8,
+        "reason": "Rule not applicable to this report's activities/hazards",
+        "applicable": false,
+        "applicable_keywords": [],
+        "broken_evidence": [],
+        "compliance_evidence": []
+      },
+      {
+        "rule_id": "LSR08",
+        "rule_name": "Driving Safety",
+        "description": "Follow safe driving rules",
+        "status": "NOT_APPLICABLE",
+        "confidence": 0.8,
+        "reason": "Rule not applicable to this report's activities/hazards",
+        "applicable": false,
+        "applicable_keywords": [],
+        "broken_evidence": [],
+        "compliance_evidence": []
+      },
+      {
+        "rule_id": "LSR09",
+        "rule_name": "Working at Height",
+        "description": "Protect yourself against falls when working at height",
+        "status": "NOT_APPLICABLE",
+        "confidence": 0.8,
+        "reason": "Rule not applicable to this report's activities/hazards",
+        "applicable": false,
+        "applicable_keywords": [],
+        "broken_evidence": [],
+        "compliance_evidence": []
+      }
+    ],
+    "broken_rule_count": 0,
+    "uncertain_count": 2,
+    "not_broken_count": 0,
+    "not_applicable_count": 7
+  },
+  "precursor_analysis": {
+    "safe_work_procedure": {
+      "precursor": "Safe Work Procedure",
+      "status": "NOT_MENTIONED",
+      "confidence": 0.0,
+      "evidence_count": 0,
+      "present_evidence": [],
+      "absent_evidence": []
+    },
+    "hazard_recognition": {
+      "precursor": "Hazard Recognition",
+      "status": "PRESENT",
+      "confidence": 0.8,
+      "evidence_count": 2,
+      "present_evidence": [
+        {
+          "text": "The electrical hazard was recognized by the lead worker, who noted that the wet surfaces increased the risk of arc flash.",
+          "source_sentence_id": 2
+        },
+        {
+          "text": "The electrical hazard was recognized by the lead worker, who noted that the wet surfaces increased the risk of arc flash.",
+          "source_sentence_id": 3
+        }
+      ],
+      "absent_evidence": []
+    },
+    "departure_from_routine": {
+      "precursor": "Departure from Routine",
+      "status": "NOT_MENTIONED",
+      "confidence": 0.0,
+      "evidence_count": 0,
+      "present_evidence": [],
+      "absent_evidence": []
+    },
+    "plan_to_address_work_change": {
+      "precursor": "Plan to Address Work Change",
+      "status": "ABSENT",
+      "confidence": 0.6,
+      "evidence_count": 1,
+      "present_evidence": [],
+      "absent_evidence": [
+        {
+          "text": "The revised weather conditions were not not included in the original pre-task plan.",
+          "source_sentence_id": 4
+        }
+      ]
+    },
+    "safety_attitudes": {
+      "precursor": "Safety Attitudes",
+      "status": "NOT_MENTIONED",
+      "confidence": 0.0,
+      "evidence_count": 0,
+      "present_evidence": [],
+      "absent_evidence": []
+    },
+    "rules_and_procedures": {
+      "precursor": "Rules and Procedures",
+      "status": "NOT_MENTIONED",
+      "confidence": 0.0,
+      "evidence_count": 0,
+      "present_evidence": [],
+      "absent_evidence": []
+    },
+    "familiarity_with_task": {
+      "precursor": "Familiarity with Task",
+      "status": "NOT_MENTIONED",
+      "confidence": 0.0,
+      "evidence_count": 0,
+      "present_evidence": [],
+      "absent_evidence": []
+    },
+    "risk_normalization": {
+      "precursor": "Risk Normalization",
+      "status": "NOT_MENTIONED",
+      "confidence": 0.0,
+      "evidence_count": 0,
+      "present_evidence": [],
+      "absent_evidence": []
+    },
+    "productivity_pressure": {
+      "precursor": "Productivity Pressure",
+      "status": "PRESENT",
+      "confidence": 0.85,
+      "evidence_count": 3,
+      "present_evidence": [
+        {
+          "text": "Incident ID: INC-2026-043\nIncident Date: 2026-11-12\nLocation: Duliajan\n\nIncident Date: 2026-11-12\nIncident ID: INC-2026-043\nLocation: Duliajan\nWorker Count: 5\nInjury Severity: First Aid\n\nIncident Description:\nThe crew was scheduled to replace a power transformer before the outage window ended.",
+          "source_sentence_id": 0
+        },
+        {
+          "text": "The crew was not under pressure to complete the work before the outage window closed.",
+          "source_sentence_id": 5
+        },
+        {
+          "text": "The crew was under pressure to complete the work before the outage window closed.",
+          "source_sentence_id": 6
+        }
+      ],
+      "absent_evidence": []
+    },
+    "perceived_safety_culture": {
+      "precursor": "Perceived Safety Culture",
+      "status": "NOT_MENTIONED",
+      "confidence": 0.0,
+      "evidence_count": 0,
+      "present_evidence": [],
+      "absent_evidence": []
+    },
+    "stop_work_execution": {
+      "precursor": "Stop-Work Execution",
+      "status": "AMBIGUOUS",
+      "confidence": 0.767,
+      "evidence_count": 3,
+      "present_evidence": [
+        {
+          "text": "No stop-work authority was exercised.",
+          "source_sentence_id": 9
+        }
+      ],
+      "absent_evidence": [
+        {
+          "text": "Immediate Actions Taken:\nThe crew continued working despite the increased hazard.",
+          "source_sentence_id": 8
+        },
+        {
+          "text": "No stop-work authority was exercised.",
+          "source_sentence_id": 9
+        }
+      ]
+    },
+    "workers_inactive_in_safety": {
+      "precursor": "Workers Inactive in Safety",
+      "status": "NOT_MENTIONED",
+      "confidence": 0.0,
+      "evidence_count": 0,
+      "present_evidence": [],
+      "absent_evidence": []
+    },
+    "pre_task_plan": {
+      "precursor": "Pre-Task Plan",
+      "status": "PRESENT",
+      "confidence": 0.6,
+      "evidence_count": 1,
+      "present_evidence": [
+        {
+          "text": "The revised weather conditions were not not included in the original pre-task plan.",
+          "source_sentence_id": 4
+        }
+      ],
+      "absent_evidence": []
+    }
+  },
+  "hazards": [
+    {
+      "hazard_type": "electrical_hazard",
+      "evidence": [
+        "electrical",
+        "arc flash"
+      ]
+    },
+    {
+      "hazard_type": "stored_energy_hazard",
+      "evidence": [
+        "pressur"
+      ]
+    },
+    {
+      "hazard_type": "weather_hazard",
+      "evidence": [
+        "weather",
+        "wind"
+      ]
+    }
+  ],
+  "task_types": [
+    {
+      "task_type": "electrical_work",
+      "evidence": [
+        "electrical",
+        "transformer",
+        "arc flash"
+      ]
+    },
+    {
+      "task_type": "lockout_tagout",
+      "evidence": [
+        "Energy isolation"
+      ]
+    }
+  ],
+  "controls": {},
+  "environment": {
+    "weather_change": [
+      "wind"
+    ]
+  },
+  "work_changes": {
+    "work_plan_changed": false,
+    "unexpected_condition": false,
+    "task_changed": false,
+    "equipment_changed": false,
+    "procedure_changed": false,
+    "work_sequence_changed": false,
+    "reassessment_performed": false,
+    "reassessment_missing": false
+  },
+  "worker_info": {
+    "supervision": [
+      "lead"
+    ]
+  }
+}

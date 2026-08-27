@@ -1,0 +1,23 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: pgvector/pgvector:pg16
+    container_name: sif-aegis-db
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-sumedhsupe}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-sif}
+      POSTGRES_DB: ${POSTGRES_DB:-sif_aegis}
+    ports:
+      - "${DB_PORT:-5433}:5432"
+    volumes:
+      - sif-aegis-pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-sumedhsupe} -d ${POSTGRES_DB:-sif_aegis}"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  sif-aegis-pgdata:
+    driver: local

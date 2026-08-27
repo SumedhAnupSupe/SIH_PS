@@ -1,0 +1,17 @@
+Incident ID: INC-2026-061
+Incident Date: 2026-07-01
+Location: Moran
+
+Incident Date: 2026-07-01
+Incident ID: INC-2026-061
+Location: Moran
+Worker Count: 6
+Injury Severity: First Aid
+
+Incident Description:
+Maintenance crew entered a separator for repair. The confined space permit was expired. No plan was not in place for changing atmospheric conditions. The atmospheric hazard was not not recognized before entry.
+
+The supervisor stated that the team was experienced and had worked in similar conditions before. Life-Saving Rule LSR02 (Energy isolation not verified for connected piping.) was relevant to this activity.
+
+Immediate Actions Taken:
+Work continued without proper atmospheric monitoring. No one raised concerns about the permit status.

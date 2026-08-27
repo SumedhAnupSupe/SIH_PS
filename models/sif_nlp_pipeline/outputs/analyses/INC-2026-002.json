@@ -1,0 +1,781 @@
+{
+  "incident_id": "INC-2026-002",
+  "summary": "SIF Analysis Report: INC-2026-002\n==================================================\n\nReport Overview\n----------------------------------------\n  Report length: 2162 characters\n  Sentences analyzed: 22\n\nUnified SIF Classification Tree\n----------------------------------------\n  Classification: LOW_SEVERITY\n  Tier: 3\n  Tree confidence: 0.78\n  Tree version: unified_sif_classification_v1\n\n  Classification Path:\n    Q1: Did the event result in a FATALITY?\n      -> NO (confidence=0.90)\n      Reason: No fatality indicated in report\n    Q2: Did the event result in a LIFE-THREATENING or LIFE-ALTERING injury?\n      -> NO (confidence=0.80)\n      Reason: No life-threatening or life-altering injury indicated\n    Q3: Was HIGH ENERGY present? (>500 ft-lbs / >1500 Joules)\n      -> NO (confidence=0.70)\n      Reason: No high-energy source detected\n    Q8: Low-severity assessment: near miss/minor injury with no high-energy source?\n      -> YES (confidence=0.70)\n      Reason: Minor injury with no high-energy source\n\nHigh-Energy Analysis\n----------------------------------------\n  High energy present: NO\n  High energy incident: NO\n\nDirect Control Assessment\n----------------------------------------\n  State: NOT_APPLICABLE\n  Confidence: 0.30\n\nSIF Precursor Analysis\n----------------------------------------\n\n  PRESENT:\n  Safe Work Procedure: PRESENT (confidence=0.80, evidence_count=2, strength=0.20)\n  Familiarity with Task: PRESENT (confidence=0.60, evidence_count=1, strength=0.10)\n  Perceived Safety Culture: PRESENT (confidence=0.60, evidence_count=1, strength=0.10)\n  Stop-Work Execution: PRESENT (confidence=0.80, evidence_count=2, strength=0.20)\n  Pre-Task Plan: PRESENT (confidence=0.80, evidence_count=2, strength=0.20)\n\n  AMBIGUOUS:\n  Productivity Pressure: AMBIGUOUS (confidence=0.60, evidence_count=4, strength=0.40)\n\n  NOT MENTIONED:\n  Hazard Recognition: NOT_MENTIONED (confidence=0.00, evidence_count=0, strength=0.00)\n  Departure from Routine: NOT_MENTIONED (confidence=0.00, evidence_count=0, strength=0.00)\n  Plan to Address Work Change: NOT_MENTIONED (confidence=0.00, evidence_count=0, strength=0.00)\n  Safety Attitudes: NOT_MENTIONED (confidence=0.00, evidence_count=0, strength=0.00)\n  Rules and Procedures: NOT_MENTIONED (confidence=0.00, evidence_count=0, strength=0.00)\n  Risk Normalization: NOT_MENTIONED (confidence=0.00, evidence_count=0, strength=0.00)\n  Workers Inactive in Safety: NOT_MENTIONED (confidence=0.00, evidence_count=0, strength=0.00)\n  Critical Control Failure: NOT_MENTIONED (confidence=0.00, evidence_count=0, strength=0.00)\n  High Energy Exposure: NOT_MENTIONED (confidence=0.00, evidence_count=0, strength=0.00)\n  Energy Isolation Failure: NOT_MENTIONED (confidence=0.00, evidence_count=0, strength=0.00)\n  Line of Fire Exposure: NOT_MENTIONED (confidence=0.00, evidence_count=0, strength=0.00)\n  Critical Control Verification Failure: NOT_MENTIONED (confidence=0.00, evidence_count=0, strength=0.00)\n  Management of Change Gap: NOT_MENTIONED (confidence=0.00, evidence_count=0, strength=0.00)\n  Competency/Supervision Gap: NOT_MENTIONED (confidence=0.00, evidence_count=0, strength=0.00)\n  Work Authorization Gap: NOT_MENTIONED (confidence=0.00, evidence_count=0, strength=0.00)\n  Simultaneous Operations (SIMOPS): NOT_MENTIONED (confidence=0.00, evidence_count=0, strength=0.00)\n\nPrecursor Cluster Analysis\n----------------------------------------\n  Personnel / Human Performance: density=0.40, contribution=0.324, evidence_coverage=0.06, present=2/5\n  Planning / Work Preparation: density=0.33, contribution=0.320, evidence_coverage=0.07, present=2/6\n  Equipment / Technical: density=0.00, contribution=0.000, evidence_coverage=0.00, present=0/3\n  Barrier / Control: density=0.00, contribution=0.000, evidence_coverage=0.00, present=0/4\n  Organizational / Cultural: density=0.20, contribution=0.199, evidence_coverage=0.10, present=1/5\n  Environment / Work Conditions: density=0.00, contribution=0.000, evidence_coverage=0.00, present=0/2\n\nPrecursor Density\n----------------------------------------\n  Raw density: 0.227\n  Evidence-weighted density: 0.029\n  Applicable precursors: 22\n  Present precursors: 5\n\nModel Consistency\n----------------------------------------\n  Hazard consistency: 0.50\n  Barrier consistency: 0.50\n  Energy consistency: 0.50\n  Overall consistency: 0.50\n\nSupporting Evidence Details\n----------------------------------------\n\n  Safe Work Procedure - Evidence of presence:\n    - \"The technicians followed the standard operating procedure and completed the pre-task safety briefing as required.\"\n    - \"The safe work procedure was reviewed and both workers confirmed their understanding before beginning the work.\"\n\n  Familiarity with Task - Evidence of presence:\n    - \"Both workers were properly trained on the equipment and had several years of experience with turbine maintenance.\"\n\n  Productivity Pressure - Evidence of presence:\n    - \"No productivity pressure was applied to continue the work.\"\n    - \"The crew had adequate time to complete the work and there was no schedule pressure.\"\n\n  Productivity Pressure - Evidence of absence:\n    - \"No productivity pressure was applied to continue the work.\"\n    - \"The crew had adequate time to complete the work and there was no schedule pressure.\"\n\n  Perceived Safety Culture - Evidence of presence:\n    - \"The safety culture at the facility was supportive of workers reporting concerns without fear of reprisal.\"\n\n  Stop-Work Execution - Evidence of presence:\n    - \"Stop-work authority was exercised appropriately.\"\n    - \"The crew halted the work and waited for the engineering team to assess the situation.\"\n\n  Pre-Task Plan - Evidence of presence:\n    - \"The pre-task plan was comprehensive and included the cooling pump inspection.\"\n    - \"The job hazard analysis had been completed and reviewed by both workers.\"\n\nIdentified Hazards\n----------------------------------------\n  - stored_energy_hazard: pressur\n  - weather_hazard: wind, ice, rain\n\nWork Condition Changes\n----------------------------------------\n  - Unexpected Condition\n\nSummary Assessment\n----------------------------------------\n  5 of 22 SIF precursors detected as PRESENT.\n  Unified Tree Classification: LOW_SEVERITY (Tier 3)\n  High-energy present: NO\n\nIOGP REPORT 459 LIFE-SAVING RULES\n----------------------------------------\n\nNot Applicable:\n  - Driving\n  - Bypassing Safety Controls\n  - Confined Space\n  - Energy Isolation\n  - Hot Work\n  - Line of Fire\n  - Safe Mechanical Lifting\n  - Work Authorisation\n  - Working at Height\n\n\nSIF SCORE\n----------------------------------------\nScore: 0.23 / 1.00\nMethod: Unified Tree Classification\nWeight Source: unified_tree_classification_v1\n\nScore limitations:\n  - Low-severity classification; score should not drive urgent action\n\nThe derived SIF score is 0.23 on a 0-1 scale. This score is an evidence-based model output and should not be interpreted as a final SIF classification.",
+  "metadata": {
+    "incident_date": "2026-02-10",
+    "incident_id": "INC-2026-002",
+    "location": "Power Plant Unit 3, Turbine Hall",
+    "injury_severity": "First Aid"
+  },
+  "report_statistics": {
+    "report_length": 2162,
+    "sentence_count": 22
+  },
+  "unified_tree": {
+    "classification": "LOW_SEVERITY",
+    "tier": 3,
+    "tree_version": "unified_sif_classification_v1",
+    "confidence": 0.775,
+    "path": [
+      {
+        "node_id": "Q1",
+        "question": "Did the event result in a FATALITY?",
+        "answer": "NO",
+        "confidence": 0.9,
+        "evidence": [],
+        "source_sentence_ids": [],
+        "reason": "No fatality indicated in report"
+      },
+      {
+        "node_id": "Q2",
+        "question": "Did the event result in a LIFE-THREATENING or LIFE-ALTERING injury?",
+        "answer": "NO",
+        "confidence": 0.8,
+        "evidence": [],
+        "source_sentence_ids": [],
+        "reason": "No life-threatening or life-altering injury indicated"
+      },
+      {
+        "node_id": "Q3",
+        "question": "Was HIGH ENERGY present? (>500 ft-lbs / >1500 Joules)",
+        "answer": "NO",
+        "confidence": 0.7,
+        "evidence": [],
+        "source_sentence_ids": [],
+        "reason": "No high-energy source detected"
+      },
+      {
+        "node_id": "Q8",
+        "question": "Low-severity assessment: near miss/minor injury with no high-energy source?",
+        "answer": "YES",
+        "confidence": 0.7,
+        "evidence": [],
+        "source_sentence_ids": [],
+        "reason": "Minor injury with no high-energy source"
+      }
+    ],
+    "terminal_node": "Q8",
+    "reason": "No fatality indicated in report; No life-threatening or life-altering injury indicated; No high-energy source detected; Minor injury with no high-energy source",
+    "evidence": []
+  },
+  "high_energy": {
+    "energy_sources": {},
+    "exposure_categories": {},
+    "high_energy_present": false,
+    "high_energy_incident": false
+  },
+  "direct_control": {
+    "present": false,
+    "state": "NOT_APPLICABLE",
+    "confidence": 0.3,
+    "evidence": [],
+    "source_sentence_ids": [],
+    "control_types": []
+  },
+  "outcome": {
+    "fatality": false,
+    "life_threatening_injury": false,
+    "life_altering_injury": false,
+    "sustained_sif_injury": false,
+    "minor_injury": true,
+    "near_miss": false,
+    "evidence": {
+      "minor_injury": [
+        "Injur"
+      ]
+    }
+  },
+  "two_if_test": {
+    "applicable": false,
+    "if_conditions": [],
+    "independent_if_count": 0,
+    "result": "UNCERTAIN",
+    "confidence": 0.3
+  },
+  "precursor_analysis": {
+    "safe_work_procedure": {
+      "precursor": "Safe Work Procedure",
+      "status": "PRESENT",
+      "confidence": 0.8,
+      "evidence_count": 2,
+      "evidence_strength": 0.2,
+      "present_evidence": [
+        {
+          "text": "The technicians followed the standard operating procedure and completed the pre-task safety briefing as required.",
+          "source_sentence_id": 2
+        },
+        {
+          "text": "The safe work procedure was reviewed and both workers confirmed their understanding before beginning the work.",
+          "source_sentence_id": 3
+        }
+      ],
+      "absent_evidence": []
+    },
+    "hazard_recognition": {
+      "precursor": "Hazard Recognition",
+      "status": "NOT_MENTIONED",
+      "confidence": 0.0,
+      "evidence_count": 0,
+      "evidence_strength": 0.0,
+      "present_evidence": [],
+      "absent_evidence": []
+    },
+    "departure_from_routine": {
+      "precursor": "Departure from Routine",
+      "status": "NOT_MENTIONED",
+      "confidence": 0.0,
+      "evidence_count": 0,
+      "evidence_strength": 0.0,
+      "present_evidence": [],
+      "absent_evidence": []
+    },
+    "plan_to_address_work_change": {
+      "precursor": "Plan to Address Work Change",
+      "status": "NOT_MENTIONED",
+      "confidence": 0.0,
+      "evidence_count": 0,
+      "evidence_strength": 0.0,
+      "present_evidence": [],
+      "absent_evidence": []
+    },
+    "safety_attitudes": {
+      "precursor": "Safety Attitudes",
+      "status": "NOT_MENTIONED",
+      "confidence": 0.0,
+      "evidence_count": 0,
+      "evidence_strength": 0.0,
+      "present_evidence": [],
+      "absent_evidence": []
+    },
+    "rules_and_procedures": {
+      "precursor": "Rules and Procedures",
+      "status": "NOT_MENTIONED",
+      "confidence": 0.0,
+      "evidence_count": 0,
+      "evidence_strength": 0.0,
+      "present_evidence": [],
+      "absent_evidence": []
+    },
+    "familiarity_with_task": {
+      "precursor": "Familiarity with Task",
+      "status": "PRESENT",
+      "confidence": 0.6,
+      "evidence_count": 1,
+      "evidence_strength": 0.1,
+      "present_evidence": [
+        {
+          "text": "Both workers were properly trained on the equipment and had several years of experience with turbine maintenance.",
+          "source_sentence_id": 15
+        }
+      ],
+      "absent_evidence": []
+    },
+    "risk_normalization": {
+      "precursor": "Risk Normalization",
+      "status": "NOT_MENTIONED",
+      "confidence": 0.0,
+      "evidence_count": 0,
+      "evidence_strength": 0.0,
+      "present_evidence": [],
+      "absent_evidence": []
+    },
+    "productivity_pressure": {
+      "precursor": "Productivity Pressure",
+      "status": "AMBIGUOUS",
+      "confidence": 0.6,
+      "evidence_count": 4,
+      "evidence_strength": 0.4,
+      "present_evidence": [
+        {
+          "text": "No productivity pressure was applied to continue the work.",
+          "source_sentence_id": 10
+        },
+        {
+          "text": "The crew had adequate time to complete the work and there was no schedule pressure.",
+          "source_sentence_id": 13
+        }
+      ],
+      "absent_evidence": [
+        {
+          "text": "No productivity pressure was applied to continue the work.",
+          "source_sentence_id": 10
+        },
+        {
+          "text": "The crew had adequate time to complete the work and there was no schedule pressure.",
+          "source_sentence_id": 13
+        }
+      ]
+    },
+    "perceived_safety_culture": {
+      "precursor": "Perceived Safety Culture",
+      "status": "PRESENT",
+      "confidence": 0.6,
+      "evidence_count": 1,
+      "evidence_strength": 0.1,
+      "present_evidence": [
+        {
+          "text": "The safety culture at the facility was supportive of workers reporting concerns without fear of reprisal.",
+          "source_sentence_id": 16
+        }
+      ],
+      "absent_evidence": []
+    },
+    "stop_work_execution": {
+      "precursor": "Stop-Work Execution",
+      "status": "PRESENT",
+      "confidence": 0.8,
+      "evidence_count": 2,
+      "evidence_strength": 0.2,
+      "present_evidence": [
+        {
+          "text": "Stop-work authority was exercised appropriately.",
+          "source_sentence_id": 8
+        },
+        {
+          "text": "The crew halted the work and waited for the engineering team to assess the situation.",
+          "source_sentence_id": 9
+        }
+      ],
+      "absent_evidence": []
+    },
+    "workers_inactive_in_safety": {
+      "precursor": "Workers Inactive in Safety",
+      "status": "NOT_MENTIONED",
+      "confidence": 0.0,
+      "evidence_count": 0,
+      "evidence_strength": 0.0,
+      "present_evidence": [],
+      "absent_evidence": []
+    },
+    "pre_task_plan": {
+      "precursor": "Pre-Task Plan",
+      "status": "PRESENT",
+      "confidence": 0.8,
+      "evidence_count": 2,
+      "evidence_strength": 0.2,
+      "present_evidence": [
+        {
+          "text": "The pre-task plan was comprehensive and included the cooling pump inspection.",
+          "source_sentence_id": 17
+        },
+        {
+          "text": "The job hazard analysis had been completed and reviewed by both workers.",
+          "source_sentence_id": 18
+        }
+      ],
+      "absent_evidence": []
+    },
+    "critical_control_failure": {
+      "precursor": "Critical Control Failure",
+      "status": "NOT_MENTIONED",
+      "confidence": 0.0,
+      "evidence_count": 0,
+      "evidence_strength": 0.0,
+      "present_evidence": [],
+      "absent_evidence": []
+    },
+    "high_energy_exposure": {
+      "precursor": "High Energy Exposure",
+      "status": "NOT_MENTIONED",
+      "confidence": 0.0,
+      "evidence_count": 0,
+      "evidence_strength": 0.0,
+      "present_evidence": [],
+      "absent_evidence": []
+    },
+    "energy_isolation_failure": {
+      "precursor": "Energy Isolation Failure",
+      "status": "NOT_MENTIONED",
+      "confidence": 0.0,
+      "evidence_count": 0,
+      "evidence_strength": 0.0,
+      "present_evidence": [],
+      "absent_evidence": []
+    },
+    "line_of_fire_exposure": {
+      "precursor": "Line of Fire Exposure",
+      "status": "NOT_MENTIONED",
+      "confidence": 0.0,
+      "evidence_count": 0,
+      "evidence_strength": 0.0,
+      "present_evidence": [],
+      "absent_evidence": []
+    },
+    "critical_control_verification_failure": {
+      "precursor": "Critical Control Verification Failure",
+      "status": "NOT_MENTIONED",
+      "confidence": 0.0,
+      "evidence_count": 0,
+      "evidence_strength": 0.0,
+      "present_evidence": [],
+      "absent_evidence": []
+    },
+    "management_of_change_gap": {
+      "precursor": "Management of Change Gap",
+      "status": "NOT_MENTIONED",
+      "confidence": 0.0,
+      "evidence_count": 0,
+      "evidence_strength": 0.0,
+      "present_evidence": [],
+      "absent_evidence": []
+    },
+    "competency_supervision_gap": {
+      "precursor": "Competency/Supervision Gap",
+      "status": "NOT_MENTIONED",
+      "confidence": 0.0,
+      "evidence_count": 0,
+      "evidence_strength": 0.0,
+      "present_evidence": [],
+      "absent_evidence": []
+    },
+    "work_authorization_gap": {
+      "precursor": "Work Authorization Gap",
+      "status": "NOT_MENTIONED",
+      "confidence": 0.0,
+      "evidence_count": 0,
+      "evidence_strength": 0.0,
+      "present_evidence": [],
+      "absent_evidence": []
+    },
+    "simops_or_concurrent_operations": {
+      "precursor": "Simultaneous Operations (SIMOPS)",
+      "status": "NOT_MENTIONED",
+      "confidence": 0.0,
+      "evidence_count": 0,
+      "evidence_strength": 0.0,
+      "present_evidence": [],
+      "absent_evidence": []
+    }
+  },
+  "cluster_analysis": {
+    "personnel": {
+      "label": "Personnel / Human Performance",
+      "contribution_score": 0.324,
+      "density": 0.4,
+      "evidence_coverage": 0.06,
+      "present_count": 2,
+      "applicable_count": 5,
+      "members": [
+        {
+          "precursor": "hazard_recognition",
+          "label": "Hazard Recognition",
+          "status": 0,
+          "status_label": "NOT_MENTIONED",
+          "confidence": 0.0,
+          "evidence_strength": 0.0
+        },
+        {
+          "precursor": "familiarity_with_task",
+          "label": "Familiarity with Task",
+          "status": 3,
+          "status_label": "PRESENT",
+          "confidence": 0.6,
+          "evidence_strength": 0.1
+        },
+        {
+          "precursor": "workers_inactive_in_safety",
+          "label": "Workers Inactive in Safety",
+          "status": 0,
+          "status_label": "NOT_MENTIONED",
+          "confidence": 0.0,
+          "evidence_strength": 0.0
+        },
+        {
+          "precursor": "stop_work_execution",
+          "label": "Stop-Work Execution",
+          "status": 3,
+          "status_label": "PRESENT",
+          "confidence": 0.8,
+          "evidence_strength": 0.2
+        },
+        {
+          "precursor": "competency_supervision_gap",
+          "label": "Competency/Supervision Gap",
+          "status": 0,
+          "status_label": "NOT_MENTIONED",
+          "confidence": 0.0,
+          "evidence_strength": 0.0
+        }
+      ]
+    },
+    "planning": {
+      "label": "Planning / Work Preparation",
+      "contribution_score": 0.32,
+      "density": 0.3333,
+      "evidence_coverage": 0.0667,
+      "present_count": 2,
+      "applicable_count": 6,
+      "members": [
+        {
+          "precursor": "safe_work_procedure",
+          "label": "Safe Work Procedure",
+          "status": 3,
+          "status_label": "PRESENT",
+          "confidence": 0.8,
+          "evidence_strength": 0.2
+        },
+        {
+          "precursor": "pre_task_plan",
+          "label": "Pre-Task Plan",
+          "status": 3,
+          "status_label": "PRESENT",
+          "confidence": 0.8,
+          "evidence_strength": 0.2
+        },
+        {
+          "precursor": "departure_from_routine",
+          "label": "Departure from Routine",
+          "status": 0,
+          "status_label": "NOT_MENTIONED",
+          "confidence": 0.0,
+          "evidence_strength": 0.0
+        },
+        {
+          "precursor": "plan_to_address_work_change",
+          "label": "Plan to Address Work Change",
+          "status": 0,
+          "status_label": "NOT_MENTIONED",
+          "confidence": 0.0,
+          "evidence_strength": 0.0
+        },
+        {
+          "precursor": "management_of_change_gap",
+          "label": "Management of Change Gap",
+          "status": 0,
+          "status_label": "NOT_MENTIONED",
+          "confidence": 0.0,
+          "evidence_strength": 0.0
+        },
+        {
+          "precursor": "work_authorization_gap",
+          "label": "Work Authorization Gap",
+          "status": 0,
+          "status_label": "NOT_MENTIONED",
+          "confidence": 0.0,
+          "evidence_strength": 0.0
+        }
+      ]
+    },
+    "equipment": {
+      "label": "Equipment / Technical",
+      "contribution_score": 0.0,
+      "density": 0.0,
+      "evidence_coverage": 0.0,
+      "present_count": 0,
+      "applicable_count": 3,
+      "members": [
+        {
+          "precursor": "critical_control_failure",
+          "label": "Critical Control Failure",
+          "status": 0,
+          "status_label": "NOT_MENTIONED",
+          "confidence": 0.0,
+          "evidence_strength": 0.0
+        },
+        {
+          "precursor": "energy_isolation_failure",
+          "label": "Energy Isolation Failure",
+          "status": 0,
+          "status_label": "NOT_MENTIONED",
+          "confidence": 0.0,
+          "evidence_strength": 0.0
+        },
+        {
+          "precursor": "critical_control_verification_failure",
+          "label": "Critical Control Verification Failure",
+          "status": 0,
+          "status_label": "NOT_MENTIONED",
+          "confidence": 0.0,
+          "evidence_strength": 0.0
+        }
+      ]
+    },
+    "barrier": {
+      "label": "Barrier / Control",
+      "contribution_score": 0.0,
+      "density": 0.0,
+      "evidence_coverage": 0.0,
+      "present_count": 0,
+      "applicable_count": 4,
+      "members": [
+        {
+          "precursor": "critical_control_failure",
+          "label": "Critical Control Failure",
+          "status": 0,
+          "status_label": "NOT_MENTIONED",
+          "confidence": 0.0,
+          "evidence_strength": 0.0
+        },
+        {
+          "precursor": "critical_control_verification_failure",
+          "label": "Critical Control Verification Failure",
+          "status": 0,
+          "status_label": "NOT_MENTIONED",
+          "confidence": 0.0,
+          "evidence_strength": 0.0
+        },
+        {
+          "precursor": "energy_isolation_failure",
+          "label": "Energy Isolation Failure",
+          "status": 0,
+          "status_label": "NOT_MENTIONED",
+          "confidence": 0.0,
+          "evidence_strength": 0.0
+        },
+        {
+          "precursor": "line_of_fire_exposure",
+          "label": "Line of Fire Exposure",
+          "status": 0,
+          "status_label": "NOT_MENTIONED",
+          "confidence": 0.0,
+          "evidence_strength": 0.0
+        }
+      ]
+    },
+    "organizational": {
+      "label": "Organizational / Cultural",
+      "contribution_score": 0.1992,
+      "density": 0.2,
+      "evidence_coverage": 0.1,
+      "present_count": 1,
+      "applicable_count": 5,
+      "members": [
+        {
+          "precursor": "safety_attitudes",
+          "label": "Safety Attitudes",
+          "status": 0,
+          "status_label": "NOT_MENTIONED",
+          "confidence": 0.0,
+          "evidence_strength": 0.0
+        },
+        {
+          "precursor": "risk_normalization",
+          "label": "Risk Normalization",
+          "status": 0,
+          "status_label": "NOT_MENTIONED",
+          "confidence": 0.0,
+          "evidence_strength": 0.0
+        },
+        {
+          "precursor": "productivity_pressure",
+          "label": "Productivity Pressure",
+          "status": 2,
+          "status_label": "AMBIGUOUS",
+          "confidence": 0.6,
+          "evidence_strength": 0.4
+        },
+        {
+          "precursor": "perceived_safety_culture",
+          "label": "Perceived Safety Culture",
+          "status": 3,
+          "status_label": "PRESENT",
+          "confidence": 0.6,
+          "evidence_strength": 0.1
+        },
+        {
+          "precursor": "rules_and_procedures",
+          "label": "Rules and Procedures",
+          "status": 0,
+          "status_label": "NOT_MENTIONED",
+          "confidence": 0.0,
+          "evidence_strength": 0.0
+        }
+      ]
+    },
+    "environment": {
+      "label": "Environment / Work Conditions",
+      "contribution_score": 0.0,
+      "density": 0.0,
+      "evidence_coverage": 0.0,
+      "present_count": 0,
+      "applicable_count": 2,
+      "members": [
+        {
+          "precursor": "departure_from_routine",
+          "label": "Departure from Routine",
+          "status": 0,
+          "status_label": "NOT_MENTIONED",
+          "confidence": 0.0,
+          "evidence_strength": 0.0
+        },
+        {
+          "precursor": "simops_or_concurrent_operations",
+          "label": "Simultaneous Operations (SIMOPS)",
+          "status": 0,
+          "status_label": "NOT_MENTIONED",
+          "confidence": 0.0,
+          "evidence_strength": 0.0
+        }
+      ]
+    }
+  },
+  "density": {
+    "raw": 0.2273,
+    "evidence_weighted": 0.029,
+    "applicable_precursor_count": 22,
+    "present_precursor_count": 5,
+    "evidence_strength": 0.0545
+  },
+  "interaction_features": {
+    "risk_normalization_x_high_energy_exposure": 0.0,
+    "departure_from_routine_x_management_of_change_gap": 0.0,
+    "work_change_x_reassessment_gap": 0.0,
+    "productivity_pressure_x_stop_work_failure": 0.5,
+    "competency_supervision_gap_x_high_energy_exposure": 0.0,
+    "critical_control_failure_x_high_energy_exposure": 0.0,
+    "line_of_fire_x_suspended_load": 0.0,
+    "energy_isolation_failure_x_stored_energy": 0.0
+  },
+  "consistency": {
+    "hazard_consistency": 0.5,
+    "barrier_consistency": 0.5,
+    "energy_consistency": 0.5,
+    "intra_model_consistency": 0.5
+  },
+  "hazards": [
+    {
+      "hazard_type": "stored_energy_hazard",
+      "evidence": [
+        "pressur"
+      ]
+    },
+    {
+      "hazard_type": "weather_hazard",
+      "evidence": [
+        "wind",
+        "ice",
+        "rain"
+      ]
+    }
+  ],
+  "task_types": [
+    {
+      "task_type": "general_maintenance",
+      "evidence": [
+        "inspection",
+        "maintenance"
+      ]
+    }
+  ],
+  "controls": {},
+  "environment": {
+    "weather_change": [
+      "wind",
+      "ice",
+      "rain"
+    ]
+  },
+  "work_changes": {
+    "work_plan_changed": false,
+    "unexpected_condition": true,
+    "task_changed": false,
+    "equipment_changed": false,
+    "procedure_changed": false,
+    "work_sequence_changed": false,
+    "reassessment_performed": false,
+    "reassessment_missing": false
+  },
+  "worker_info": {
+    "training_known": [
+      "trained"
+    ],
+    "experience_known": [
+      "experience with",
+      "experience",
+      "years of experience"
+    ],
+    "supervision": [
+      "supervis"
+    ]
+  },
+  "life_saving_rules": {
+    "broken_rule_count": 0,
+    "broken_rules": [],
+    "analysis": [
+      {
+        "rule_name": "Driving",
+        "status": "NOT_APPLICABLE",
+        "confidence": 0.99,
+        "reason": "No Driving activity was identified in the report.",
+        "evidence": []
+      },
+      {
+        "rule_name": "Bypassing Safety Controls",
+        "status": "NOT_APPLICABLE",
+        "confidence": 0.99,
+        "reason": "No Bypassing Safety Controls activity was identified in the report.",
+        "evidence": []
+      },
+      {
+        "rule_name": "Confined Space",
+        "status": "NOT_APPLICABLE",
+        "confidence": 0.99,
+        "reason": "No Confined Space activity was identified in the report.",
+        "evidence": []
+      },
+      {
+        "rule_name": "Energy Isolation",
+        "status": "NOT_APPLICABLE",
+        "confidence": 0.99,
+        "reason": "No Energy Isolation activity was identified in the report.",
+        "evidence": []
+      },
+      {
+        "rule_name": "Hot Work",
+        "status": "NOT_APPLICABLE",
+        "confidence": 0.99,
+        "reason": "No Hot Work activity was identified in the report.",
+        "evidence": []
+      },
+      {
+        "rule_name": "Line of Fire",
+        "status": "NOT_APPLICABLE",
+        "confidence": 0.99,
+        "reason": "No Line of Fire activity was identified in the report.",
+        "evidence": []
+      },
+      {
+        "rule_name": "Safe Mechanical Lifting",
+        "status": "NOT_APPLICABLE",
+        "confidence": 0.99,
+        "reason": "No Safe Mechanical Lifting activity was identified in the report.",
+        "evidence": []
+      },
+      {
+        "rule_name": "Work Authorisation",
+        "status": "NOT_APPLICABLE",
+        "confidence": 0.99,
+        "reason": "No Work Authorisation activity was identified in the report.",
+        "evidence": []
+      },
+      {
+        "rule_name": "Working at Height",
+        "status": "NOT_APPLICABLE",
+        "confidence": 0.99,
+        "reason": "No Working at Height activity was identified in the report.",
+        "evidence": []
+      }
+    ]
+  },
+  "sif_score": {
+    "value": 0.2341,
+    "range": [
+      0.0,
+      1.0
+    ],
+    "method": "unified_tree_classification",
+    "score_version": "1.0.0",
+    "tree_version": "unified_sif_classification_v1",
+    "classification": "LOW_SEVERITY",
+    "classification_tier": 3,
+    "tree_confidence": 0.775,
+    "score_method": "unified_tree_classification",
+    "score_version_label": "1.0.0",
+    "limitations": [
+      "Low-severity classification; score should not drive urgent action"
+    ],
+    "weight_source": "unified_tree_classification_v1",
+    "components": [],
+    "missing_components": []
+  }
+}

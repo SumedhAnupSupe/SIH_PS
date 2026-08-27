@@ -1,0 +1,72 @@
+SIF Analysis Report: INC-2026-048
+==================================================
+
+Report Overview
+----------------------------------------
+  Report length: 973 characters
+  Sentences analyzed: 12
+
+SIF Precursor Analysis
+----------------------------------------
+
+  PRESENT:
+  Stop-Work Execution: PRESENT (confidence=0.60, evidence_count=1)
+  Pre-Task Plan: PRESENT (confidence=0.60, evidence_count=1)
+
+  ABSENT:
+  Plan to Address Work Change: ABSENT (confidence=0.60, evidence_count=1)
+
+  AMBIGUOUS:
+  Productivity Pressure: AMBIGUOUS (confidence=0.60, evidence_count=2)
+
+  NOT MENTIONED:
+  Safe Work Procedure: NOT_MENTIONED (confidence=0.00, evidence_count=0)
+  Hazard Recognition: NOT_MENTIONED (confidence=0.00, evidence_count=0)
+  Departure from Routine: NOT_MENTIONED (confidence=0.00, evidence_count=0)
+  Safety Attitudes: NOT_MENTIONED (confidence=0.00, evidence_count=0)
+  Rules and Procedures: NOT_MENTIONED (confidence=0.00, evidence_count=0)
+  Familiarity with Task: NOT_MENTIONED (confidence=0.00, evidence_count=0)
+  Risk Normalization: NOT_MENTIONED (confidence=0.00, evidence_count=0)
+  Perceived Safety Culture: NOT_MENTIONED (confidence=0.00, evidence_count=0)
+  Workers Inactive in Safety: NOT_MENTIONED (confidence=0.00, evidence_count=0)
+
+Supporting Evidence Details
+----------------------------------------
+
+  Plan to Address Work Change - Evidence of absence:
+    - "No revised plan when gas monitor indicated LEL increase."
+
+  Productivity Pressure - Evidence of presence:
+    - "The crew had adequate time to complete the work and there was no schedule pressure."
+
+  Productivity Pressure - Evidence of absence:
+    - "The crew had adequate time to complete the work and there was no schedule pressure."
+
+  Stop-Work Execution - Evidence of presence:
+    - "Stop-work authority not exercised when vapors detected."
+
+  Pre-Task Plan - Evidence of presence:
+    - "Pre-task plan did not address continuous gas monitoring requirement."
+
+Identified Hazards
+----------------------------------------
+  - stored_energy_hazard: pressur
+  - chemical_hazard: Vapor, vapor
+  - weather_hazard: wind
+
+Work Condition Changes
+----------------------------------------
+  - Work Plan Changed
+
+Life-Saving Rules (IOGP)
+----------------------------------------
+  Broken: 0 | Uncertain: 4 | Not Broken: 1 | Not Applicable: 4
+  LSR02: Energy Isolation — UNCERTAIN (conf=0.50) — Rule applicable but no clear evidence found
+  LSR03: Line of Fire — UNCERTAIN (conf=0.50) — Rule applicable but no clear evidence found
+  LSR04: Confined Space — UNCERTAIN (conf=0.50) — Rule applicable but no clear evidence found
+  LSR09: Working at Height — UNCERTAIN (conf=0.50) — Rule applicable but no clear evidence found
+
+Summary Assessment
+----------------------------------------
+  2 of 13 SIF precursors detected as PRESENT.
+  Assessment: LOW SIF precursor density. Some risk indicators present.

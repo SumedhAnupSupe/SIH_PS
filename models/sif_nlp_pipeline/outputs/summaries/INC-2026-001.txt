@@ -1,0 +1,144 @@
+SIF Analysis Report: INC-2026-001
+==================================================
+
+Report Overview
+----------------------------------------
+  Report length: 246 characters
+  Sentences analyzed: 1
+
+Unified SIF Classification Tree
+----------------------------------------
+  Classification: LOW_SEVERITY
+  Tier: 3
+  Tree confidence: 0.75
+  Tree version: unified_sif_classification_v1
+
+  Classification Path:
+    Q1: Did the event result in a FATALITY?
+      -> NO (confidence=0.90)
+      Reason: No fatality indicated in report
+    Q2: Did the event result in a LIFE-THREATENING or LIFE-ALTERING injury?
+      -> NO (confidence=0.80)
+      Reason: No life-threatening or life-altering injury indicated
+    Q3: Was HIGH ENERGY present? (>500 ft-lbs / >1500 Joules)
+      -> NO (confidence=0.70)
+      Reason: No high-energy source detected
+    Q8: Low-severity assessment: near miss/minor injury with no high-energy source?
+      -> YES (confidence=0.60)
+      Reason: Low-severity event assumed (no high energy, no SIF injury)
+
+High-Energy Analysis
+----------------------------------------
+  High energy present: NO
+  High energy incident: NO
+
+Direct Control Assessment
+----------------------------------------
+  State: NOT_APPLICABLE
+  Confidence: 0.30
+
+SIF Precursor Analysis
+----------------------------------------
+
+  PRESENT:
+  Productivity Pressure: PRESENT (confidence=0.60, evidence_count=1, strength=0.10)
+
+  NOT MENTIONED:
+  Safe Work Procedure: NOT_MENTIONED (confidence=0.00, evidence_count=0, strength=0.00)
+  Hazard Recognition: NOT_MENTIONED (confidence=0.00, evidence_count=0, strength=0.00)
+  Departure from Routine: NOT_MENTIONED (confidence=0.00, evidence_count=0, strength=0.00)
+  Plan to Address Work Change: NOT_MENTIONED (confidence=0.00, evidence_count=0, strength=0.00)
+  Safety Attitudes: NOT_MENTIONED (confidence=0.00, evidence_count=0, strength=0.00)
+  Rules and Procedures: NOT_MENTIONED (confidence=0.00, evidence_count=0, strength=0.00)
+  Familiarity with Task: NOT_MENTIONED (confidence=0.00, evidence_count=0, strength=0.00)
+  Risk Normalization: NOT_MENTIONED (confidence=0.00, evidence_count=0, strength=0.00)
+  Perceived Safety Culture: NOT_MENTIONED (confidence=0.00, evidence_count=0, strength=0.00)
+  Stop-Work Execution: NOT_MENTIONED (confidence=0.00, evidence_count=0, strength=0.00)
+  Workers Inactive in Safety: NOT_MENTIONED (confidence=0.00, evidence_count=0, strength=0.00)
+  Pre-Task Plan: NOT_MENTIONED (confidence=0.00, evidence_count=0, strength=0.00)
+  Critical Control Failure: NOT_MENTIONED (confidence=0.00, evidence_count=0, strength=0.00)
+  High Energy Exposure: NOT_MENTIONED (confidence=0.00, evidence_count=0, strength=0.00)
+  Energy Isolation Failure: NOT_MENTIONED (confidence=0.00, evidence_count=0, strength=0.00)
+  Line of Fire Exposure: NOT_MENTIONED (confidence=0.00, evidence_count=0, strength=0.00)
+  Critical Control Verification Failure: NOT_MENTIONED (confidence=0.00, evidence_count=0, strength=0.00)
+  Management of Change Gap: NOT_MENTIONED (confidence=0.00, evidence_count=0, strength=0.00)
+  Competency/Supervision Gap: NOT_MENTIONED (confidence=0.00, evidence_count=0, strength=0.00)
+  Work Authorization Gap: NOT_MENTIONED (confidence=0.00, evidence_count=0, strength=0.00)
+  Simultaneous Operations (SIMOPS): NOT_MENTIONED (confidence=0.00, evidence_count=0, strength=0.00)
+
+Precursor Cluster Analysis
+----------------------------------------
+  Personnel / Human Performance: density=0.00, contribution=0.000, evidence_coverage=0.00, present=0/5
+  Planning / Work Preparation: density=0.00, contribution=0.000, evidence_coverage=0.00, present=0/6
+  Equipment / Technical: density=0.00, contribution=0.000, evidence_coverage=0.00, present=0/3
+  Barrier / Control: density=0.00, contribution=0.000, evidence_coverage=0.00, present=0/4
+  Organizational / Cultural: density=0.20, contribution=0.132, evidence_coverage=0.02, present=1/5
+  Environment / Work Conditions: density=0.00, contribution=0.000, evidence_coverage=0.00, present=0/2
+
+Precursor Density
+----------------------------------------
+  Raw density: 0.045
+  Evidence-weighted density: 0.003
+  Applicable precursors: 22
+  Present precursors: 1
+
+Model Consistency
+----------------------------------------
+  Hazard consistency: 0.50
+  Barrier consistency: 0.50
+  Energy consistency: 0.50
+  Overall consistency: 0.50
+
+Supporting Evidence Details
+----------------------------------------
+
+  Productivity Pressure - Evidence of presence:
+    - "Incident ID: INC-2026-001
+Incident Date: 2026-01-15
+Location: Duliajan
+
+Incident Date: 2026-01-15
+Incident ID: INC-2026-001
+Location: Duliajan
+
+Incident Description:
+
+The crew was scheduled to replace"
+
+Identified Hazards
+----------------------------------------
+  - weather_hazard: wind
+
+No notable work condition changes identified.
+
+Summary Assessment
+----------------------------------------
+  1 of 22 SIF precursors detected as PRESENT.
+  Unified Tree Classification: LOW_SEVERITY (Tier 3)
+  High-energy present: NO
+
+IOGP REPORT 459 LIFE-SAVING RULES
+----------------------------------------
+
+Not Applicable:
+  - Driving
+  - Bypassing Safety Controls
+  - Confined Space
+  - Energy Isolation
+  - Hot Work
+  - Line of Fire
+  - Safe Mechanical Lifting
+  - Work Authorisation
+  - Working at Height
+
+
+SIF SCORE
+----------------------------------------
+Score: 0.21 / 1.00
+Method: Unified Tree Classification
+Weight Source: unified_tree_classification_v1
+
+Score limitations:
+  - Low-severity classification; score should not drive urgent action
+
+The derived SIF score is 0.21 on a 0-1 scale. This score is an evidence-based model output and should not be interpreted as a final SIF classification.

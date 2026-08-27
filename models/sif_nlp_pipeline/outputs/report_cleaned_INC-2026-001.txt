@@ -1,0 +1,11 @@
+Incident ID: INC-2026-001
+Incident Date: 2026-01-15
+Location: Duliajan
+
+Incident Date: 2026-01-15
+Incident ID: INC-2026-001
+Location: Duliajan
+
+Incident Description:
+
+The crew was scheduled to replace a transformer before the outage window ended.

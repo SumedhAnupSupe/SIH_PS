@@ -1,0 +1,17 @@
+Incident ID: INC-2026-009
+Incident Date: 2026-12-03
+Location: Power Plant Unit 3
+
+Incident Date: 2026-12-03
+Incident ID: INC-2026-009
+Location: Power Plant Unit 3
+Worker Count: 4
+Injury Severity: Near Miss
+
+Incident Description:
+Technicians performed bearing inspection maintenance on the compressor. The technicians followed the standard operating procedure and completed the pre-task safety briefing as required. Stop-work authority was exercised appropriately. Both workers were properly trained on the equipment and had several years of experience with turbine maintenance. The pre-task plan was not comprehensive and included the cooling pump inspection. The safety culture at the facility was not supportive of workers reporting concerns without fear of reprisal.
+
+Both workers were properly trained on the equipment and had several years of experience with turbine maintenance. 
+
+Immediate Actions Taken:
+Stop-work authority was exercised appropriately. The crew halted the work and waited for the engineering team to assess the situation.

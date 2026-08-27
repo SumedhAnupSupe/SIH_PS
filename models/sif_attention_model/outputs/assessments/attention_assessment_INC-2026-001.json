@@ -1,0 +1,286 @@
+{
+  "incident_id": "INC-2026-001",
+  "prediction_mode": "RULE_BASED_COLD_START",
+  "risk_potential_score": 0.8477,
+  "risk_potential_source": "upstream_sif_score",
+  "attention": {
+    "level": "MONITOR",
+    "urgency_score": 0.0,
+    "confidence": 0.5,
+    "systemic_attention": "HIGH",
+    "systemic_attention_score": 1.0
+  },
+  "actions": [
+    {
+      "action": "LESSONS_LEARNED",
+      "priority": 1,
+      "time_horizon": "LONGER_TERM",
+      "confidence": 0.7,
+      "reason": "Recurring pattern warrants organizational learning",
+      "evidence": []
+    },
+    {
+      "action": "MANAGEMENT_SYSTEM_REVIEW",
+      "priority": 2,
+      "time_horizon": "LONGER_TERM",
+      "confidence": 0.7,
+      "reason": "Systemic precursor pattern detected",
+      "evidence": []
+    },
+    {
+      "action": "SAFETY_CULTURE_REVIEW",
+      "priority": 3,
+      "time_horizon": "LONGER_TERM",
+      "confidence": 0.7,
+      "reason": "Risk normalization or safety culture signal",
+      "evidence": []
+    },
+    {
+      "action": "SCHEDULE_PRESSURE_REVIEW",
+      "priority": 4,
+      "time_horizon": "DAYS_TO_WEEKS",
+      "confidence": 0.7,
+      "reason": "Productivity pressure contributing to risk",
+      "evidence": []
+    },
+    {
+      "action": "SUPERVISION_IMPROVEMENT",
+      "priority": 5,
+      "time_horizon": "DAYS_TO_WEEKS",
+      "confidence": 0.7,
+      "reason": "Risk normalization or supervision gap detected",
+      "evidence": []
+    },
+    {
+      "action": "WORK_PLANNING_REVIEW",
+      "priority": 6,
+      "time_horizon": "DAYS_TO_WEEKS",
+      "confidence": 0.7,
+      "reason": "Work planning deficiency detected",
+      "evidence": []
+    }
+  ],
+  "drivers": [
+    {
+      "feature": "unified_tree_tier",
+      "value": 1,
+      "role": "observed",
+      "importance": 0.7
+    },
+    {
+      "feature": "RULE_PRODUCTIVITY_PRESSURE",
+      "value": "Productivity pressure detected -- systemic concern",
+      "role": "rule_signal",
+      "importance": 0.5
+    },
+    {
+      "feature": "RULE_RISK_NORMALIZATION",
+      "value": "Risk normalization detected -- systemic safety culture concern",
+      "role": "rule_signal",
+      "importance": 0.5
+    },
+    {
+      "feature": "RULE_MULTIPLE_PRECURSORS",
+      "value": "7 SIF precursors detected as PRESENT",
+      "role": "rule_signal",
+      "importance": 0.5
+    },
+    {
+      "feature": "cluster_personnel_density",
+      "value": 0.5,
+      "role": "observed",
+      "importance": 0.35
+    },
+    {
+      "feature": "cluster_environment_density",
+      "value": 0.5,
+      "role": "observed",
+      "importance": 0.35
+    },
+    {
+      "feature": "productivity_pressure",
+      "value": "PRESENT",
+      "role": "observed",
+      "importance": 0.3
+    },
+    {
+      "feature": "risk_normalization",
+      "value": "PRESENT",
+      "role": "observed",
+      "importance": 0.3
+    },
+    {
+      "feature": "departure_from_routine",
+      "value": "PRESENT",
+      "role": "observed",
+      "importance": 0.3
+    },
+    {
+      "feature": "stop_work_execution",
+      "value": "AMBIGUOUS",
+      "role": "observed",
+      "importance": 0.15
+    },
+    {
+      "feature": "tree_confidence",
+      "value": 0.74,
+      "role": "observed",
+      "importance": 0.15
+    },
+    {
+      "feature": "high_energy_present",
+      "value": 1,
+      "role": "observed",
+      "importance": 0.15
+    }
+  ],
+  "evidence": [
+    {
+      "source_sentence_id": 8,
+      "text": "The electrical hazard was recognized by the lead worker, who noted that the wet surfaces increased the risk of arc flash.",
+      "role": "observed"
+    },
+    {
+      "source_sentence_id": 2,
+      "text": "During the work, unexpected rain began.",
+      "role": "observed"
+    },
+    {
+      "source_sentence_id": 12,
+      "text": "The crew did not call for a safety stand-down to discuss the changed conditions.",
+      "role": "observed"
+    },
+    {
+      "source_sentence_id": 16,
+      "text": "No revised plan was developed after the rain started.",
+      "role": "observed"
+    },
+    {
+      "source_sentence_id": 5,
+      "text": "The revised weather conditions were not included in the original pre-task plan.",
+      "role": "absent_evidence"
+    },
+    {
+      "source_sentence_id": 14,
+      "text": "The pre-task plan had been completed before the work began, but it did not account for potential weather changes.",
+      "role": "absent_evidence"
+    },
+    {
+      "source_sentence_id": 16,
+      "text": "No revised plan was developed after the rain started.",
+      "role": "absent_evidence"
+    },
+    {
+      "source_sentence_id": 4,
+      "text": "The supervisor noted that the crew had completed similar transformer replacements many times previously.",
+      "role": "observed"
+    },
+    {
+      "source_sentence_id": 10,
+      "text": "The supervisor stated that the team was experienced and had worked in similar conditions before.",
+      "role": "observed"
+    },
+    {
+      "source_sentence_id": 13,
+      "text": "One junior worker mentioned concern about the wet conditions but was told by the supervisor that they had done this many times before and it would be fine.",
+      "role": "observed"
+    },
+    {
+      "source_sentence_id": 0,
+      "text": "Incident Date: 2026-01-15\nIncident ID: INC-2026-001\nLocation: Substation Alpha, Bay 7\nWorker Count: 4\nInjury Severity: Near Miss\n\nIncident Description:\n\nThe crew was scheduled to replace a transformer before the outage window ended.",
+      "role": "observed"
+    },
+    {
+      "source_sentence_id": 19,
+      "text": "The crew was under pressure to complete the work before the outage window closed.",
+      "role": "observed"
+    },
+    {
+      "source_sentence_id": 11,
+      "text": "No stop-work authority was exercised.",
+      "role": "observed"
+    },
+    {
+      "source_sentence_id": 9,
+      "text": "However, the crew continued working despite the increased hazard.",
+      "role": "absent_evidence"
+    },
+    {
+      "source_sentence_id": 11,
+      "text": "No stop-work authority was exercised.",
+      "role": "absent_evidence"
+    },
+    {
+      "source_sentence_id": 5,
+      "text": "The revised weather conditions were not included in the original pre-task plan.",
+      "role": "observed"
+    },
+    {
+      "source_sentence_id": 14,
+      "text": "The pre-task plan had been completed before the work began, but it did not account for potential weather changes.",
+      "role": "observed"
+    },
+    {
+      "source_sentence_id": 8,
+      "text": "The electrical hazard was recognized by the lead worker, who noted that the wet surfaces increased the risk of arc flash.",
+      "role": "observed"
+    }
+  ],
+  "similar_incidents": [],
+  "uncertainty": {
+    "missing_information": [
+      "procedure"
+    ],
+    "contradictions": [
+      "Stop-work execution ambiguous",
+      "Plan to address work change ambiguous"
+    ],
+    "out_of_distribution": false,
+    "human_review_required": true
+  },
+  "model_metadata": {
+    "upstream_pipeline_version": "3.0.0",
+    "feature_schema_version": "2.0.0",
+    "urgency_model_version": "",
+    "action_model_version": "",
+    "rule_engine_version": "3.0.0",
+    "prediction_mode": "RULE_BASED_COLD_START"
+  },
+  "action_flags": {
+    "action_supervision_improvement": 0,
+    "action_work_planning_review": 0,
+    "action_schedule_pressure_review": 0,
+    "action_safety_culture_review": 0,
+    "action_management_system_review": 0,
+    "action_lessons_learned": 0
+  },
+  "upstream_sif_score": 0.8477,
+  "upstream_tree_classification": "PSIF",
+  "upstream_tree_tier": 1,
+  "upstream_tree_confidence": 0.74,
+  "upstream_tree_version": "unified_sif_classification_v1",
+  "upstream_tree_node_answers": {
+    "Q1": "NO",
+    "Q2": "NO",
+    "Q3": "YES",
+    "Q4": "YES",
+    "Q5": "UNCERTAIN"
+  },
+  "upstream_tree_node_confidences": {
+    "Q1": 0.9,
+    "Q2": 0.8,
+    "Q3": 0.75,
+    "Q4": 0.85,
+    "Q5": 0.4
+  },
+  "barrier_failure_rate": 0.05,
+  "barrier_failure_assessment": {
+    "failure_rate": 0.05,
+    "direct_control_failure_contrib": 0.0,
+    "barrier_cluster_contrib": 0.0,
+    "critical_control_verification_contrib": 0.0,
+    "energy_isolation_contrib": 0.0,
+    "stop_work_contrib": 0.05,
+    "calculation_method": "deterministic_weighted_sum"
+  }
+}

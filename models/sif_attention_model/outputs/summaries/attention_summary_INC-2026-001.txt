@@ -1,0 +1,80 @@
+SIF ATTENTION ASSESSMENT (v3.0.0)
+==================================================
+
+Incident: INC-2026-001
+Prediction Mode: RULE_BASED_COLD_START
+
+Attention: MONITOR
+Urgency Score: 0.00
+Risk Potential Score: 0.85
+Systemic Attention: HIGH
+Systemic Attention Score: 1.00
+
+Barrier Failure Rate:
+------------------------------
+  Rate: 0.050
+  Direct Control Failure: 0.000
+  Barrier Cluster: 0.000
+  Critical Control Verification: 0.000
+  Energy Isolation: 0.000
+  Stop Work Absence: 0.050
+
+Upstream Unified Classification Tree:
+------------------------------
+  Classification: PSIF
+  Tier: 1
+  Confidence: 0.74
+  Version: unified_sif_classification_v1
+  Decisive Path:
+    Q1: NO (conf=0.90)
+    Q2: NO (conf=0.80)
+    Q3: YES (conf=0.75)
+    Q4: YES (conf=0.85)
+    Q5: UNCERTAIN (conf=0.40)
+
+Key Drivers:
+------------------------------
+  [Evidence] unified_tree_tier: 1
+  [Rule] RULE_PRODUCTIVITY_PRESSURE: Productivity pressure detected -- systemic concern
+  [Rule] RULE_RISK_NORMALIZATION: Risk normalization detected -- systemic safety culture concern
+  [Rule] RULE_MULTIPLE_PRECURSORS: 7 SIF precursors detected as PRESENT
+  [Evidence] cluster_personnel_density: 0.5
+  [Evidence] cluster_environment_density: 0.5
+  [Evidence] productivity_pressure: PRESENT
+  [Evidence] risk_normalization: PRESENT
+
+Long-Term Actions:
+------------------------------
+  1. LESSONS_LEARNED
+     Reason: Recurring pattern warrants organizational learning
+  2. MANAGEMENT_SYSTEM_REVIEW
+     Reason: Systemic precursor pattern detected
+  3. SAFETY_CULTURE_REVIEW
+     Reason: Risk normalization or safety culture signal
+  4. SCHEDULE_PRESSURE_REVIEW
+     Reason: Productivity pressure contributing to risk
+  5. SUPERVISION_IMPROVEMENT
+     Reason: Risk normalization or supervision gap detected
+  6. WORK_PLANNING_REVIEW
+     Reason: Work planning deficiency detected
+
+Evidence:
+------------------------------
+  [Sentence 8] The electrical hazard was recognized by the lead worker, who noted that the wet surfaces increased the risk of arc flash...
+  [Sentence 2] During the work, unexpected rain began....
+  [Sentence 12] The crew did not call for a safety stand-down to discuss the changed conditions....
+  [Sentence 16] No revised plan was developed after the rain started....
+  [Sentence 5] The revised weather conditions were not included in the original pre-task plan....
+
+Uncertainty:
+------------------------------
+  Missing information: procedure
+  Contradictions: Stop-work execution ambiguous, Plan to address work change ambiguous
+  Human review: RECOMMENDED
+
+Model Metadata:
+------------------------------
+  Urgency Model: N/A (rule-based)
+  Action Model: N/A (rule-based)
+  Rule Engine: 3.0.0
+  Model Version: 3.0.0

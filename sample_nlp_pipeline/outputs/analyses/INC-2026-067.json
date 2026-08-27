@@ -1,0 +1,401 @@
+{
+  "incident_id": "INC-2026-067",
+  "summary": "SIF Analysis Report: INC-2026-067\n==================================================\n\nReport Overview\n----------------------------------------\n  Report length: 737 characters\n  Sentences analyzed: 8\n\nSIF Precursor Analysis\n----------------------------------------\n\n  ABSENT:\n  Stop-Work Execution: ABSENT (confidence=0.60, evidence_count=1)\n\n  NOT MENTIONED:\n  Safe Work Procedure: NOT_MENTIONED (confidence=0.00, evidence_count=0)\n  Hazard Recognition: NOT_MENTIONED (confidence=0.00, evidence_count=0)\n  Departure from Routine: NOT_MENTIONED (confidence=0.00, evidence_count=0)\n  Plan to Address Work Change: NOT_MENTIONED (confidence=0.00, evidence_count=0)\n  Safety Attitudes: NOT_MENTIONED (confidence=0.00, evidence_count=0)\n  Rules and Procedures: NOT_MENTIONED (confidence=0.00, evidence_count=0)\n  Familiarity with Task: NOT_MENTIONED (confidence=0.00, evidence_count=0)\n  Risk Normalization: NOT_MENTIONED (confidence=0.00, evidence_count=0)\n  Productivity Pressure: NOT_MENTIONED (confidence=0.00, evidence_count=0)\n  Perceived Safety Culture: NOT_MENTIONED (confidence=0.00, evidence_count=0)\n  Workers Inactive in Safety: NOT_MENTIONED (confidence=0.00, evidence_count=0)\n  Pre-Task Plan: NOT_MENTIONED (confidence=0.00, evidence_count=0)\n\nSupporting Evidence Details\n----------------------------------------\n\n  Stop-Work Execution - Evidence of absence:\n    - \"Immediate Actions Taken:\nExcavation continued despite proximity to pipeline.\"\n\nNo specific hazards identified in the report.\n\nWork Condition Changes\n----------------------------------------\n  - Unexpected Condition\n\nLife-Saving Rules (IOGP)\n----------------------------------------\n  Broken: 0 | Uncertain: 2 | Not Broken: 0 | Not Applicable: 7\n  LSR01: Work Authorization \u2014 UNCERTAIN (conf=0.50) \u2014 Rule applicable but no clear evidence found\n  LSR03: Line of Fire \u2014 UNCERTAIN (conf=0.50) \u2014 Rule applicable but no clear evidence found\n\nSummary Assessment\n----------------------------------------\n  0 of 13 SIF precursors detected as PRESENT.\n  Assessment: MINIMAL SIF precursor evidence detected.",
+  "metadata": {
+    "incident_date": "2026-01-16",
+    "incident_id": "INC-2026-067",
+    "location": "Tinsukia",
+    "injury_severity": "First Aid"
+  },
+  "report_statistics": {
+    "report_length": 737,
+    "sentence_count": 8
+  },
+  "sif_score": {
+    "value": 0.0,
+    "class": "LOW",
+    "method": "weighted_precursor_sum",
+    "weight_source": "EEI/DEKRA/IOGP literature-based defaults",
+    "components": [
+      {
+        "precursor": "Safe Work Procedure",
+        "precursor_key": "safe_work_procedure",
+        "status": "NOT_MENTIONED",
+        "confidence": 0.0,
+        "evidence_count": 0,
+        "weight": 0.05,
+        "contribution": 0.0
+      },
+      {
+        "precursor": "Hazard Recognition",
+        "precursor_key": "hazard_recognition",
+        "status": "NOT_MENTIONED",
+        "confidence": 0.0,
+        "evidence_count": 0,
+        "weight": 0.1,
+        "contribution": 0.0
+      },
+      {
+        "precursor": "Departure from Routine",
+        "precursor_key": "departure_from_routine",
+        "status": "NOT_MENTIONED",
+        "confidence": 0.0,
+        "evidence_count": 0,
+        "weight": 0.12,
+        "contribution": 0.0
+      },
+      {
+        "precursor": "Plan to Address Work Change",
+        "precursor_key": "plan_to_address_work_change",
+        "status": "NOT_MENTIONED",
+        "confidence": 0.0,
+        "evidence_count": 0,
+        "weight": 0.12,
+        "contribution": 0.0
+      },
+      {
+        "precursor": "Safety Attitudes",
+        "precursor_key": "safety_attitudes",
+        "status": "NOT_MENTIONED",
+        "confidence": 0.0,
+        "evidence_count": 0,
+        "weight": 0.03,
+        "contribution": 0.0
+      },
+      {
+        "precursor": "Rules and Procedures",
+        "precursor_key": "rules_and_procedures",
+        "status": "NOT_MENTIONED",
+        "confidence": 0.0,
+        "evidence_count": 0,
+        "weight": 0.02,
+        "contribution": 0.0
+      },
+      {
+        "precursor": "Familiarity with Task",
+        "precursor_key": "familiarity_with_task",
+        "status": "NOT_MENTIONED",
+        "confidence": 0.0,
+        "evidence_count": 0,
+        "weight": 0.05,
+        "contribution": 0.0
+      },
+      {
+        "precursor": "Risk Normalization",
+        "precursor_key": "risk_normalization",
+        "status": "NOT_MENTIONED",
+        "confidence": 0.0,
+        "evidence_count": 0,
+        "weight": 0.08,
+        "contribution": 0.0
+      },
+      {
+        "precursor": "Productivity Pressure",
+        "precursor_key": "productivity_pressure",
+        "status": "NOT_MENTIONED",
+        "confidence": 0.0,
+        "evidence_count": 0,
+        "weight": 0.08,
+        "contribution": 0.0
+      },
+      {
+        "precursor": "Perceived Safety Culture",
+        "precursor_key": "perceived_safety_culture",
+        "status": "NOT_MENTIONED",
+        "confidence": 0.0,
+        "evidence_count": 0,
+        "weight": 0.02,
+        "contribution": 0.0
+      },
+      {
+        "precursor": "Stop-Work Execution",
+        "precursor_key": "stop_work_execution",
+        "status": "ABSENT",
+        "confidence": 0.6,
+        "evidence_count": 1,
+        "weight": 0.1,
+        "contribution": 0.0
+      },
+      {
+        "precursor": "Workers Inactive in Safety",
+        "precursor_key": "workers_inactive_in_safety",
+        "status": "NOT_MENTIONED",
+        "confidence": 0.0,
+        "evidence_count": 0,
+        "weight": 0.02,
+        "contribution": 0.0
+      },
+      {
+        "precursor": "Pre-Task Plan",
+        "precursor_key": "pre_task_plan",
+        "status": "NOT_MENTIONED",
+        "confidence": 0.0,
+        "evidence_count": 0,
+        "weight": 0.1,
+        "contribution": 0.0
+      }
+    ],
+    "present_precursors": [],
+    "max_possible": 1.04
+  },
+  "life_saving_rules": {
+    "analysis": [
+      {
+        "rule_id": "LSR01",
+        "rule_name": "Work Authorization",
+        "description": "Ensure all work is authorized before starting",
+        "status": "UNCERTAIN",
+        "confidence": 0.5,
+        "reason": "Rule applicable but no clear evidence found",
+        "applicable": true,
+        "applicable_keywords": [
+          "permit"
+        ],
+        "broken_evidence": [],
+        "compliance_evidence": []
+      },
+      {
+        "rule_id": "LSR02",
+        "rule_name": "Energy Isolation",
+        "description": "Verify isolation before work begins",
+        "status": "NOT_APPLICABLE",
+        "confidence": 0.8,
+        "reason": "Rule not applicable to this report's activities/hazards",
+        "applicable": false,
+        "applicable_keywords": [],
+        "broken_evidence": [],
+        "compliance_evidence": []
+      },
+      {
+        "rule_id": "LSR03",
+        "rule_name": "Line of Fire",
+        "description": "Keep yourself and others out of the line of fire",
+        "status": "UNCERTAIN",
+        "confidence": 0.5,
+        "reason": "Rule applicable but no clear evidence found",
+        "applicable": true,
+        "applicable_keywords": [
+          "Pipe",
+          "pipe"
+        ],
+        "broken_evidence": [],
+        "compliance_evidence": []
+      },
+      {
+        "rule_id": "LSR04",
+        "rule_name": "Confined Space",
+        "description": "Obtain authorization before entering a confined space",
+        "status": "NOT_APPLICABLE",
+        "confidence": 0.8,
+        "reason": "Rule not applicable to this report's activities/hazards",
+        "applicable": false,
+        "applicable_keywords": [],
+        "broken_evidence": [],
+        "compliance_evidence": []
+      },
+      {
+        "rule_id": "LSR05",
+        "rule_name": "Falling Objects",
+        "description": "Secure tools and materials to prevent falling objects",
+        "status": "NOT_APPLICABLE",
+        "confidence": 0.8,
+        "reason": "Rule not applicable to this report's activities/hazards",
+        "applicable": false,
+        "applicable_keywords": [],
+        "broken_evidence": [],
+        "compliance_evidence": []
+      },
+      {
+        "rule_id": "LSR06",
+        "rule_name": "Safe Mechanical Lifting",
+        "description": "Plan lifting operations and control the area",
+        "status": "NOT_APPLICABLE",
+        "confidence": 0.8,
+        "reason": "Rule not applicable to this report's activities/hazards",
+        "applicable": false,
+        "applicable_keywords": [],
+        "broken_evidence": [],
+        "compliance_evidence": []
+      },
+      {
+        "rule_id": "LSR07",
+        "rule_name": "Fit for Purpose Equipment",
+        "description": "Use only equipment that is fit for purpose",
+        "status": "NOT_APPLICABLE",
+        "confidence": 0.8,
+        "reason": "Rule not applicable to this report's activities/hazards",
+        "applicable": false,
+        "applicable_keywords": [],
+        "broken_evidence": [],
+        "compliance_evidence": []
+      },
+      {
+        "rule_id": "LSR08",
+        "rule_name": "Driving Safety",
+        "description": "Follow safe driving rules",
+        "status": "NOT_APPLICABLE",
+        "confidence": 0.8,
+        "reason": "Rule not applicable to this report's activities/hazards",
+        "applicable": false,
+        "applicable_keywords": [],
+        "broken_evidence": [],
+        "compliance_evidence": []
+      },
+      {
+        "rule_id": "LSR09",
+        "rule_name": "Working at Height",
+        "description": "Protect yourself against falls when working at height",
+        "status": "NOT_APPLICABLE",
+        "confidence": 0.8,
+        "reason": "Rule not applicable to this report's activities/hazards",
+        "applicable": false,
+        "applicable_keywords": [],
+        "broken_evidence": [],
+        "compliance_evidence": []
+      }
+    ],
+    "broken_rule_count": 0,
+    "uncertain_count": 2,
+    "not_broken_count": 0,
+    "not_applicable_count": 7
+  },
+  "precursor_analysis": {
+    "safe_work_procedure": {
+      "precursor": "Safe Work Procedure",
+      "status": "NOT_MENTIONED",
+      "confidence": 0.0,
+      "evidence_count": 0,
+      "present_evidence": [],
+      "absent_evidence": []
+    },
+    "hazard_recognition": {
+      "precursor": "Hazard Recognition",
+      "status": "NOT_MENTIONED",
+      "confidence": 0.0,
+      "evidence_count": 0,
+      "present_evidence": [],
+      "absent_evidence": []
+    },
+    "departure_from_routine": {
+      "precursor": "Departure from Routine",
+      "status": "NOT_MENTIONED",
+      "confidence": 0.0,
+      "evidence_count": 0,
+      "present_evidence": [],
+      "absent_evidence": []
+    },
+    "plan_to_address_work_change": {
+      "precursor": "Plan to Address Work Change",
+      "status": "NOT_MENTIONED",
+      "confidence": 0.0,
+      "evidence_count": 0,
+      "present_evidence": [],
+      "absent_evidence": []
+    },
+    "safety_attitudes": {
+      "precursor": "Safety Attitudes",
+      "status": "NOT_MENTIONED",
+      "confidence": 0.0,
+      "evidence_count": 0,
+      "present_evidence": [],
+      "absent_evidence": []
+    },
+    "rules_and_procedures": {
+      "precursor": "Rules and Procedures",
+      "status": "NOT_MENTIONED",
+      "confidence": 0.0,
+      "evidence_count": 0,
+      "present_evidence": [],
+      "absent_evidence": []
+    },
+    "familiarity_with_task": {
+      "precursor": "Familiarity with Task",
+      "status": "NOT_MENTIONED",
+      "confidence": 0.0,
+      "evidence_count": 0,
+      "present_evidence": [],
+      "absent_evidence": []
+    },
+    "risk_normalization": {
+      "precursor": "Risk Normalization",
+      "status": "NOT_MENTIONED",
+      "confidence": 0.0,
+      "evidence_count": 0,
+      "present_evidence": [],
+      "absent_evidence": []
+    },
+    "productivity_pressure": {
+      "precursor": "Productivity Pressure",
+      "status": "NOT_MENTIONED",
+      "confidence": 0.0,
+      "evidence_count": 0,
+      "present_evidence": [],
+      "absent_evidence": []
+    },
+    "perceived_safety_culture": {
+      "precursor": "Perceived Safety Culture",
+      "status": "NOT_MENTIONED",
+      "confidence": 0.0,
+      "evidence_count": 0,
+      "present_evidence": [],
+      "absent_evidence": []
+    },
+    "stop_work_execution": {
+      "precursor": "Stop-Work Execution",
+      "status": "ABSENT",
+      "confidence": 0.6,
+      "evidence_count": 1,
+      "present_evidence": [],
+      "absent_evidence": [
+        {
+          "text": "Immediate Actions Taken:\nExcavation continued despite proximity to pipeline.",
+          "source_sentence_id": 6
+        }
+      ]
+    },
+    "workers_inactive_in_safety": {
+      "precursor": "Workers Inactive in Safety",
+      "status": "NOT_MENTIONED",
+      "confidence": 0.0,
+      "evidence_count": 0,
+      "present_evidence": [],
+      "absent_evidence": []
+    },
+    "pre_task_plan": {
+      "precursor": "Pre-Task Plan",
+      "status": "NOT_MENTIONED",
+      "confidence": 0.0,
+      "evidence_count": 0,
+      "present_evidence": [],
+      "absent_evidence": []
+    }
+  },
+  "hazards": [],
+  "task_types": [
+    {
+      "task_type": "excavation",
+      "evidence": [
+        "dig",
+        "excavat",
+        "Excavat"
+      ]
+    }
+  ],
+  "controls": {},
+  "environment": {},
+  "work_changes": {
+    "work_plan_changed": false,
+    "unexpected_condition": true,
+    "task_changed": false,
+    "equipment_changed": false,
+    "procedure_changed": false,
+    "work_sequence_changed": false,
+    "reassessment_performed": false,
+    "reassessment_missing": false
+  },
+  "worker_info": {
+    "experience_known": [
+      "experienced"
+    ]
+  }
+}

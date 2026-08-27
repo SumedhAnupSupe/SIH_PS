@@ -1,0 +1,17 @@
+Incident ID: INC-2026-015
+Incident Date: 2026-07-25
+Location: Moran
+
+Incident Date: 2026-07-25
+Incident ID: INC-2026-015
+Location: Moran
+Worker Count: 2
+Injury Severity: First Aid
+
+Incident Description:
+Maintenance crew entered a heat exchanger for inspection. The confined space permit was not obtained. The atmospheric hazard was not recognized before entry. The crew was under pressure to complete the maintenance before shift end. Confined space entry procedures were not followed. No plan was not in place for changing atmospheric conditions. Entry was not made without the standard gas testing procedure.
+
+The supervisor stated that the team was experienced and had worked in similar conditions before. Life-Saving Rule LSR03 (No attendant posted outside confined space entry.) was relevant to this activity.
+
+Immediate Actions Taken:
+Work continued without proper atmospheric monitoring. No one raised concerns about the permit status.

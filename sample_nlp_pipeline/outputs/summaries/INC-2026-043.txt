@@ -1,0 +1,86 @@
+SIF Analysis Report: INC-2026-043
+==================================================
+
+Report Overview
+----------------------------------------
+  Report length: 1078 characters
+  Sentences analyzed: 10
+
+SIF Precursor Analysis
+----------------------------------------
+
+  PRESENT:
+  Hazard Recognition: PRESENT (confidence=0.80, evidence_count=2)
+  Productivity Pressure: PRESENT (confidence=0.85, evidence_count=3)
+  Pre-Task Plan: PRESENT (confidence=0.60, evidence_count=1)
+
+  ABSENT:
+  Plan to Address Work Change: ABSENT (confidence=0.60, evidence_count=1)
+
+  AMBIGUOUS:
+  Stop-Work Execution: AMBIGUOUS (confidence=0.77, evidence_count=3)
+
+  NOT MENTIONED:
+  Safe Work Procedure: NOT_MENTIONED (confidence=0.00, evidence_count=0)
+  Departure from Routine: NOT_MENTIONED (confidence=0.00, evidence_count=0)
+  Safety Attitudes: NOT_MENTIONED (confidence=0.00, evidence_count=0)
+  Rules and Procedures: NOT_MENTIONED (confidence=0.00, evidence_count=0)
+  Familiarity with Task: NOT_MENTIONED (confidence=0.00, evidence_count=0)
+  Risk Normalization: NOT_MENTIONED (confidence=0.00, evidence_count=0)
+  Perceived Safety Culture: NOT_MENTIONED (confidence=0.00, evidence_count=0)
+  Workers Inactive in Safety: NOT_MENTIONED (confidence=0.00, evidence_count=0)
+
+Supporting Evidence Details
+----------------------------------------
+
+  Hazard Recognition - Evidence of presence:
+    - "The electrical hazard was recognized by the lead worker, who noted that the wet surfaces increased the risk of arc flash."
+    - "The electrical hazard was recognized by the lead worker, who noted that the wet surfaces increased the risk of arc flash."
+
+  Plan to Address Work Change - Evidence of absence:
+    - "The revised weather conditions were not not included in the original pre-task plan."
+
+  Productivity Pressure - Evidence of presence:
+    - "Incident ID: INC-2026-043
+Incident Date: 2026-11-12
+Location: Duliajan
+
+Incident Date: 2026-11-12
+Incident ID: INC-2026-043
+Location: Duliajan
+Worker Count: 5
+Injury Severity: First Aid
+
+Incident Desc"
+    - "The crew was not under pressure to complete the work before the outage window closed."
+    - "The crew was under pressure to complete the work before the outage window closed."
+
+  Stop-Work Execution - Evidence of presence:
+    - "No stop-work authority was exercised."
+
+  Stop-Work Execution - Evidence of absence:
+    - "Immediate Actions Taken:
+The crew continued working despite the increased hazard."
+    - "No stop-work authority was exercised."
+
+  Pre-Task Plan - Evidence of presence:
+    - "The revised weather conditions were not not included in the original pre-task plan."
+
+Identified Hazards
+----------------------------------------
+  - electrical_hazard: electrical, arc flash
+  - stored_energy_hazard: pressur
+  - weather_hazard: weather, wind
+
+No notable work condition changes identified.
+
+Life-Saving Rules (IOGP)
+----------------------------------------
+  Broken: 0 | Uncertain: 2 | Not Broken: 0 | Not Applicable: 7
+  LSR02: Energy Isolation — UNCERTAIN (conf=0.50) — Rule applicable but no clear evidence found
+  LSR03: Line of Fire — UNCERTAIN (conf=0.50) — Rule applicable but no clear evidence found
+
+Summary Assessment
+----------------------------------------
+  3 of 13 SIF precursors detected as PRESENT.
+  Assessment: MODERATE SIF precursor density. Several risk indicators present.

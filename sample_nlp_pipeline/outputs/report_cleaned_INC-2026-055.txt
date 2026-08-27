@@ -1,0 +1,17 @@
+Incident ID: INC-2026-055
+Incident Date: 2026-09-10
+Location: Tinsukia
+
+Incident Date: 2026-09-10
+Incident ID: INC-2026-055
+Location: Tinsukia
+Worker Count: 8
+Injury Severity: First Aid
+
+Incident Description:
+Excavation crew using excavator near buried crude oil pipeline. The excavation permit was obtained but incomplete. Unexpected soil conditions encountered during excavation. Crew assumed pipeline was not deeper based on old drawings.
+
+The operator was experienced but the ground conditions were different from the drawings. Life-Saving Rule LSR03 (Workers in line of fire of potential pipeline strike.) was relevant to this activity.
+
+Immediate Actions Taken:
+Excavation continued despite proximity to pipeline. No hand digging verification performed.

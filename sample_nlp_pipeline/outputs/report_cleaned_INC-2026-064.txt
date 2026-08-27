@@ -1,0 +1,17 @@
+Incident ID: INC-2026-064
+Incident Date: 2026-12-17
+Location: Tinsukia
+
+Incident Date: 2026-12-17
+Incident ID: INC-2026-064
+Location: Tinsukia
+Worker Count: 2
+Injury Severity: Medical Treatment
+
+Incident Description:
+Excavation crew using backhoe near buried natural gas pipeline. The excavation permit was obtained and valid. Pipeline hazard not recognized in excavation planning. Crew assumed pipeline was deeper based on old drawings. Unexpected soil conditions encountered during excavation. Hand digging verification not performed near pipeline. Excavation permit requirements not fully met. Stop-work authority not exercised when pipeline locate marks unclear. No revised plan when pipeline proximity identified.
+
+The operator was experienced but the ground conditions were different from the drawings. 
+
+Immediate Actions Taken:
+Excavation continued despite proximity to pipeline. No hand digging verification performed.

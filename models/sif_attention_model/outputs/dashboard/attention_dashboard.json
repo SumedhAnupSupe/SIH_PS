@@ -1,0 +1,41 @@
+{
+  "total_incidents": 2,
+  "attention_distribution": {
+    "IMMEDIATE": 0,
+    "SHORT_TERM": 0,
+    "PLANNED": 0,
+    "MONITOR": 2
+  },
+  "systemic_distribution": {
+    "NONE": 0,
+    "LOW": 0,
+    "MODERATE": 0,
+    "HIGH": 2
+  },
+  "human_review_required_count": 1,
+  "out_of_distribution_count": 0,
+  "top_actions": {
+    "LESSONS_LEARNED": 2,
+    "MANAGEMENT_SYSTEM_REVIEW": 2,
+    "SAFETY_CULTURE_REVIEW": 1,
+    "SCHEDULE_PRESSURE_REVIEW": 1,
+    "SUPERVISION_IMPROVEMENT": 1,
+    "WORK_PLANNING_REVIEW": 1
+  },
+  "top_drivers": {
+    "RULE_MULTIPLE_PRECURSORS": 2,
+    "productivity_pressure": 2,
+    "stop_work_execution": 2,
+    "tree_confidence": 2,
+    "unified_tree_tier": 1,
+    "RULE_PRODUCTIVITY_PRESSURE": 1,
+    "RULE_RISK_NORMALIZATION": 1,
+    "cluster_personnel_density": 1,
+    "cluster_environment_density": 1,
+    "risk_normalization": 1
+  },
+  "average_urgency_score": 0.0,
+  "average_risk_potential": 0.5409,
+  "average_barrier_failure_rate": 0.05625,
+  "high_barrier_failure_count": 0
+}
